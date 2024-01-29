@@ -28,14 +28,11 @@ with pkgs; [
   docker-compose
 
   # Media-related packages
-  emacs-all-the-icons-fonts
   dejavu_fonts
   ffmpeg
   fd
   font-awesome
   hack-font
-  noto-fonts
-  noto-fonts-emoji
   meslo-lgs-nf
 
   # Node.js development tools
@@ -45,14 +42,11 @@ with pkgs; [
 
   # Text and terminal utilities
   htop
-  hunspell
   iftop
   jetbrains-mono
   jq
-  ripgrep
   tree
   tmux
-  unrar
   unzip
   zsh-powerlevel10k
 
