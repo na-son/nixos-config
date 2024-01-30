@@ -6,14 +6,8 @@ _:
   "visual-studio-code"
 
   # Communication Tools
-  "discord"
   "notion"
-  "slack"
-  "telegram"
   "zoom"
-
-  # Productivity Tools
-  "raycast"
 
   # Browsers
   "google-chrome"
