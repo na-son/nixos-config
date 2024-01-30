@@ -224,14 +224,6 @@ let name = "Austin Nason";
         ];
       };
 
-      #dynamic_padding = true;
-      #decorations = "full";
-      #title = "Terminal";
-      #class = {
-      #  instance = "Alacritty";
-      #  general = "Alacritty";
-      #};
-
       colors = {
         primary = {
           background = "0x1f2528";

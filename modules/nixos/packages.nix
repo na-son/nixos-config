@@ -6,7 +6,6 @@ shared-packages ++ [
 
   # Security and authentication
   yubikey-agent
-  keepassxc
 
   # App and package management
   appimage-run
@@ -19,10 +18,6 @@ shared-packages ++ [
   fontconfig
   font-manager
 
-  # Productivity tools
-  bc # old school calculator
-  galculator
-
   # Audio tools
   cava # Terminal audio visualizer
   pavucontrol # Pulse audio controls
@@ -32,15 +27,11 @@ shared-packages ++ [
   rofi
   rofi-calc
   rnix-lsp # lsp-mode for nix
-  postgresql
-  libtool # for Emacs vterm
 
   # Screenshot and recording tools
   flameshot
 
   # Text and terminal utilities
-  feh # Manage wallpapers
-  screenkey
   tree
   unixtools.ifconfig
   unixtools.netstat
