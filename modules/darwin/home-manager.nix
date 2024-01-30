@@ -49,7 +49,7 @@ in
         file = lib.mkMerge [
           sharedFiles
           additionalFiles
-          { "emacs-launcher.command".source = myEmacsLauncher; }
+         # { "emacs-launcher.command".source = myEmacsLauncher; }
         ];
         stateVersion = "23.11";
       };
@@ -67,20 +67,20 @@ in
     { path = "/System/Applications/Messages.app/"; }
     { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
     { path = "/System/Applications/Home.app/"; }
-    {
-      path = toString myEmacsLauncher;
-      section = "others";
-    }
-    {
-      path = "${config.users.users.${user}.home}/.local/share/";
-      section = "others";
-      options = "--sort name --view grid --display folder";
-    }
-    {
-      path = "${config.users.users.${user}.home}/.local/share/downloads";
-      section = "others";
-      options = "--sort name --view grid --display stack";
-    }
+   # {
+   #   path = toString myEmacsLauncher;
+   #   section = "others";
+   # }
+   # {
+   #   path = "${config.users.users.${user}.home}/.local/share/";
+   #   section = "others";
+   #   options = "--sort name --view grid --display folder";
+   # }
+   # {
+   #   path = "${config.users.users.${user}.home}/.local/share/downloads";
+   #   section = "others";
+   #   options = "--sort name --view grid --display stack";
+   # }
   ];
 
 }
