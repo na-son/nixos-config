@@ -45,10 +45,6 @@ let name = "Austin Nason";
       export EDITOR="nvim"
       export VISUAL="zed"
 
-      e() {
-          emacsclient -t "$@"
-      }
-
       # nix shortcuts
       shell() {
           nix-shell '<nixpkgs>' -A "$1"
