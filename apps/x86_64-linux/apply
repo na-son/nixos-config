@@ -43,6 +43,8 @@ if [[ "$USERNAME" == "nixos" ]] || [[ "$USERNAME" == "root" ]]; then
   _prompt "You're running as $USERNAME. Please enter your desired username: " USERNAME
 fi
 
+_print "__________GIT________________"
+
 # Check if git is available
 if command -v git >/dev/null 2>&1; then
   # Fetch email and name from git config
@@ -66,6 +68,8 @@ select_boot_disk() {
   local disks
   local _boot_disk
 
+  _print "__________DISKS________________"
+
   _print "Available disks: "
   disks=$(lsblk -nd --output NAME,SIZE | grep -v loop)
   echo "$disks"
@@ -87,29 +91,29 @@ select_boot_disk() {
 
 # Set hostname and find primary disk if this is NixOS
 if [[ "$OS" != "Darwin" ]]; then
-  _prompt "${YELLOW}Please enter a hostname for the system: ${NC}" HOST_NAME
+  _prompt "Please enter a hostname for the system: " HOST_NAME
   export HOST_NAME
   select_boot_disk
 fi
 
 # Confirmation step
 confirm_details() {
-  _print "${GREEN}Username: $USERNAME"
+  _print "Username: $USERNAME"
   _print "Email: $GIT_EMAIL"
-  _print "Name: $GIT_NAME${NC}"
+  _print "Name: $GIT_NAME"
 
   if([[ "$OS" != "Darwin" ]]); then
-    _print "${GREEN}Primary interface: $PRIMARY_IFACE"
+    _print "Primary interface: $PRIMARY_IFACE"
     _print "Boot disk: $BOOT_DISK"
-    _print "Hostname: $HOST_NAME${NC}"
+    _print "Hostname: $HOST_NAME"
   fi
 
-  _prompt "${YELLOW}Is this correct? (Y/N): ${NC}" choice
+  _prompt "Is this correct? (Y/N): " choice
 
   case "$choice" in
-  [Nn] ) _print "${RED}Exiting script.${NC}" && exit 1;;
-  [Yy] ) _print "${GREEN}Continuing...${NC}";;
-  * ) _print "${RED}Invalid option. Exiting script.${NC}" && exit 1;;
+  [Nn] ) _print "Exiting script." && exit 1;;
+  [Yy] ) _print "Continuing...";;
+  * ) _print "Invalid option. Exiting script." && exit 1;;
   esac
 }
 
@@ -142,4 +146,4 @@ export -f replace_tokens
 find . -type f -exec bash -c 'replace_tokens "$0"' {} \;
 
 echo "$USERNAME" > /tmp/username.txt
-_print "${GREEN}User $USERNAME information applied.${NC}"
+_print "User $USERNAME information applied."
