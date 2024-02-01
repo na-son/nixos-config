@@ -23,10 +23,10 @@ in {
     };
     initrd.availableKernelModules =
       # normal modules
-      #[ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+      [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
 
       # hyper-v modules. WHAT IS A NAMING SCHEME
-      [ "hv_vmbus hv_storvsc hv_netvsc hv_utils hv_balloon hyperv-keyboard hyperv_fb hid-hyperv" ];
+      # [ "hv_vmbus hv_storvsc hv_netvsc hv_utils hv_balloon hyperv-keyboard hyperv_fb hid-hyperv" ];
     # Uncomment for AMD GPU
     # initrd.kernelModules = [ "amdgpu" ];
     kernelPackages = pkgs.linuxPackages_latest;
@@ -74,8 +74,6 @@ in {
       # Uncomment these for AMD or Nvidia GPU
       # boot.initrd.kernelModules = [ "amdgpu" ];
 
-      # Uncomment for hyper-v graphics
-      # boot.initrd.kernelModules = [ "hyperv-fb" ];
       # videoDrivers = [ "amdgpu" ];
       # videoDrivers = [ "nvidia" ];
 
