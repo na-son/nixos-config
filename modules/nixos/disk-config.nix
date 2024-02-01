@@ -12,7 +12,7 @@ _: {
           partitions = [
             {
               name = "ESP";
-              type = "EF00";
+              #type = "EF00";
               start = "1M";
               end = "500M";
               #size = "100M";
