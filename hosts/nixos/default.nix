@@ -204,10 +204,10 @@ in {
     gvfs.enable = true; # Mount, trash, and other functionalities
     tumbler.enable = true; # Thumbnail support for images
 
-    # Enable sound
-    sound.enable = true;
-
   };
+
+  # Enable sound
+  sound.enable = true;
 
   # Video support
   hardware = {
