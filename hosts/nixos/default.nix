@@ -22,7 +22,11 @@ in {
       efi.canTouchEfiVariables = true;
     };
     initrd.availableKernelModules =
-      [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+      # normal modules
+      #[ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+
+      # hyper-v modules. WHAT IS A NAMING SCHEME
+      [ "hv_vmbus hv_storvsc hv_netvsc hv_utils hv_balloon hyperv-keyboard hyperv_fb hid-hyperv" ];
     # Uncomment for AMD GPU
     # initrd.kernelModules = [ "amdgpu" ];
     kernelPackages = pkgs.linuxPackages_latest;

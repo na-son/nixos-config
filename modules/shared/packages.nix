@@ -18,17 +18,17 @@ with pkgs; [
   zip
 
   # Encryption and security tools
-  age
-  age-plugin-yubikey
-  gnupg
-  libfido2
-  pinentry
+  #age
+  #age-plugin-yubikey
+  #gnupg
+  #libfido2
+  #pinentry
 
   # Cloud-related tools and SDKs
-  docker
-  docker-compose
-  awscli
-  google-cloud-sdk
+  #docker
+  #docker-compose
+  #awscli
+  #google-cloud-sdk
 
   # Media-related packages
   dejavu_fonts
@@ -51,18 +51,18 @@ with pkgs; [
   # Python
   python39
   python39Packages.virtualenv # globally install virtualenv
-  ansible
-  ansible-lint
+  #ansible
+  #ansible-lint
 
   # Terraform
   #tfenv
   #terraform-ls
-  terraform-docs
+  #terraform-docs
 
   # Nix
-  nil
-  nixfmt
-  statix
-  deadnix
+  #nil
+  #nixfmt
+  #statix
+  #deadnix
 
 ]
