@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
-let user = "nason"; in
+let user = "nason";
 
-{
+in {
 
   imports = [
     ../../modules/darwin/home-manager.nix
@@ -21,7 +21,11 @@ let user = "nason"; in
     gc = {
       user = "root";
       automatic = true;
-      interval = { Weekday = 0; Hour = 2; Minute = 0; };
+      interval = {
+        Weekday = 0;
+        Hour = 2;
+        Minute = 0;
+      };
       options = "--delete-older-than 30d";
     };
 
@@ -35,9 +39,10 @@ let user = "nason"; in
   system.checks.verifyNixPath = false;
 
   # Load configuration that is shared across systems
-  environment.systemPackages = with pkgs; [
-    ## emacs-unstable
-  ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
+  environment.systemPackages = with pkgs;
+    [
+      ## emacs-unstable
+    ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
 
   # Enable fonts dir
   fonts.fontDir.enable = true;
@@ -69,9 +74,7 @@ let user = "nason"; in
         tilesize = 48;
       };
 
-      finder = {
-        _FXShowPosixPathInTitle = false;
-      };
+      finder = { _FXShowPosixPathInTitle = false; };
 
       trackpad = {
         Clicking = true;

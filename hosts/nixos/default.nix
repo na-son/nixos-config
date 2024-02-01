@@ -1,8 +1,11 @@
 { config, inputs, pkgs, ... }:
 
-let user = "nason";
-    keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOk8iAnIaa1deoc7jw8YACPNVka1ZFJxhnU4G74TmS+p" ]; in
-{
+let
+  user = "nason";
+  keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOk8iAnIaa1deoc7jw8YACPNVka1ZFJxhnU4G74TmS+p"
+  ];
+in {
   imports = [
     ../../modules/nixos/disk-config.nix
     ../../modules/shared
@@ -18,7 +21,8 @@ let user = "nason";
       };
       efi.canTouchEfiVariables = true;
     };
-    initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+    initrd.availableKernelModules =
+      [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
     # Uncomment for AMD GPU
     # initrd.kernelModules = [ "amdgpu" ];
     kernelPackages = pkgs.linuxPackages_latest;
@@ -39,13 +43,14 @@ let user = "nason";
 
   # Turn on flag for proprietary software
   nix = {
-    nixPath = [ "nixos-config=/home/${user}/.local/share/src/nixos-config:/etc/nixos" ];
+    nixPath =
+      [ "nixos-config=/home/${user}/.local/share/src/nixos-config:/etc/nixos" ];
     settings.allowed-users = [ "${user}" ];
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-   };
+  };
 
   # Manages keys and such
   programs = {
@@ -85,9 +90,7 @@ let user = "nason";
       };
 
       # Tiling window manager
-      windowManager.bspwm = {
-        enable = true;
-      };
+      windowManager.bspwm = { enable = true; };
 
       # Turn Caps Lock into Ctrl
       layout = "us";
@@ -129,13 +132,11 @@ let user = "nason";
         animation-for-menu-window = "none";
         animation-for-transient-window = "slide-down";
         corner-radius = 12;
-        rounded-corners-exclude = [
-          "class_i = 'polybar'"
-          "class_g = 'i3lock'"
-        ];
+        rounded-corners-exclude =
+          [ "class_i = 'polybar'" "class_g = 'i3lock'" ];
         round-borders = 3;
-        round-borders-exclude = [];
-        round-borders-rule = [];
+        round-borders-exclude = [ ];
+        round-borders-rule = [ ];
         shadow = true;
         shadow-radius = 8;
         shadow-opacity = 0.4;
@@ -146,8 +147,7 @@ let user = "nason";
         frame-opacity = 0.7;
         inactive-opacity-override = false;
         active-opacity = 1.0;
-        focus-exclude = [
-        ];
+        focus-exclude = [ ];
 
         opacity-rule = [
           "100:class_g = 'i3lock'"
@@ -166,13 +166,9 @@ let user = "nason";
           kern = "3x3box";
         };
 
-        shadow-exclude = [
-          "class_g = 'Dunst'"
-        ];
+        shadow-exclude = [ "class_g = 'Dunst'" ];
 
-        blur-background-exclude = [
-          "class_g = 'Dunst'"
-        ];
+        blur-background-exclude = [ "class_g = 'Dunst'" ];
 
         backend = "glx";
         vsync = false;
@@ -186,8 +182,17 @@ let user = "nason";
         log-level = "info";
 
         wintypes = {
-          normal = { fade = true; shadow = false; };
-          tooltip = { fade = true; shadow = false; opacity = 0.75; focus = true; full-shadow = false; };
+          normal = {
+            fade = true;
+            shadow = false;
+          };
+          tooltip = {
+            fade = true;
+            shadow = false;
+            opacity = 0.75;
+            focus = true;
+            full-shadow = false;
+          };
           dock = { shadow = false; };
           dnd = { shadow = false; };
           popup_menu = { opacity = 1.0; };
@@ -199,8 +204,10 @@ let user = "nason";
     gvfs.enable = true; # Mount, trash, and other functionalities
     tumbler.enable = true; # Thumbnail support for images
 
-  # Enable sound
-   sound.enable = true;
+    # Enable sound
+    sound.enable = true;
+
+  };
 
   # Video support
   hardware = {
@@ -214,7 +221,6 @@ let user = "nason";
     # Crypto wallet support
     ledger.enable = true;
   };
-
 
   # Add docker daemon
   virtualisation = {
@@ -236,21 +242,17 @@ let user = "nason";
       openssh.authorizedKeys.keys = keys;
     };
 
-    root = {
-      openssh.authorizedKeys.keys = keys;
-    };
+    root = { openssh.authorizedKeys.keys = keys; };
   };
 
   # Don't require password for users in `wheel` group for these commands
   security.sudo = {
     enable = true;
     extraRules = [{
-      commands = [
-       {
-         command = "${pkgs.systemd}/bin/reboot";
-         options = [ "NOPASSWD" ];
-        }
-      ];
+      commands = [{
+        command = "${pkgs.systemd}/bin/reboot";
+        options = [ "NOPASSWD" ];
+      }];
       groups = [ "wheel" ];
     }];
   };
@@ -265,11 +267,7 @@ let user = "nason";
     noto-fonts-emoji
   ];
 
-  environment.systemPackages = with pkgs; [
-    gitAndTools.gitFull
-    inetutils
-  ];
+  environment.systemPackages = with pkgs; [ gitAndTools.gitFull inetutils ];
 
   system.stateVersion = "21.05"; # Don't change this
-
 }

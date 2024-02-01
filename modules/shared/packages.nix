@@ -47,7 +47,6 @@ with pkgs; [
   tmux
   unzip
   zsh-powerlevel10k
-  zed-editor
 
   # Python
   python39
