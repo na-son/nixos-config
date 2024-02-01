@@ -39,13 +39,7 @@ _prompt() {
 export USERNAME=$(whoami)
 
 # Set hostname and find primary disk if this is NixOS
-if [[ "$OS" != "Darwin" ]]; then
-  _print "__________SYSTEM________________"
 
-  _prompt "Please enter a hostname for the system: " HOST_NAME
-  export HOST_NAME
-  select_boot_disk
-fi
 
 # If the username is 'nixos' or 'root', ask the user for their username
 if [[ "$USERNAME" == "nixos" ]] || [[ "$USERNAME" == "root" ]]; then
@@ -71,6 +65,14 @@ fi
 # If git name is not found or git is not available, ask the user
 if [[ -z "$GIT_NAME" ]]; then
   _prompt "Please enter your name: " GIT_NAME
+fi
+
+if [[ "$OS" != "Darwin" ]]; then
+  _print "__________SYSTEM________________"
+
+  _prompt "Please enter a hostname for the system: " HOST_NAME
+  export HOST_NAME
+  select_boot_disk
 fi
 
 select_boot_disk() {
