@@ -22,9 +22,14 @@ nix run .#build-switch
 
 Boot the [minimal installer](https://nixos.org/download)
 
+THIS WILL WIPE YOUR DISKS AND APPLY THE PARTITION SCHEME IN
+`./modules/nixos/disk-config.nix`
+
 ```shell
-sudo nix run --extra-experimental-features 'nix-command flakes' github:/na-son/nixos-config#install
+sudo nix run --extra-experimental-features 'nix-command flakes' github:na-son/nixos-config#install
 ```
+
+
 
 ## Apps
 
