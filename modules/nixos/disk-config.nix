@@ -7,26 +7,35 @@ _: {
         device = "/dev/%DISK%";
         type = "disk";
         content = {
-          type = "gpt";
-          partitions = {
-            ESP = {
+          type = "table";
+          format = "gpt";
+          partitions = [
+            {
+              name = "ESP";
               type = "EF00";
-              size = "100M";
+              start = "1M";
+              end = "500M";
+              #size = "100M";
+              bootable = true;
               content = {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
               };
-            };
-            root = {
-              size = "100%";
+            }
+            {
+              name = "root"
+              start = "500M";
+              end = "100%";
+              #size = "100%";
+              part-type = "primary";
               content = {
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/";
               };
-            };
-          };
+            }
+          ];
         };
       };
     };
