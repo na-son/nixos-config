@@ -33,4 +33,6 @@ cachix auth $auth-token
 nix build $thing | cachix push $my-cachix
 # example
 nix --extra-experimental-features 'nix-command flakes' build .#darwinConfigurations.macos.system | cachix push na-son
+# if "nothing to push" when you know there is something to push:
+cachix push na-son ./result
 ```
