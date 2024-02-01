@@ -11,6 +11,7 @@ with pkgs; [
   coreutils
   killall
   neofetch
+  neovim
   openssh
   sqlite
   wget
@@ -26,6 +27,8 @@ with pkgs; [
   # Cloud-related tools and SDKs
   docker
   docker-compose
+  awscli
+  google-cloud-sdk
 
   # Media-related packages
   dejavu_fonts
@@ -50,7 +53,20 @@ with pkgs; [
   unzip
   zsh-powerlevel10k
 
-  # Python packages
+  # Python
   python39
   python39Packages.virtualenv # globally install virtualenv
+  ansible
+  ansible-lint
+
+  # Terraform
+  #tfenv
+  #terraform-ls
+  terraform-docs
+
+  # Nix
+  nil
+  nixfmt
+  statix
+  deadnix
 ]

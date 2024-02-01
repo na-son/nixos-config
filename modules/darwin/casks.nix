@@ -9,7 +9,11 @@ _:
   # Communication Tools
   "notion"
   "zoom"
+  "meetingbar"
 
   # Browsers
   "google-chrome"
+
+  # Fun tools
+  "spotify"
 ]
