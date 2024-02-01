@@ -65,7 +65,7 @@ install_nixos() {
 }
 
 prompt_reboot() {
-  read -p "Do you want to reboot now? (y/yes) " choice
+  read -p "Do you want to reboot now? (yes/no) " choice
   case "$choice" in
   y|Y|yes|YES ) echo -e "\e[1;32mRebooting...\e[0m" && sudo reboot;;
   * ) echo -e "\e[1;33mReboot skipped.\e[0m";;

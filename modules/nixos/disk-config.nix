@@ -3,7 +3,7 @@ _: {
   # Other examples found here: https://github.com/nix-community/disko/tree/master/example
   disko.devices = {
     disk = {
-      vdb = {
+      sda = {
         device = "/dev/%DISK%";
         type = "disk";
         content = {
