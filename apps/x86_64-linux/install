@@ -3,9 +3,9 @@ set -exu
 
 check_installer() {
   if [ -e /etc/NIXOS ]; then
-    echo -e "\e[1;32mRunning in the NixOS installer environment.\e[0m"
+    echo -e "Running in the NixOS installer environment."
   else
-    echo -e "\e[1;31mNot running in the NixOS installer environment.\e[0m"
+    echo -e "Not running in the NixOS installer environment."
     exit 1
   fi
 }
@@ -23,7 +23,7 @@ download_config() {
 run_apply() {
   ./apps/x86_64-linux/apply
   if [ ! -f /tmp/username.txt ]; then
-    echo -e "\e[1;31mError: /tmp/username.txt does not exist.\e[0m"
+    echo -e "Error: /tmp/username.txt does not exist."
     exit 1
   fi
   export USERNAME=$(cat /tmp/username.txt)
@@ -51,14 +51,13 @@ install_nixos() {
       FLAKE_TARGET="aarch64-linux"
       ;;
     *)
-      echo -e "${RED}Unsupported architecture: $ARCH${CLEAR}"
+      echo -e "Unsupported architecture: $ARCH"
       exit 1
       ;;
   esac
 
-  echo "Installing NixOS..."
-  echo "This can take a while..."
-  echo "Reticulating splines..."
+  echo "Disk initialization complete. ________________________________________"
+  echo "Installing NixOS........................................"
 
   sudo nixos-install --flake .#$FLAKE_TARGET $@
   sudo chmod -R 775 /mnt/etc/nixos
@@ -67,8 +66,8 @@ install_nixos() {
 prompt_reboot() {
   read -p "Do you want to reboot now? (yes/no) " choice
   case "$choice" in
-  y|Y|yes|YES ) echo -e "\e[1;32mRebooting...\e[0m" && sudo reboot;;
-  * ) echo -e "\e[1;33mReboot skipped.\e[0m";;
+  y|Y|yes|YES ) echo -e "Rebooting..." && sudo reboot;;
+  * ) echo -e "Reboot skipped.";;
   esac
 }
 
@@ -79,5 +78,4 @@ run_apply
 run_disko
 setup_files
 install_nixos
-#cleanup
 prompt_reboot
