@@ -36,13 +36,10 @@ in {
   # Set your time zone.
   time.timeZone = "America/New_York";
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
   networking = {
     hostName = "%HOST%"; # Define your hostname.
-    useDHCP = false;
-    interfaces."%INTERFACE%".useDHCP = true;
+    # useDHCP = false;
+    # interfaces."%INTERFACE%".useDHCP = true;
   };
 
   # Turn on flag for proprietary software
@@ -99,6 +96,8 @@ in {
 
       # Turn Caps Lock into Ctrl
       layout = "us";
+      # You will want to remove this line if you use qwerty
+      xkbVariant = "dvorak";
       xkbOptions = "ctrl:nocaps";
 
       # Better support for general peripherals
