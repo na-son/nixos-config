@@ -67,14 +67,6 @@ if [[ -z "$GIT_NAME" ]]; then
   _prompt "Please enter your name: " GIT_NAME
 fi
 
-if [[ "$OS" != "Darwin" ]]; then
-  _print "__________SYSTEM________________"
-
-  _prompt "Please enter a hostname for the system: " HOST_NAME
-  export HOST_NAME
-  select_boot_disk
-fi
-
 select_boot_disk() {
   local disks
   local _boot_disk
@@ -100,7 +92,13 @@ select_boot_disk() {
   fi
 }
 
+if [[ "$OS" != "Darwin" ]]; then
+  _print "__________SYSTEM________________"
 
+  _prompt "Please enter a hostname for the system: " HOST_NAME
+  export HOST_NAME
+  select_boot_disk
+fi
 
 # Confirmation step
 confirm_details() {
