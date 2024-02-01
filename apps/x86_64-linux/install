@@ -56,6 +56,10 @@ install_nixos() {
       ;;
   esac
 
+  echo "Installing NixOS..."
+  echo "This can take a while..."
+  echo "Reticulating splines..."
+
   sudo nixos-install --flake .#$FLAKE_TARGET $@
   sudo chmod -R 775 /mnt/etc/nixos
 }
@@ -75,5 +79,5 @@ run_apply
 run_disko
 setup_files
 install_nixos
-cleanup
+#cleanup
 prompt_reboot

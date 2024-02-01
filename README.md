@@ -29,7 +29,11 @@ THIS WILL WIPE YOUR DISKS AND APPLY THE PARTITION SCHEME IN
 sudo nix run --extra-experimental-features 'nix-command flakes' github:na-son/nixos-config#install
 ```
 
+to test changes:
 
+```shell
+nixos-rebuild build --flake .#x86_64-linux
+```
 
 ## Apps
 
