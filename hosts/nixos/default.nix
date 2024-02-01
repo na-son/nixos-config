@@ -74,8 +74,8 @@ in {
       # Uncomment these for AMD or Nvidia GPU
       # boot.initrd.kernelModules = [ "amdgpu" ];
 
-      # hyper-v graphics
-      boot.initrd.kernelModules = [ "hyperv-fb" ];
+      # Uncomment for hyper-v graphics
+      # boot.initrd.kernelModules = [ "hyperv-fb" ];
       # videoDrivers = [ "amdgpu" ];
       # videoDrivers = [ "nvidia" ];
 

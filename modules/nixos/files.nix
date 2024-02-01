@@ -48,15 +48,6 @@ let
       while ! systemctl is-active --quiet network-online.target; do sleep 1; done
       notify-send 'Network found.'
 
-      # Wait for the Emacs daemon
-      notify-send 'Starting Emacs...'
-      /run/current-system/sw/bin/emacsclient -a "" -e '(progn)' &
-
-      # Wait for Emacs daemon to be ready
-      while ! /run/current-system/sw/bin/emacsclient -e '(progn)' &>/dev/null; do
-      sleep 1
-      done
-      notify-send 'Emacs daemon started.'
     '';
   };
 
