@@ -24,7 +24,7 @@ _: {
               };
             }
             {
-              name = "root"
+              name = "root";
               start = "500M";
               end = "100%";
               #size = "100%";
