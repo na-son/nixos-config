@@ -14,7 +14,7 @@ export OS=$(uname)
 # Primary network interface
 if [[ "$OS" != "Darwin" ]]; then
   export PRIMARY_IFACE=$(ip -o -4 route show to default | awk '{print $5}')
-  echo -e "${GREEN}Found primary network interface $PRIMARY_IFACE${NC}"
+  echo -e "Found primary network interface $PRIMARY_IFACE"
 fi
 
 # Custom print function
@@ -40,7 +40,7 @@ export USERNAME=$(whoami)
 
 # If the username is 'nixos' or 'root', ask the user for their username
 if [[ "$USERNAME" == "nixos" ]] || [[ "$USERNAME" == "root" ]]; then
-  _prompt "${YELLOW}You're running as $USERNAME. Please enter your desired username: ${NC}" USERNAME
+  _prompt "You're running as $USERNAME. Please enter your desired username: " USERNAME
 fi
 
 # Check if git is available
@@ -49,38 +49,38 @@ if command -v git >/dev/null 2>&1; then
   export GIT_EMAIL=$(git config --get user.email)
   export GIT_NAME=$(git config --get user.name)
 else
-  _print "${RED}Git is not available on this system.${NC}"
+  _print "Git is not available on this system."
 fi
 
 # If git email is not found or git is not available, ask the user
 if [[ -z "$GIT_EMAIL" ]]; then
-  _prompt "${YELLOW}Please enter your email: ${NC}" GIT_EMAIL
+  _prompt "Please enter your email:" GIT_EMAIL
 fi
 
 # If git name is not found or git is not available, ask the user
 if [[ -z "$GIT_NAME" ]]; then
-  _prompt "${YELLOW}Please enter your name: ${NC}" GIT_NAME
+  _prompt "Please enter your name: " GIT_NAME
 fi
 
 select_boot_disk() {
   local disks
   local _boot_disk
 
-  _print "${YELLOW}Available disks:${NC}"
+  _print "Available disks: "
   disks=$(lsblk -nd --output NAME,SIZE | grep -v loop)
   echo "$disks"
 
   # Warning message for data deletion
-  _print "${RED}WARNING: All data on the chosen disk will be erased during the installation!${NC}"
-  _prompt "${YELLOW}Please choose your boot disk (e.g., nvme0n1, sda): ${NC}" _boot_disk
+  _print "WARNING: All data on the chosen disk will be erased during the installation!"
+  _prompt "Please choose your boot disk (e.g., nvme0n1, sda): " _boot_disk
 
   # Confirmation for disk selection to prevent accidental data loss
-  _print "${YELLOW}You have selected $_boot_disk as the boot disk. This will delete everything on this disk. Are you sure? (Y/N): ${NC}"
+  _print "You have selected $_boot_disk as the boot disk. This will delete everything on this disk. Are you sure? (Y/N): "
   read -r confirmation
   if [[ "$confirmation" =~ ^[Yy]$ ]]; then
     export BOOT_DISK=$_boot_disk
   else
-    _print "${RED}Disk selection cancelled by the user. Please run the script again to select the correct disk.${NC}"
+    _print "Disk selection cancelled by the user. Please run the script again to select the correct disk."
     exit 1
   fi
 }
