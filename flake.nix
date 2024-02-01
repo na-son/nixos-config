@@ -3,6 +3,14 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
+
+    # linux inputs
+    disko = {
+         url = "github:nix-community/disko";
+         inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # darwin inputs
     darwin = {
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,10 +29,6 @@
     homebrew-cask = {
       url = "github:homebrew/homebrew-cask";
       flake = false;
-    };
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, nixpkgs, disko } @inputs:

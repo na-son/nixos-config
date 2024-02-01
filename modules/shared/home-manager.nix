@@ -76,7 +76,7 @@ let name = "Austin Nason";
     extraConfig = {
       init.defaultBranch = "main";
       core = {
-	    editor = "vim";
+	    editor = "nvim";
         autocrlf = "input";
       };
       pull.rebase = true;
@@ -115,10 +115,6 @@ let name = "Austin Nason";
       set noswapfile
       set backupdir=~/.config/vim/backups
       set directory=~/.config/vim/swap
-
-      " Relative line numbers for easy movement
-      set relativenumber
-      set rnu
 
       "" Whitespace rules
       set tabstop=8
@@ -175,9 +171,6 @@ let name = "Austin Nason";
       "" Move buffers
       nnoremap <tab> :bnext<cr>
       nnoremap <S-tab> :bprev<cr>
-
-      "" Like a boss, sudo AFTER opening the file to write
-      cmap w!! w !sudo tee % >/dev/null
 
       let g:startify_lists = [
         \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },

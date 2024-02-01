@@ -38,11 +38,6 @@ with pkgs; [
   hack-font
   meslo-lgs-nf
 
-  # Node.js development tools
-  nodePackages.npm # globally install npm
-  nodePackages.prettier
-  nodejs
-
   # Text and terminal utilities
   htop
   iftop
@@ -52,6 +47,7 @@ with pkgs; [
   tmux
   unzip
   zsh-powerlevel10k
+  zed-editor
 
   # Python
   python39
@@ -69,4 +65,5 @@ with pkgs; [
   nixfmt
   statix
   deadnix
+
 ]
