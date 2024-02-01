@@ -4,6 +4,8 @@ Built off of https://github.com/dustinlyons/nixos-config
 
 ## Usage
 
+### Macos
+
 Build system
 
 ```shell
@@ -16,7 +18,13 @@ Make configuration active
 nix run .#build-switch
 ```
 
-First run will be slow, as nix needs to download and compile everything. You will appreciate this when you rebuild and everything is cached.
+### Linux
+
+Boot the [minimal installer](https://nixos.org/download)
+
+```shell
+sudo nix run --extra-experimental-features 'nix-command flakes' github:/na-son/nixos-config#install
+```
 
 ## Apps
 
