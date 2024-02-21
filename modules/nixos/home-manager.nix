@@ -2,118 +2,182 @@
 
 let
   user = "nason";
-  xdg_configHome  = "/home/${user}/.config";
-  shared-programs = import ../shared/home-manager.nix { inherit config pkgs lib; };
+  xdg_configHome = "/home/${user}/.config";
+  shared-programs =
+    import ../shared/home-manager.nix { inherit config pkgs lib; };
   shared-files = import ../shared/files.nix { inherit config pkgs; };
 
-  polybar-user_modules = builtins.readFile (pkgs.substituteAll {
-    src = ./config/polybar/user_modules.ini;
-    packages = "${xdg_configHome}/polybar/bin/check-nixos-updates.sh";
-    searchpkgs = "${xdg_configHome}/polybar/bin/search-nixos-updates.sh";
-    launcher = "${xdg_configHome}/polybar/bin/launcher.sh";
-    powermenu = "${xdg_configHome}/rofi/bin/powermenu.sh";
-    calendar = "${xdg_configHome}/polybar/bin/popup-calendar.sh";
-  });
-
-  polybar-config = pkgs.substituteAll {
-    src = ./config/polybar/config.ini;
-    font0 = "DejaVu Sans:size=12;3";
-    font1 = "feather:size=12;3"; # from overlay
-  };
-
-  polybar-modules = builtins.readFile ./config/polybar/modules.ini;
-  polybar-bars = builtins.readFile ./config/polybar/bars.ini;
-  polybar-colors = builtins.readFile ./config/polybar/colors.ini;
-
-in
-{
+in {
   home = {
     enableNixpkgsReleaseCheck = false;
     username = "${user}";
     homeDirectory = "/home/${user}";
-    packages = pkgs.callPackage ./packages.nix {};
+    packages = pkgs.callPackage ./packages.nix { };
     file = shared-files // import ./files.nix { inherit user; };
     stateVersion = "21.05";
+
+    keyboard = {
+      layout = "us";
+      variant = "dvorak";
+    };
+
   };
 
-  # Use a dark theme
   gtk = {
     enable = true;
-    iconTheme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome.adwaita-icon-theme;
-    };
     theme = {
       name = "Adwaita-dark";
       package = pkgs.gnome.adwaita-icon-theme;
     };
+    iconTheme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome.adwaita-icon-theme;
+    };
   };
 
-  # Screen lock
-  services = {
-    screen-locker = {
-      enable = true;
-      inactiveInterval = 10;
-      lockCmd = "${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 10 15";
-    };
-
-    # Auto mount devices
-    udiskie.enable = true;
-
-    polybar = {
-      enable = true;
-      config = polybar-config;
-      extraConfig = polybar-bars + polybar-colors + polybar-modules + polybar-user_modules;
-      package = pkgs.polybarFull;
-      script = "polybar main &";
-    };
-
-    dunst = {
-      enable = true;
-      package = pkgs.dunst;
-      settings = {
-        global = {
-          monitor = 0;
-          follow = "mouse";
-          border = 0;
-          height = 400;
-          width = 320;
-          offset = "33x65";
-          indicate_hidden = "yes";
-          shrink = "no";
-          separator_height = 0;
-          padding = 32;
-          horizontal_padding = 32;
-          frame_width = 0;
-          sort = "no";
-          idle_threshold = 120;
-          font = "Noto Sans";
-          line_height = 4;
-          markup = "full";
-          format = "<b>%s</b>\n%b";
-          alignment = "left";
-          transparency = 10;
-          show_age_threshold = 60;
-          word_wrap = "yes";
-          ignore_newline = "no";
-          stack_duplicates = false;
-          hide_duplicate_count = "yes";
-          show_indicators = "no";
-          icon_position = "left";
-          icon_theme = "Adwaita-dark";
-          sticky_history = "yes";
-          history_length = 20;
-          history = "ctrl+grave";
-          browser = "google-chrome-stable";
-          always_run_script = true;
-          title = "Dunst";
-          class = "Dunst";
-          max_icon_size = 64;
+  wayland.windowManager.sway = {
+    enable = true;
+    config = rec {
+      modifier = "Mod4";
+      #terminal = "foot"; 
+      menu = "rofi -show run";
+      input = {
+        "type:keyboard" = {
+          xkb_layout = "us";
+          xkb_variant = "dvorak";
+          xkb_options = "ctrl:nocaps";
+          repeat_delay = "300";
+          repeat_rate = "50";
         };
+        "type:touchpad" = {
+          tap = "enabled";
+          dwt = "enabled";
+          natural_scroll = "enabled";
+          accel_profile = "adaptive"; # mouse acceleration
+          pointer_accel = "0.3";
+        };
+      };
+      startup = [
+        {
+          command =
+            "exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,secrets,ssh";
+        }
+        {
+          command =
+            "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        }
+        {
+          # see https://nixos.wiki/wiki/Firefox
+          always = true;
+          command = "systemctl --user import-environment";
+        }
+        #{
+        #  always = true;
+        #  command = "${dbus-sway-environment}/bin/dbus-sway-environment";
+        #}
+
+      ];
+
+      keybindings = lib.mkOptionDefault {
+
+        # Laptop buttons
+        "XF86AudioRaiseVolume" =
+          "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
+        "XF86AudioLowerVolume" =
+          "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
+        "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
+        "XF86AudioMicMute" =
+          "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+        "XF86MonBrightnessDown" = "exec brillo -q -U 5";
+        "XF86MonBrightnessUp" = "exec brillo -q -A 5";
+        "XF86AudioPlay" = "exec playerctl play-pause";
+        "XF86AudioNext" = "exec playerctl next";
+        "XF86AudioPrev" = "exec playerctl previous";
+        "Mod4+Shift+W" = "kill";
+      };
+
+      gaps = {
+        inner = 10;
+        outer = 10;
+        smartGaps = true;
+      };
+
+      bars = [{
+        fonts = {
+          names = [ "JetBrains Mono" ];
+          size = 10.0;
+        };
+        mode = "dock";
+        hiddenState = "hide";
+        position = "bottom";
+        statusCommand = "${pkgs.i3status}/bin/i3status";
+        workspaceButtons = true;
+        trayOutput = "primary";
+      }];
+
+    };
+  };
+
+  services = {
+    # notifications
+    mako = {
+      enable = true;
+      defaultTimeout = 10000;
+    };
+
+    # Automount
+    # udiskie.enable = true;
+  };
+
+  programs = shared-programs // {
+    # terminal
+    foot = {
+      enable = true;
+      server.enable = true;
+
+      settings = {
+        main = {
+          term = "xterm-256color";
+          font = "JetBrains Mono:size=8";
+          dpi-aware = "yes";
+          pad = "10x10 center";
+        };
+
+        bell = {
+          urgent = "yes";
+          notify = "yes";
+          visual = "yes";
+        };
+
+        mouse = { hide-when-typing = "yes"; };
+
+        colors = {
+          background = "002b36";
+          foreground = "839496";
+
+          regular0 = "073642";
+          regular1 = "dc322f";
+          regular2 = "859900";
+          regular3 = "b58900";
+          regular4 = "268bd2";
+          regular5 = "d33682";
+          regular6 = "2aa198";
+          regular7 = "eee8d5";
+          bright0 = "002b36";
+          bright1 = "cb4b16";
+          bright2 = "586e75";
+          bright3 = "657b83";
+          bright4 = "839496";
+          bright5 = "6c71c4";
+          bright6 = "93a1a1";
+          bright7 = "fdf6e3";
+
+          selection-foreground = "93a1a1";
+          selection-background = "073642";
+        };
+
       };
     };
   };
-
-  programs = shared-programs // {};
 
 }

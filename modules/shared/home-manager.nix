@@ -1,9 +1,10 @@
 { config, pkgs, lib, ... }:
 
-let name = "Austin Nason";
-    user = "nason";
-    email = "austin.nason@schrodinger.com"; in
-{
+let
+  name = "Austin Nason";
+  user = "nason";
+  email = "austin.nason@schrodinger.com";
+in {
   # Shared shell configuration
   zsh = {
     enable = true;
@@ -27,41 +28,22 @@ let name = "Austin Nason";
         . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
       fi
 
-      # liquidprompt
-      # if [ -f /opt/homebrew/share/liquidprompt ]; then
-      #   . /opt/homebrew/share/liquidprompt
-      # fi
-
-      # Define variables for directories
-      export PATH=$HOME/.pnpm-packages/bin:$HOME/.pnpm-packages:$PATH
-      export PATH=$HOME/.npm-packages/bin:$HOME/bin:$PATH
       export PATH=$HOME/.local/share/bin:$PATH
-
-      # Remove history data we don't want to see
       export HISTIGNORE="pwd:ls:cd"
 
-      # Vim is my editor
-      export ALTERNATE_EDITOR=""
       export EDITOR="nvim"
-      export VISUAL="zed"
 
       # nix shortcuts
       shell() {
           nix-shell '<nixpkgs>' -A "$1"
       }
 
-      # Use difftastic, syntax-aware diffing
       alias diff=difft
-
-      # Always color ls and group directories
       alias ls='ls --color=auto'
 
       # Terraform
       alias tf='terraform'
 
-      # zsh completion
-      autoload -Uz compinit
-      compinit
     '';
   };
 
@@ -70,23 +52,35 @@ let name = "Austin Nason";
     ignores = [ "*.swp" ];
     userName = name;
     userEmail = email;
-    lfs = {
-      enable = true;
-    };
+    lfs = { enable = true; };
     extraConfig = {
       init.defaultBranch = "main";
       core = {
-	    editor = "nvim";
+        editor = "nvim";
         autocrlf = "input";
       };
       pull.rebase = true;
       rebase.autoStash = true;
+      credential = {
+        "https://github.com" = { helper = "!gh auth git-credential"; };
+      };
     };
+  };
+
+  gh = {
+    enable = true;
+    gitCredentialHelper.enable =
+      false; # https://github.com/NixOS/nixpkgs/issues/169115
   };
 
   vim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [ vim-airline vim-airline-themes vim-startify vim-tmux-navigator ];
+    plugins = with pkgs.vimPlugins; [
+      vim-airline
+      vim-airline-themes
+      vim-startify
+      vim-tmux-navigator
+    ];
     settings = { ignorecase = true; };
     extraConfig = ''
       "" General
@@ -129,7 +123,7 @@ let name = "Austin Nason";
       "" Statusbar
       set nocompatible " Disable vi-compatibility
       set laststatus=2 " Always show the statusline
-      let g:airline_theme='bubblegum'
+      let g:airline_theme='seoul256'
       let g:airline_powerline_fonts = 1
 
       "" Local keys and such
@@ -184,167 +178,104 @@ let name = "Austin Nason";
 
       let g:airline_theme='bubblegum'
       let g:airline_powerline_fonts = 1
-      '';
-     };
-
-  alacritty = {
-    enable = true;
-    settings = {
-      cursor = {
-        style = "Block";
-      };
-
-      window = {
-        opacity = 1.0;
-        padding = {
-          x = 24;
-          y = 24;
-        };
-      };
-
-      font = {
-        normal = {
-          family = "MesloLGS NF";
-          style = "Regular";
-        };
-        size = lib.mkMerge [
-          (lib.mkIf pkgs.stdenv.hostPlatform.isLinux 10)
-          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin 14)
-        ];
-      };
-
-      colors = {
-        primary = {
-          background = "0x1f2528";
-          foreground = "0xc0c5ce";
-        };
-
-        normal = {
-          black = "0x1f2528";
-          red = "0xec5f67";
-          green = "0x99c794";
-          yellow = "0xfac863";
-          blue = "0x6699cc";
-          magenta = "0xc594c5";
-          cyan = "0x5fb3b3";
-          white = "0xc0c5ce";
-        };
-
-        bright = {
-          black = "0x65737e";
-          red = "0xec5f67";
-          green = "0x99c794";
-          yellow = "0xfac863";
-          blue = "0x6699cc";
-          magenta = "0xc594c5";
-          cyan = "0x5fb3b3";
-          white = "0xd8dee9";
-        };
-      };
-    };
+    '';
   };
+
+  #firefox = {
+  #  enable = true;
+  #  #nativeMessagingHosts.packages = [
+  #  #  pkgs.tridactyl-native
+  #  #];
+  #  profiles = {
+  #    default = {
+  #      id = 0;
+  #      name = "default";
+  #      isDefault = true;
+  #        #extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+  #        #  no-pdf-download
+  #        #  tridactyl
+  #        #  ublock-origin
+  #        #];
+  #      settings = {
+  #        "gfx.webrender.all" = true; # gpu accel
+  #        "media.ffmpeg.vaapi.enabled" = true;
+  #        "widget.dmabuf.force-enabled" = true;
+
+  #        "privacy.webrtc.legacyGlobalIndicator" = false;
+  #        "app.shield.optoutstudies.enabled" = false;
+  #        "app.update.auto" = false;
+  #        "browser.bookmarks.restore_default_bookmarks" = false;
+  #        "browser.contentblocking.category" = "strict";
+  #        "browser.ctrlTab.recentlyUsedOrder" = false;
+  #        "browser.discovery.enabled" = false;
+  #        "browser.laterrun.enabled" = false;
+  #        "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" =
+  #          false;
+  #        "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" =
+  #          false;
+  #        "browser.newtabpage.activity-stream.feeds.snippets" = false;
+  #        "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.havePinned" =
+  #          "";
+  #        "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines" =
+  #          "";
+  #        "browser.newtabpage.activity-stream.section.highlights.includePocket" =
+  #          false;
+  #        "browser.newtabpage.activity-stream.showSponsored" = false;
+  #        "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+  #        "browser.newtabpage.pinned" = false;
+  #        "browser.protections_panel.infoMessage.seen" = true;
+  #        "browser.quitShortcut.disabled" = true;
+  #        "browser.shell.checkDefaultBrowser" = false;
+  #        "browser.ssb.enabled" = true;
+  #        "browser.toolbars.bookmarks.visibility" = "never";
+  #        "browser.urlbar.placeholderName" = "DuckDuckGo";
+  #        "browser.urlbar.suggest.openpage" = false;
+  #        "datareporting.policy.dataSubmissionEnable" = false;
+  #        "datareporting.policy.dataSubmissionPolicyAcceptedVersion" = 2;
+  #        "dom.security.https_only_mode" = true;
+  #        "dom.security.https_only_mode_ever_enabled" = true;
+  #        "extensions.getAddons.showPane" = false;
+  #        "extensions.htmlaboutaddons.recommendations.enabled" = false;
+  #        "extensions.pocket.enabled" = false;
+  #        "identity.fxaccounts.enabled" = false;
+  #        "privacy.trackingprotection.enabled" = true;
+  #        "privacy.trackingprotection.socialtracking.enabled" = true;
+  #      };
+  #    };
+  #  };
+
+  #};
 
   ssh = {
     enable = true;
-
     extraConfig = lib.mkMerge [
       ''
         Host github.com
           Hostname github.com
           IdentitiesOnly yes
       ''
-      (lib.mkIf pkgs.stdenv.hostPlatform.isLinux
-        ''
-          IdentityFile /home/${user}/.ssh/id_github
-        '')
-      (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
-        ''
-          IdentityFile /Users/${user}/.ssh/id_github
-        '')
+      (lib.mkIf pkgs.stdenv.hostPlatform.isLinux ''
+        IdentityFile /home/${user}/.ssh/id_github
+      '')
+      (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin ''
+        IdentityFile /Users/${user}/.ssh/id_rsa
+      '')
     ];
   };
 
-  tmux = {
+  vscode = {
     enable = true;
-    plugins = with pkgs.tmuxPlugins; [
-      vim-tmux-navigator
-      sensible
-      yank
-      prefix-highlight
-      {
-        plugin = power-theme;
-        extraConfig = ''
-           set -g @tmux_power_theme 'gold'
-        '';
-      }
-      {
-        plugin = resurrect; # Used by tmux-continuum
-
-        # Use XDG data directory
-        # https://github.com/tmux-plugins/tmux-resurrect/issues/348
-        extraConfig = ''
-          set -g @resurrect-dir '$HOME/.cache/tmux/resurrect'
-          set -g @resurrect-capture-pane-contents 'on'
-          set -g @resurrect-pane-contents-area 'visible'
-        '';
-      }
-      {
-        plugin = continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '5' # minutes
-        '';
-      }
+    extensions = with pkgs.vscode-extensions; [
+      hashicorp.terraform
+      bbenoist.nix
+      vscodevim.vim
+      yzhang.markdown-all-in-one
     ];
-    terminal = "screen-256color";
-    prefix = "C-x";
-    escapeTime = 10;
-    historyLimit = 50000;
-    extraConfig = ''
-      # Remove Vim mode delays
-      set -g focus-events on
-
-      # Enable full mouse support
-      set -g mouse on
-
-      # -----------------------------------------------------------------------------
-      # Key bindings
-      # -----------------------------------------------------------------------------
-
-      # Unbind default keys
-      unbind C-b
-      unbind '"'
-      unbind %
-
-      # Split panes, vertical or horizontal
-      bind-key x split-window -v
-      bind-key v split-window -h
-
-      # Move around panes with vim-like bindings (h,j,k,l)
-      bind-key -n M-k select-pane -U
-      bind-key -n M-h select-pane -L
-      bind-key -n M-j select-pane -D
-      bind-key -n M-l select-pane -R
-
-      # Smart pane switching with awareness of Vim splits.
-      # This is copy paste from https://github.com/christoomey/vim-tmux-navigator
-      is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-        | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-      bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h'  'select-pane -L'
-      bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
-      bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
-      bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
-      tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-      if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
-        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
-      if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
-        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
-
-      bind-key -T copy-mode-vi 'C-h' select-pane -L
-      bind-key -T copy-mode-vi 'C-j' select-pane -D
-      bind-key -T copy-mode-vi 'C-k' select-pane -U
-      bind-key -T copy-mode-vi 'C-l' select-pane -R
-      bind-key -T copy-mode-vi 'C-\' select-pane -l
-      '';
+    userSettings = {
+      "editor.fontFamily" = "JetBrains Mono";
+      "terminal.intergated.copyOnSelection" = true;
+      "terminal.intergated.defaultProfile.osx" = "zsh";
+      "workbench.colorTheme" = "Solarized Dark";
     };
+  };
 }

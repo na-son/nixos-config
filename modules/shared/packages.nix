@@ -2,7 +2,6 @@
 
 with pkgs; [
   # General packages for development and system management
-  alacritty
   aspell
   aspellDicts.en
   bash-completion
@@ -10,7 +9,6 @@ with pkgs; [
   btop
   coreutils
   killall
-  neofetch
   neovim
   openssh
   sqlite
@@ -35,22 +33,22 @@ with pkgs; [
   ffmpeg
   fd
   font-awesome
-  hack-font
-  meslo-lgs-nf
+  jetbrains-mono
 
   # Text and terminal utilities
   htop
   iftop
-  jetbrains-mono
   jq
   tree
   tmux
   unzip
   zsh-powerlevel10k
+  tio # serial console
+  silver-searcher
 
   # Python
   python39
-  python39Packages.virtualenv # globally install virtualenv
+  #python39Packages.virtualenv # globally install virtualenv
   #ansible
   #ansible-lint
 
@@ -60,8 +58,8 @@ with pkgs; [
   #terraform-docs
 
   # Nix
-  #nil
-  #nixfmt
+  nil
+  nixfmt
   #statix
   #deadnix
 

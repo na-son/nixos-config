@@ -40,9 +40,7 @@ in {
 
   # Load configuration that is shared across systems
   environment.systemPackages = with pkgs;
-    [
-      ## emacs-unstable
-    ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
+    [ ranger ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
 
   # Enable fonts dir
   fonts.fontDir.enable = true;
