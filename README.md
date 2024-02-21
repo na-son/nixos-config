@@ -6,7 +6,19 @@ Built off of https://github.com/dustinlyons/nixos-config
 
 ### Macos
 
-Build system
+Install xcode bits
+
+```shell
+xcode-select --install
+```
+
+Install nix
+
+```shell
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+```
+
+Build system (optional)
 
 ```shell
 nix run .#build
