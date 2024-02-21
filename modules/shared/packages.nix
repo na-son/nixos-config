@@ -53,9 +53,10 @@ with pkgs; [
   #ansible-lint
 
   # Terraform
+  terraform
   #tfenv
-  #terraform-ls
-  #terraform-docs
+  terraform-ls
+  terraform-docs
 
   # Nix
   nil
