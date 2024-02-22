@@ -4,7 +4,6 @@ _:
   # Development Tools
   "iterm2"
   "homebrew/cask/docker"
-  "visual-studio-code"
 
   # Communication Tools
   "notion"
@@ -13,7 +12,4 @@ _:
 
   # Browsers
   "google-chrome"
-
-  # Fun tools
-  "spotify"
 ]

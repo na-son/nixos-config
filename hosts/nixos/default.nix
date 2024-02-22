@@ -24,7 +24,6 @@ in {
     };
     initrd.availableKernelModules =
       [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-    # initrd.kernelModules = [ "amdgpu" ];
 
     kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "uinput" "tun" ];

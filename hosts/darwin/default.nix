@@ -35,9 +35,6 @@ in {
     '';
   };
 
-  # Turn off NIX_PATH warnings now that we're using flakes
-  system.checks.verifyNixPath = false;
-
   # Load configuration that is shared across systems
   environment.systemPackages = with pkgs;
     [ ranger ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
@@ -45,13 +42,24 @@ in {
   # Enable fonts dir
   fonts.fontDir.enable = true;
 
+  # logout / restart is required for most of these
   system = {
     stateVersion = 4;
 
+    # Turn off NIX_PATH warnings now that we're using flakes
+    checks.verifyNixPath = false;
+
+    # https://mynixos.com/nix-darwin/options/system.defaults
     defaults = {
       NSGlobalDomain = {
+        AppleInterfaceStyle = "Dark";
         AppleShowAllExtensions = true;
         ApplePressAndHoldEnabled = false;
+        AppleICUForce24HourTime = true;
+        NSAutomaticCapitalizationEnabled = false;
+        NSAutomaticDashSubstitutionEnabled = false;
+        NSAutomaticPeriodSubstitutionEnabled = false;
+        NSAutomaticQuoteSubstitutionEnabled = false;
 
         # 120, 90, 60, 30, 12, 6, 2
         KeyRepeat = 2;
