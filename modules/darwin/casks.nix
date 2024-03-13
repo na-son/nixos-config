@@ -4,6 +4,7 @@ _:
   # Development Tools
   "iterm2"
   "homebrew/cask/docker"
+  "vagrant"
 
   # Communication Tools
   "notion"
