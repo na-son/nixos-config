@@ -273,8 +273,8 @@ in {
     ];
     userSettings = {
       "editor.fontFamily" = "JetBrains Mono";
-      "terminal.intergated.copyOnSelection" = true;
-      "terminal.intergated.defaultProfile.osx" = "zsh";
+      "terminal.integrated.copyOnSelection" = true;
+      "terminal.integrated.defaultProfile.osx" = "zsh";
       "workbench.colorTheme" = "Solarized Dark";
     };
   };
