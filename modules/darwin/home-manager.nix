@@ -45,8 +45,7 @@ in {
   local.dock.entries = [
     { path = "/Applications/Google Chrome.app/"; }
     { path = "/Applications/iTerm.app/"; }
-    {
-      path = "/System/Applications/Messages.app/";
-    }
+    { path = "/System/Applications/Messages.app/"; }
+    { path = "/Users/${user}/Downloads"; }
   ];
 }

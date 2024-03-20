@@ -49,6 +49,5 @@ in shared-packages ++ [
   xdg-desktop-portal-gtk
 
   # work
-  appgate-sdp
-  dnsmasq
+  containerlab
 ]

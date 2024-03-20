@@ -38,7 +38,7 @@ in {
   # Load configuration that is shared across systems
   environment.systemPackages = with pkgs;
     [ ranger ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
-
+  
   # Enable fonts dir
   fonts.fontDir.enable = true;
 

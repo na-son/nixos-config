@@ -98,10 +98,7 @@ in {
   };
 
   systemd = {
-    #packages = [ pkgs.appgate-sdp ];
     services = {
-      #appgatedriver.enable = true;
-
       greetd.serviceConfig = {
         Type = "idle";
         StandardInput = "tty";
@@ -146,12 +143,12 @@ in {
     # hardware.nvidia.modesetting.enable = true;
   };
 
-  #  virtualisation = {
-  #    docker = {
-  #      enable = true;
-  #      logDriver = "json-file";
-  #    };
-  #  };
+  virtualisation = {
+    docker = {
+      enable = true;
+      logDriver = "json-file";
+    };
+  };
 
   users.users = {
     ${user} = {
