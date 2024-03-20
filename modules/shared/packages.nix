@@ -53,20 +53,15 @@ with pkgs; [
   #ansible-lint
 
   # Terraform
-  terraform
-  #tfenv
-  terraform-ls
+  #terraform-ls
   terraform-docs
 
   # virtual machines
-  qemu
-  libvirt
-  virt-manager
+  #qemu
+  #libvirt
+  #virt-manager
 
   # Nix
   nil
   nixfmt
-  #statix
-  #deadnix
-
 ]

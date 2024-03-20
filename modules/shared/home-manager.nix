@@ -29,9 +29,11 @@ in {
       fi
 
       export PATH=$HOME/.local/share/bin:$PATH
+      export PATH=$HOME/.tfenv/bin:$PATH
       export HISTIGNORE="pwd:ls:cd"
 
       export EDITOR="nvim"
+      export TFENV_CONFIG_DIR=$HOME/.local/share/tfenv
 
       # nix shortcuts
       shell() {
@@ -43,7 +45,6 @@ in {
 
       # Terraform
       alias tf='terraform'
-
     '';
   };
 
@@ -273,6 +274,7 @@ in {
     ];
     userSettings = {
       "editor.fontFamily" = "JetBrains Mono";
+      "diffEditor.ignoreTrimWhitespace" = false;
       "terminal.integrated.copyOnSelection" = true;
       "terminal.integrated.defaultProfile.osx" = "zsh";
       "workbench.colorTheme" = "Solarized Dark";
