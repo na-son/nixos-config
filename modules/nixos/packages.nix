@@ -33,7 +33,6 @@ in shared-packages ++ [
 
   # Testing and development tools
   direnv
-  rnix-lsp
 
   # Core unix tools
   unixtools.ifconfig
