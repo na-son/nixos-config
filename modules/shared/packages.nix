@@ -56,11 +56,6 @@ with pkgs; [
   #terraform-ls
   terraform-docs
 
-  # virtual machines
-  #qemu
-  #libvirt
-  #virt-manager
-
   # Nix
   nil
   nixfmt
