@@ -26,7 +26,7 @@ with pkgs; [
   #docker
   #docker-compose
   #awscli
-  #google-cloud-sdk
+  google-cloud-sdk
 
   # Media-related packages
   dejavu_fonts
@@ -48,7 +48,7 @@ with pkgs; [
 
   # Python
   python39
-  #python39Packages.virtualenv # globally install virtualenv
+  python39Packages.virtualenv # globally install virtualenv
   #ansible
   #ansible-lint
 
