@@ -46,6 +46,9 @@ with pkgs; [
   tio # serial console
   silver-searcher
 
+  # devtools
+  direnv
+
   # Python
   python39
   python39Packages.virtualenv # globally install virtualenv
