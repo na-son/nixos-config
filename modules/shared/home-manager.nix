@@ -43,8 +43,8 @@ in {
       alias diff=difft
       alias ls='ls --color=auto'
 
-      # Terraform
-      alias tf='terraform'
+      eval "$(direnv hook zsh)"
+
     '';
   };
 
