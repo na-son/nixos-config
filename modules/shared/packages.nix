@@ -34,6 +34,7 @@ with pkgs; [
   fd
   font-awesome
   jetbrains-mono
+  (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
   # Text and terminal utilities
   htop
@@ -61,5 +62,5 @@ with pkgs; [
 
   # Nix
   nil
-  nixfmt
+  nixfmt-rfc-style
 ]

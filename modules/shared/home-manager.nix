@@ -266,18 +266,30 @@ in {
 
   vscode = {
     enable = true;
+    enableUpdateCheck = false;
+    # if extensions are messed up, rm ~/.vscode and build-switch
     extensions = with pkgs.vscode-extensions; [
-      hashicorp.terraform
       bbenoist.nix
+      hashicorp.terraform
+      ms-python.python
       vscodevim.vim
       yzhang.markdown-all-in-one
     ];
+    # https://code.visualstudio.com/docs/getstarted/settings#_default-settings
     userSettings = {
+      # fonts
       "editor.fontFamily" = "JetBrains Mono";
+      "terminal.integrated.fontFamily" = "JetBrainsMono Nerd Font Mono";
+     
+      # colorscheme
+      "workbench.colorTheme" = "Solarized Dark";
+      
+      # git
       "diffEditor.ignoreTrimWhitespace" = false;
+
+      # terminal behavior
       "terminal.integrated.copyOnSelection" = true;
       "terminal.integrated.defaultProfile.osx" = "zsh";
-      "workbench.colorTheme" = "Solarized Dark";
     };
   };
 }
