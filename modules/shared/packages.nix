@@ -14,6 +14,9 @@ with pkgs; [
   sqlite
   wget
   zip
+  
+  # networking
+  ipcalc
 
   # Encryption and security tools
   #age
