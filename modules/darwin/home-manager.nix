@@ -1,11 +1,18 @@
-{ config, pkgs, lib, home-manager, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  home-manager,
+  ...
+}:
 
 let
   user = "nason";
   # Define the content of your file as a derivation
   sharedFiles = import ../shared/files.nix { inherit config pkgs; };
   additionalFiles = import ./files.nix { inherit user config pkgs; };
-in {
+in
+{
   imports = [ ./dock ];
 
   # It me
@@ -27,18 +34,27 @@ in {
 
   home-manager = {
     useGlobalPkgs = true;
-    users.${user} = { pkgs, config, lib, ... }: {
-      home = {
-        enableNixpkgsReleaseCheck = false;
-        packages = pkgs.callPackage ./packages.nix { };
-        file = lib.mkMerge [ sharedFiles additionalFiles ];
-        stateVersion = "23.11";
-      };
-      programs = { }
-        // import ../shared/home-manager.nix { inherit config pkgs lib; };
+    users.${user} =
+      {
+        pkgs,
+        config,
+        lib,
+        ...
+      }:
+      {
+        home = {
+          enableNixpkgsReleaseCheck = false;
+          packages = pkgs.callPackage ./packages.nix { };
+          file = lib.mkMerge [
+            sharedFiles
+            additionalFiles
+          ];
+          stateVersion = "23.11";
+        };
+        programs = { } // import ../shared/home-manager.nix { inherit config pkgs lib; };
 
-      manual.manpages.enable = false;
-    };
+        manual.manpages.enable = false;
+      };
   };
 
   local.dock.enable = true;

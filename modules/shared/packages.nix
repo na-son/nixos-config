@@ -1,6 +1,7 @@
 { pkgs }:
 
-with pkgs; [
+with pkgs;
+[
   # General packages for development and system management
   aspell
   aspellDicts.en
@@ -14,7 +15,7 @@ with pkgs; [
   sqlite
   wget
   zip
-  
+
   # networking
   ipcalc
 

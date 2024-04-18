@@ -1,10 +1,16 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   name = "Austin Nason";
   user = "nason";
   email = "austin.nason@schrodinger.com";
-in {
+in
+{
   # Shared shell configuration
   zsh = {
     enable = true;
@@ -53,7 +59,9 @@ in {
     ignores = [ "*.swp" ];
     userName = name;
     userEmail = email;
-    lfs = { enable = true; };
+    lfs = {
+      enable = true;
+    };
     extraConfig = {
       init.defaultBranch = "main";
       core = {
@@ -63,15 +71,16 @@ in {
       pull.rebase = true;
       rebase.autoStash = true;
       credential = {
-        "https://github.com" = { helper = "!gh auth git-credential"; };
+        "https://github.com" = {
+          helper = "!gh auth git-credential";
+        };
       };
     };
   };
 
   gh = {
     enable = true;
-    gitCredentialHelper.enable =
-      false; # https://github.com/NixOS/nixpkgs/issues/169115
+    gitCredentialHelper.enable = false; # https://github.com/NixOS/nixpkgs/issues/169115
   };
 
   vim = {
@@ -82,7 +91,9 @@ in {
       vim-startify
       vim-tmux-navigator
     ];
-    settings = { ignorecase = true; };
+    settings = {
+      ignorecase = true;
+    };
     extraConfig = ''
       "" General
       set number
@@ -280,10 +291,10 @@ in {
       # fonts
       "editor.fontFamily" = "JetBrains Mono";
       "terminal.integrated.fontFamily" = "JetBrainsMono Nerd Font Mono";
-     
+
       # colorscheme
       "workbench.colorTheme" = "Solarized Dark";
-      
+
       # git
       "diffEditor.ignoreTrimWhitespace" = false;
 

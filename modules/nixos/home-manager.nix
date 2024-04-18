@@ -1,13 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   user = "nason";
   xdg_configHome = "/home/${user}/.config";
-  shared-programs =
-    import ../shared/home-manager.nix { inherit config pkgs lib; };
+  shared-programs = import ../shared/home-manager.nix { inherit config pkgs lib; };
   shared-files = import ../shared/files.nix { inherit config pkgs; };
-
-in {
+in
+{
   home = {
     enableNixpkgsReleaseCheck = false;
     username = "${user}";
@@ -20,7 +24,6 @@ in {
       layout = "us";
       variant = "dvorak";
     };
-
   };
 
   gtk = {
@@ -58,14 +61,8 @@ in {
         };
       };
       startup = [
-        {
-          command =
-            "exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,secrets,ssh";
-        }
-        {
-          command =
-            "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        }
+        { command = "exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,secrets,ssh"; }
+        { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
         {
           # see https://nixos.wiki/wiki/Firefox
           always = true;
@@ -75,19 +72,15 @@ in {
         #  always = true;
         #  command = "${dbus-sway-environment}/bin/dbus-sway-environment";
         #}
-
       ];
 
       keybindings = lib.mkOptionDefault {
 
         # Laptop buttons
-        "XF86AudioRaiseVolume" =
-          "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
-        "XF86AudioLowerVolume" =
-          "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
+        "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
+        "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";
         "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
-        "XF86AudioMicMute" =
-          "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+        "XF86AudioMicMute" = "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle";
         "XF86MonBrightnessDown" = "exec brillo -q -U 5";
         "XF86MonBrightnessUp" = "exec brillo -q -A 5";
         "XF86AudioPlay" = "exec playerctl play-pause";
@@ -102,19 +95,20 @@ in {
         smartGaps = true;
       };
 
-      bars = [{
-        fonts = {
-          names = [ "JetBrains Mono" ];
-          size = 10.0;
-        };
-        mode = "dock";
-        hiddenState = "hide";
-        position = "bottom";
-        statusCommand = "${pkgs.i3status}/bin/i3status";
-        workspaceButtons = true;
-        trayOutput = "primary";
-      }];
-
+      bars = [
+        {
+          fonts = {
+            names = [ "JetBrains Mono" ];
+            size = 10.0;
+          };
+          mode = "dock";
+          hiddenState = "hide";
+          position = "bottom";
+          statusCommand = "${pkgs.i3status}/bin/i3status";
+          workspaceButtons = true;
+          trayOutput = "primary";
+        }
+      ];
     };
   };
 
@@ -149,7 +143,9 @@ in {
           visual = "yes";
         };
 
-        mouse = { hide-when-typing = "yes"; };
+        mouse = {
+          hide-when-typing = "yes";
+        };
 
         colors = {
           background = "002b36";
@@ -175,9 +171,7 @@ in {
           selection-foreground = "93a1a1";
           selection-background = "073642";
         };
-
       };
     };
   };
-
 }

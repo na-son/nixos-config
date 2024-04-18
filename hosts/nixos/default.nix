@@ -1,4 +1,10 @@
-{ config, inputs, pkgs, lib, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   user = "nason";
@@ -6,8 +12,8 @@ let
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKoLhJuOE878n9BaTFAAmGgmGjztT61HsMRJOU+uKf/t+pJLxUOn3Or2CLMG5EkfKiTZzLFRQ9y1IvHPvmrM5QB5obJP6mJm2xNlL6wmDBKF0qpcXCU5nX3SmFJdbLg5a4FRWLSdMifWK75kvOSBskTYv81W5ncsbRdHK67AciarHYbkPoktoJpJE4EpEPMrPGLS7AaRo1zfbrIfOJJc4LzX2jBzNg1gw0/iPX39KPB/F+N6DzEh8cd43B3dKlqHscHCerpsHVF0EIgFkGm76MrgoJO92qAjeln9ibVSjU9ysS0YP7Z5khyyd19HQFiMQ6Dvp5cmUxndgvKdHooGE/"
   ];
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
-
-in {
+in
+{
   imports = [
     ../../modules/nixos/disk-config.nix
     ../../modules/shared
@@ -22,11 +28,20 @@ in {
       };
       efi.canTouchEfiVariables = true;
     };
-    initrd.availableKernelModules =
-      [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "ahci"
+      "nvme"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
+    ];
 
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelModules = [ "uinput" "tun" ];
+    kernelModules = [
+      "uinput"
+      "tun"
+    ];
   };
 
   time.timeZone = "America/Los_Angeles";
@@ -39,8 +54,7 @@ in {
   };
 
   nix = {
-    nixPath =
-      [ "nixos-config=/home/${user}/.local/share/src/nixos-config:/etc/nixos" ];
+    nixPath = [ "nixos-config=/home/${user}/.local/share/src/nixos-config:/etc/nixos" ];
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -49,11 +63,8 @@ in {
       allowed-users = [ "${user}" ];
       auto-optimise-store = true;
       substituters = [ "https://nix-community.cachix.org" ];
-      trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
+      trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
     };
-
   };
 
   programs = {
@@ -164,23 +175,36 @@ in {
       openssh.authorizedKeys.keys = keys;
     };
 
-    root = { openssh.authorizedKeys.keys = keys; };
+    root = {
+      openssh.authorizedKeys.keys = keys;
+    };
   };
 
   security.sudo = {
     enable = true;
-    extraRules = [{
-      commands = [{
-        command = "${pkgs.systemd}/bin/reboot";
-        options = [ "NOPASSWD" ];
-      }];
-      groups = [ "wheel" ];
-    }];
+    extraRules = [
+      {
+        commands = [
+          {
+            command = "${pkgs.systemd}/bin/reboot";
+            options = [ "NOPASSWD" ];
+          }
+        ];
+        groups = [ "wheel" ];
+      }
+    ];
   };
 
-  fonts.packages = with pkgs; [ dejavu_fonts jetbrains-mono font-awesome ];
+  fonts.packages = with pkgs; [
+    dejavu_fonts
+    jetbrains-mono
+    font-awesome
+  ];
 
-  environment.systemPackages = with pkgs; [ gitAndTools.gitFull inetutils ];
+  environment.systemPackages = with pkgs; [
+    gitAndTools.gitFull
+    inetutils
+  ];
 
   system.stateVersion = "21.05"; # Don't change this
 }

@@ -15,7 +15,9 @@
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-homebrew = { url = "github:zhaofengli-wip/nix-homebrew"; };
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+    };
     homebrew-bundle = {
       url = "github:homebrew/homebrew-bundle";
       flake = false;
@@ -29,19 +31,39 @@
       flake = false;
     };
   };
-  outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core
-    , homebrew-cask, home-manager, nixpkgs, disko }@inputs:
+  outputs =
+    {
+      self,
+      darwin,
+      nix-homebrew,
+      homebrew-bundle,
+      homebrew-core,
+      homebrew-cask,
+      home-manager,
+      nixpkgs,
+      disko,
+    }@inputs:
     let
       user = "nason";
-      linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
+      linuxSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
       darwinSystems = [ "aarch64-darwin" ];
       forAllSystems = f: nixpkgs.lib.genAttrs (linuxSystems ++ darwinSystems) f;
-      devShell = system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in {
-          default = with pkgs;
+      devShell =
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          default =
+            with pkgs;
             mkShell {
-              nativeBuildInputs = with pkgs; [ bashInteractive git ];
+              nativeBuildInputs = with pkgs; [
+                bashInteractive
+                git
+              ];
               shellHook = with pkgs; ''
                 export EDITOR=vim
               '';
@@ -50,13 +72,13 @@
       mkApp = scriptName: system: {
         type = "app";
         program = "${
-            (nixpkgs.legacyPackages.${system}.writeScriptBin scriptName ''
-              #!/usr/bin/env bash
-              PATH=${nixpkgs.legacyPackages.${system}.git}/bin:$PATH
-              echo "Running ${scriptName} for ${system}"
-              exec ${self}/apps/${system}/${scriptName}
-            '')
-          }/bin/${scriptName}";
+          (nixpkgs.legacyPackages.${system}.writeScriptBin scriptName ''
+            #!/usr/bin/env bash
+            PATH=${nixpkgs.legacyPackages.${system}.git}/bin:$PATH
+            echo "Running ${scriptName} for ${system}"
+            exec ${self}/apps/${system}/${scriptName}
+          '')
+        }/bin/${scriptName}";
       };
       mkLinuxApps = system: {
         "apply" = mkApp "apply" system;
@@ -74,38 +96,44 @@
         "create-keys" = mkApp "create-keys" system;
         "check-keys" = mkApp "check-keys" system;
       };
-    in {
+    in
+    {
       devShells = forAllSystems devShell;
-      apps = nixpkgs.lib.genAttrs linuxSystems mkLinuxApps
+      apps =
+        nixpkgs.lib.genAttrs linuxSystems mkLinuxApps
         // nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;
 
-      darwinConfigurations = let user = "nason";
-      in {
-        macos = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          specialArgs = inputs;
-          modules = [
-            home-manager.darwinModules.home-manager
-            nix-homebrew.darwinModules.nix-homebrew
-            {
-              nix-homebrew = {
-                enable = true;
-                user = "${user}";
-                taps = {
-                  "homebrew/homebrew-core" = homebrew-core;
-                  "homebrew/homebrew-cask" = homebrew-cask;
-                  "homebrew/homebrew-bundle" = homebrew-bundle;
+      darwinConfigurations =
+        let
+          user = "nason";
+        in
+        {
+          macos = darwin.lib.darwinSystem {
+            system = "aarch64-darwin";
+            specialArgs = inputs;
+            modules = [
+              home-manager.darwinModules.home-manager
+              nix-homebrew.darwinModules.nix-homebrew
+              {
+                nix-homebrew = {
+                  enable = true;
+                  user = "${user}";
+                  taps = {
+                    "homebrew/homebrew-core" = homebrew-core;
+                    "homebrew/homebrew-cask" = homebrew-cask;
+                    "homebrew/homebrew-bundle" = homebrew-bundle;
+                  };
+                  mutableTaps = false;
+                  autoMigrate = true;
                 };
-                mutableTaps = false;
-                autoMigrate = true;
-              };
-            }
-            ./hosts/darwin
-          ];
+              }
+              ./hosts/darwin
+            ];
+          };
         };
-      };
 
-      nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (system:
+      nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (
+        system:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = inputs;
@@ -121,6 +149,7 @@
             }
             ./hosts/nixos
           ];
-        });
+        }
+      );
     };
 }

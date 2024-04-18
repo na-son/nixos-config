@@ -1,4 +1,5 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   nix.settings = {
     substituters = [
       "https://na-son.cachix.org"
