@@ -63,6 +63,8 @@
               nativeBuildInputs = with pkgs; [
                 bashInteractive
                 git
+                statix
+                deadnix
               ];
               shellHook = with pkgs; ''
                 export EDITOR=vim
