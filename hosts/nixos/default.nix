@@ -1,10 +1,4 @@
-{
-  config,
-  inputs,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, pkgs, ... }:
 
 let
   user = "nason";

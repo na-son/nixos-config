@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 
 {
   ".tfenv".source = pkgs.fetchFromGitHub {
