@@ -1,8 +1,9 @@
 { config, pkgs, ... }:
 
-let user = "nason";
-
-in {
+let
+  user = "nason";
+in
+{
 
   imports = [
     ../../modules/darwin/home-manager.nix
@@ -16,7 +17,10 @@ in {
   # Setup user, packages, programs
   nix = {
     package = pkgs.nixUnstable;
-    settings.trusted-users = [ "@admin" "${user}" ];
+    settings.trusted-users = [
+      "@admin"
+      "${user}"
+    ];
 
     gc = {
       user = "root";
@@ -36,7 +40,8 @@ in {
   };
 
   # Load configuration that is shared across systems
-  environment.systemPackages = with pkgs;
+  environment.systemPackages =
+    with pkgs;
     [ ranger ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
 
   # Enable fonts dir
@@ -72,6 +77,12 @@ in {
         "com.apple.sound.beep.feedback" = 0;
       };
 
+      CustomUserPreferences = {
+        "com.apple.Spotlight" = {
+          "com.apple.Spotlight MenuItemHidden" = 1;
+        };
+      };
+
       dock = {
         autohide = true;
         show-recents = false;
@@ -80,7 +91,9 @@ in {
         tilesize = 48;
       };
 
-      finder = { _FXShowPosixPathInTitle = false; };
+      finder = {
+        _FXShowPosixPathInTitle = false;
+      };
 
       trackpad = {
         Clicking = true;
