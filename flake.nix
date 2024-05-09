@@ -12,8 +12,7 @@
 
     # darwin inputs
     darwin = {
-      # url = "github:LnL7/nix-darwin/master";
-      url = "github:wegank/nix-darwin/mddoc-remove";
+      url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-homebrew = {
