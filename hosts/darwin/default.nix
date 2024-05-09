@@ -86,6 +86,7 @@ in
 
       dock = {
         autohide = true;
+        mru-spaces = false;
         show-recents = false;
         launchanim = true;
         orientation = "bottom";
@@ -93,7 +94,9 @@ in
       };
 
       finder = {
-        _FXShowPosixPathInTitle = false;
+        _FXShowPosixPathInTitle = true;
+        AppleShowAllExtensions = true;
+        ShowPathbar = true;
       };
 
       trackpad = {
