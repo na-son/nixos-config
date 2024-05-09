@@ -72,7 +72,6 @@ in
     gnome.gnome-keyring.enable = true;
     hardware.bolt.enable = true;
     upower.enable = true;
-
     thermald.enable = true;
 
     tlp = {
