@@ -148,9 +148,12 @@ in
   };
 
   virtualisation = {
-    docker = {
+    containers.enable = true;
+    
+    podman = {
       enable = true;
-      logDriver = "json-file";
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
     };
   };
 

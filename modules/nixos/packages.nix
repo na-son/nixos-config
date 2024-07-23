@@ -53,4 +53,5 @@ shared-packages
 
   # work
   containerlab
+  podman-desktop
 ]

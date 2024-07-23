@@ -3,7 +3,8 @@ _:
 [
   # Development Tools
   "iterm2"
-  "homebrew/cask/docker"
+  #"homebrew/cask/docker"
+  "podman-desktop"
   "zoc"
 
   # Communication Tools

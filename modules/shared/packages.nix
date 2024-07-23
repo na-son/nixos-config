@@ -30,6 +30,12 @@ with pkgs;
   #docker
   #docker-compose
   #awscli
+  qemu
+  podman
+  podman-compose
+  podman-tui
+  dive
+  #podman-desktop
   google-cloud-sdk
 
   # Media-related packages
@@ -50,6 +56,7 @@ with pkgs;
   zsh-powerlevel10k
   tio # serial console
   silver-searcher
+  fastfetch
 
   # devtools
   direnv
