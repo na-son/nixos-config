@@ -3,12 +3,12 @@ _:
 [
   # Development Tools
   "iterm2"
-  #"homebrew/cask/docker"
-  "podman-desktop"
+  "homebrew/cask/docker"
+  #"podman-desktop"
   "zoc"
 
   # Communication Tools
-  "notion"
+  #"notion"
   "zoom"
   "meetingbar"
 

@@ -27,14 +27,14 @@ with pkgs;
   #pinentry
 
   # Cloud-related tools and SDKs
-  #docker
-  #docker-compose
+  docker
+  docker-compose
   #awscli
-  qemu
-  podman
-  podman-compose
-  podman-tui
-  dive
+  #qemu
+  #podman
+  #podman-compose
+  #podman-tui
+  #dive
   #podman-desktop
   google-cloud-sdk
 
@@ -62,14 +62,14 @@ with pkgs;
   direnv
 
   # Python
-  python39
-  python39Packages.virtualenv # globally install virtualenv
+  python311
+  python311Packages.virtualenv # globally install virtualenv
   #ansible
   #ansible-lint
 
   # Terraform
   #terraform-ls
-  terraform-docs
+  #terraform-docs
 
   # Nix
   nil

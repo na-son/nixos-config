@@ -44,9 +44,6 @@ in
     with pkgs;
     [ ranger ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
 
-  # Enable fonts dir
-  fonts.fontDir.enable = true;
-
   # logout / restart is required for most of these
   system = {
     stateVersion = 4;
