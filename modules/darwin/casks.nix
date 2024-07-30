@@ -4,11 +4,9 @@ _:
   # Development Tools
   "iterm2"
   "homebrew/cask/docker"
-  #"podman-desktop"
   "zoc"
 
   # Communication Tools
-  #"notion"
   "zoom"
   "meetingbar"
 
