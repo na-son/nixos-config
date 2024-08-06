@@ -35,7 +35,7 @@ shared-packages
   rofi-calc
 
   # Testing and development tools
-  direnv
+  #direnv
 
   # Core unix tools
   unixtools.ifconfig

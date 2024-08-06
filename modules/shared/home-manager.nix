@@ -44,7 +44,7 @@ in
       alias diff=difft
       alias ls='ls --color=auto'
 
-      eval "$(direnv hook zsh)"
+      #eval "$(direnv hook zsh)"
 
     '';
   };
