@@ -59,7 +59,7 @@ with pkgs;
   fastfetch
 
   # devtools
-  #direnv
+  direnv
   devenv
 
   # Python

@@ -35,7 +35,6 @@ shared-packages
   rofi-calc
 
   # Testing and development tools
-  #direnv
 
   # Core unix tools
   unixtools.ifconfig
@@ -53,5 +52,4 @@ shared-packages
 
   # work
   containerlab
-  podman-desktop
 ]
