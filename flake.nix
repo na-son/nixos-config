@@ -10,6 +10,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
+
     # darwin inputs
     darwin = {
       url = "github:LnL7/nix-darwin/master";
@@ -42,6 +46,7 @@
       home-manager,
       nixpkgs,
       disko,
+      ghostty,
     }@inputs:
     let
       user = "nason";
@@ -148,6 +153,10 @@
                 useUserPackages = true;
                 users.${user} = import ./modules/nixos/home-manager.nix;
               };
+
+             environment.systemPackages = [
+               ghostty.packages.x86_64-linux.default
+             ];
             }
             ./hosts/nixos
           ];
