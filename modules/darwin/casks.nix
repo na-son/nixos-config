@@ -3,6 +3,7 @@ _:
 [
   # Development Tools
   "iterm2"
+  "ghostty"
   "homebrew/cask/docker"
   "zoc"
 
