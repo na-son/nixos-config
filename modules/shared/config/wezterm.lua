@@ -29,24 +29,24 @@ config.keys = { -- close window
     }
 }, q}
 
-config.window_decorations = "NONE"
+config.window_decorations = "INTEGRATED_BUTTONS|TITLE"
 
 -- set theme
 config.color_scheme = "Banana Blueberry"
 
 function fullscreen_toggle(window, pane)
-    local overrides = window:get_config_overrides() or {}
-    local is_fullscreen = window:get_dimensions().is_full_screen
+  local overrides = window:get_config_overrides() or {}
+  local is_fullscreen = window:get_dimensions().is_full_screen
 
-    if is_fullscreen then
-      overrides.enable_tab_bar = false
-      overrides.window_decorations = 'NONE'
-      wezterm.log_info("Setting to fullscreen mode")
-    else
-      overrides.enable_tab_bar = true
-      overrides.window_decorations = 'INTEGRATED_BUTTONS|TITLE'
-    end
-    window:set_config_overrides(overrides)
+  if is_fullscreen then
+    overrides.enable_tab_bar = false
+    overrides.window_decorations = 'NONE'
+    wezterm.log_info("Setting to fullscreen mode")
+  else
+    overrides.enable_tab_bar = true
+    overrides.window_decorations = 'INTEGRATED_BUTTONS|TITLE'
+  end
+  window:set_config_overrides(overrides)
 end
 
 wezterm.on('window-resized', fullscreen_toggle)
