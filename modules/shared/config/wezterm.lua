@@ -25,8 +25,7 @@ config.keys = {
     key = 'e',
     mods = 'CMD|SHIFT',
     action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
-  },
-
+  },q
 }
 
 config.window_decorations = "NONE"
