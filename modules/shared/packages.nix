@@ -56,6 +56,7 @@ with pkgs;
   tmux
   unzip
   zsh-powerlevel10k
+  oh-my-zsh
   tio # serial console
   silver-searcher
   fastfetch

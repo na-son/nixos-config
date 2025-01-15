@@ -29,6 +29,16 @@ in
         file = "p10k.zsh";
       }
     ];
+    oh-my-zsh = {
+      enable = true;
+      theme = "robbyrussell";
+      plugins = [
+        "sudo"
+        "terraform"
+        "systemadmin"
+        "vi-mode"
+      ];
+    };
 
     initExtraFirst = ''
       if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then

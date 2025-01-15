@@ -7,6 +7,7 @@ local config = wezterm.config_builder()
 -- overwrite key bindings
 -- This will create a new split and run your default program inside it
 config.keys = {
+  
   -- close window
   {
     key = 'd',
@@ -27,6 +28,8 @@ config.keys = {
   },
 
 }
+
+config.window_decorations = "NONE"
 
 -- set theme
 config.color_scheme = "Banana Blueberry"
