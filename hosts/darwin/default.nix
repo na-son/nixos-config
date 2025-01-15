@@ -1,14 +1,14 @@
 { pkgs, ... }:
 
 let
-  user = "nason";
+  user = "casazza";
 in
 {
 
   imports = [
     ../../modules/darwin/home-manager.nix
     ../../modules/shared
-    ../../modules/shared/cachix
+    # ../../modules/shared/cachix
   ];
 
   # Auto upgrade nix package and the daemon service.

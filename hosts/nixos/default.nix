@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 
 let
-  user = "nason";
+  user = "casazza";
   keys = [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKoLhJuOE878n9BaTFAAmGgmGjztT61HsMRJOU+uKf/t+pJLxUOn3Or2CLMG5EkfKiTZzLFRQ9y1IvHPvmrM5QB5obJP6mJm2xNlL6wmDBKF0qpcXCU5nX3SmFJdbLg5a4FRWLSdMifWK75kvOSBskTYv81W5ncsbRdHK67AciarHYbkPoktoJpJE4EpEPMrPGLS7AaRo1zfbrIfOJJc4LzX2jBzNg1gw0/iPX39KPB/F+N6DzEh8cd43B3dKlqHscHCerpsHVF0EIgFkGm76MrgoJO92qAjeln9ibVSjU9ysS0YP7Z5khyyd19HQFiMQ6Dvp5cmUxndgvKdHooGE/"
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGXhLS4tLWrsiiKhoYh7CxhOmhcwukzbE27OTy5fUvLpM6bQ0jCUW8w5nYuvzhEgyNPlPi2iu04j+qUUp8fxu3Lkw3WKvHF6G/Nv/yEeQgdffO4Ulw2Qu2WluFkIkedsY8sBA2zqcFrqdp+L64JRJySy1kx/xJbzNMIrY2Q/DI212FHP3peeWSvofz7tIrOdJ/6TP3nj89vuOLHnMqBG3/tHb13/4s/DKciPlX12doG2S8PaQMifrIiCPmT3te5+IGTLyyusdGLmPsoyCCgN6hgQKq3dTOdiniMpmIKFKH7egdi5e4TU0KYKjzfvMhNnv0hUKnx8Q1izwzIUk/XyzDid2ZUvAuSJSBs0uQC64zHjkARg+7tCrJ7CGbxhOnjtUTRLZ2jxYd/hZn4Mnc4CRf9hRvZwf/CCqOhyphntdzRmWnmOh3SaEOlFHG1debP8Q8CAX1mw5A4mYddGsZUg1IqygHv2TS1R8RTNhIWIIW9lVoojYAH2PSVaQu5yp8h7qbTUybF59F8VpzA6kfojUHvTx5EebbRPytxhyAGBvB7l0hr/pWih704SgwDixh9UYqJnpiC9wy0WGWc3M8HG5j2Q45AgHSr2bYSR69XJ614Tj9+myeYIvaUFcZGw4twxa54aK9ReTjQ5zFXgXiBVVGQS0SL8uKq+3Xg3DrVIIDyQ== olive.casazza@schrodinger.com"
   ];
   tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
 in

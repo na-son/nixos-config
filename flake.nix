@@ -49,10 +49,10 @@
       ghostty,
     }@inputs:
     let
-      user = "nason";
+      user = "casazza";
       linuxSystems = [
-        "x86_64-linux"
-        "aarch64-linux"
+        # "x86_64-linux"
+        # "aarch64-linux"
       ];
       darwinSystems = [ "aarch64-darwin" ];
       forAllSystems = f: nixpkgs.lib.genAttrs (linuxSystems ++ darwinSystems) f;
@@ -112,7 +112,7 @@
 
       darwinConfigurations =
         let
-          user = "nason";
+          user = "casazza";
         in
         {
           macos = darwin.lib.darwinSystem {

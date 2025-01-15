@@ -10,7 +10,6 @@ with pkgs;
   btop
   coreutils
   killall
-  neovim
   openssh
   sqlite
   wget
@@ -27,8 +26,8 @@ with pkgs;
   #pinentry
 
   # Cloud-related tools and SDKs
-  #docker
-  #docker-compose
+  docker
+  docker-compose
   #awscli
   #qemu
   #podman
@@ -36,7 +35,7 @@ with pkgs;
   #podman-tui
   #dive
   #podman-desktop
-  google-cloud-sdk
+  #google-cloud-sdk
 
   # Media-related packages
   dejavu_fonts
@@ -48,6 +47,9 @@ with pkgs;
 
   # Text and terminal utilities
   htop
+  micro
+  
+
   #iftop
   jq
   tree
@@ -65,8 +67,8 @@ with pkgs;
   # Python
   python311
   python311Packages.virtualenv # globally install virtualenv
-  #ansible
-  #ansible-lint
+  ansible
+  ansible-lint
 
   # Terraform
   #terraform-ls
