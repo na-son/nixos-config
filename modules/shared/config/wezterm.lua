@@ -29,7 +29,7 @@ config.keys = { -- close window
     }
 }, q}
 
-config.window_decorations = "INTEGRATED_BUTTONS|TITLE"
+config.window_decorations = "RESIZE|TITLE"
 
 -- set theme
 config.color_scheme = "Banana Blueberry"
@@ -44,7 +44,7 @@ function fullscreen_toggle(window, pane)
     wezterm.log_info("Setting to fullscreen mode")
   else
     overrides.enable_tab_bar = true
-    overrides.window_decorations = 'INTEGRATED_BUTTONS|TITLE'
+    overrides.window_decorations = 'RESIZE|TITLE'
   end
   window:set_config_overrides(overrides)
 end
