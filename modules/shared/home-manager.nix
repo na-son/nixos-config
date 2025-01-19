@@ -1,11 +1,18 @@
 { pkgs, lib, ... }:
 
 let
-  name = "Austin Nason";
-  user = "nason";
-  email = "austin.nason@schrodinger.com";
+  name = "Olive Casazza";
+  user = "casazza";
+  email = "olive.casazza@schrodinger.com";
 in
 {
+  wezterm = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+    extraConfig = builtins.readFile ./config/wezterm.lua;
+  };
+
   # Shared shell configuration
   zsh = {
     enable = true;
@@ -22,6 +29,16 @@ in
         file = "p10k.zsh";
       }
     ];
+    oh-my-zsh = {
+      enable = true;
+      theme = "robbyrussell";
+      plugins = [
+        "sudo"
+        "terraform"
+        "systemadmin"
+        "vi-mode"
+      ];
+    };
 
     initExtraFirst = ''
       if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
@@ -60,7 +77,7 @@ in
     extraConfig = {
       init.defaultBranch = "main";
       core = {
-        editor = "nvim";
+        editor = "nano";
         autocrlf = "input";
       };
       pull.rebase = true;
@@ -276,9 +293,7 @@ in
     # if extensions are messed up, rm ~/.vscode and build-switch
     extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
-      hashicorp.terraform
       ms-python.python
-      vscodevim.vim
       yzhang.markdown-all-in-one
     ];
     # https://code.visualstudio.com/docs/getstarted/settings#_default-settings
@@ -288,7 +303,7 @@ in
       "terminal.integrated.fontFamily" = "JetBrainsMono Nerd Font Mono";
 
       # colorscheme
-      "workbench.colorTheme" = "Solarized Dark";
+      "workbench.colorTheme" = "Default High Contrast";
 
       # git
       "diffEditor.ignoreTrimWhitespace" = false;

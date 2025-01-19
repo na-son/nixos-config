@@ -3,6 +3,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     home-manager.url = "github:nix-community/home-manager";
+    sops-nix.url = "github:Mic92/sops-nix";
 
     # linux inputs
     disko = {
@@ -47,12 +48,13 @@
       nixpkgs,
       disko,
       ghostty,
+      sops-nix,
     }@inputs:
     let
-      user = "nason";
+      user = "casazza";
       linuxSystems = [
-        "x86_64-linux"
-        "aarch64-linux"
+        # "x86_64-linux"
+        # "aarch64-linux"
       ];
       darwinSystems = [ "aarch64-darwin" ];
       forAllSystems = f: nixpkgs.lib.genAttrs (linuxSystems ++ darwinSystems) f;
@@ -112,7 +114,7 @@
 
       darwinConfigurations =
         let
-          user = "nason";
+          user = "casazza";
         in
         {
           macos = darwin.lib.darwinSystem {
@@ -121,6 +123,7 @@
             modules = [
               home-manager.darwinModules.home-manager
               nix-homebrew.darwinModules.nix-homebrew
+              sops-nix.darwinModules.sops
               {
                 nix-homebrew = {
                   enable = true;

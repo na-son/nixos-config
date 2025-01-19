@@ -6,13 +6,14 @@ _:
   "ghostty"
   "homebrew/cask/docker"
   "zoc"
+  "wezterm"
 
   # Communication Tools
   "zoom"
   "meetingbar"
 
   # Browsers
-  "google-chrome"
+  # "google-chrome"
 
   # mac stuff
   "hiddenbar"
