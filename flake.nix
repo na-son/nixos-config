@@ -1,7 +1,7 @@
 {
   description = "Starter Configuration for MacOS and NixOS";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
 
     # linux inputs
@@ -154,9 +154,9 @@
                 users.${user} = import ./modules/nixos/home-manager.nix;
               };
 
-             environment.systemPackages = [
-               ghostty.packages.x86_64-linux.default
-             ];
+              environment.systemPackages = [
+                ghostty.packages.x86_64-linux.default
+              ];
             }
             ./hosts/nixos
           ];

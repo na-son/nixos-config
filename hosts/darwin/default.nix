@@ -11,9 +11,6 @@ in
     ../../modules/shared/cachix
   ];
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-
   # Setup user, packages, programs
   nix = {
     package = pkgs.nixVersions.latest;
@@ -23,7 +20,6 @@ in
     ];
 
     gc = {
-      user = "root";
       automatic = true;
       interval = {
         Weekday = 0;

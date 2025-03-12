@@ -272,6 +272,7 @@ in
 
   vscode = {
     enable = true;
+    profiles.default = {
     enableUpdateCheck = false;
     # if extensions are messed up, rm ~/.vscode and build-switch
     extensions = with pkgs.vscode-extensions; [
@@ -298,4 +299,5 @@ in
       "terminal.integrated.defaultProfile.osx" = "zsh";
     };
   };
+};
 }
