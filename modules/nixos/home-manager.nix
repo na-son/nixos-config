@@ -42,7 +42,7 @@ in
     enable = true;
     config = rec {
       modifier = "Mod4";
-      #terminal = "foot"; 
+      #terminal = "foot";
       menu = "rofi -show run";
       input = {
         "type:keyboard" = {

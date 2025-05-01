@@ -106,6 +106,7 @@
     in
     {
       devShells = forAllSystems devShell;
+      formatter = nixpkgs.nixfmt-rfc-style;
       apps =
         nixpkgs.lib.genAttrs linuxSystems mkLinuxApps
         // nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;

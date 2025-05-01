@@ -10,6 +10,7 @@ _:
   # Communication Tools
   "zoom"
   "meetingbar"
+  "notion"
 
   # Browsers
   "google-chrome"

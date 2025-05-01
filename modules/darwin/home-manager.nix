@@ -55,12 +55,24 @@ in
         manual.manpages.enable = false;
       };
   };
-
-  local.dock.enable = true;
-  local.dock.entries = [
+  local.dock = {
+    enable = true;
+    entries = [
     { path = "/Applications/Google Chrome.app/"; }
-    { path = "/Applications/iTerm.app/"; }
-    { path = "/System/Applications/Messages.app/"; }
-    { path = "/Users/${user}/Downloads"; }
+    { path = "/Applications/Ghostty.app/"; }
+    { path = "/Applications/Visual Studio Code.app/"; }
+    { path = "/Applications/Notion.app/"; }
+    {
+      path = "/Users/${user}/Downloads";
+      options = "--display stack --view list";
+      section = "others";
+    }
+    {
+      path = "/Users/${user}/src";
+      options = "--view list";
+      section = "others";
+    }
   ];
+};
+
 }
