@@ -7,14 +7,12 @@
 
 let
   user = "nason";
-  # Define the content of your file as a derivation
   sharedFiles = import ../shared/files.nix { inherit config pkgs; };
   additionalFiles = import ./files.nix { inherit user config pkgs; };
 in
 {
   imports = [ ./dock ];
 
-  # It me
   users.users.${user} = {
     name = "${user}";
     home = "/Users/${user}";
@@ -25,10 +23,7 @@ in
   homebrew = {
     enable = true;
     casks = pkgs.callPackage ./casks.nix { };
-
-    # $ nix shell nixpkgs#mas
-    # $ mas search <app name>
-    masApps = { };
+    masApps = { }; # $ mas search <app name>
   };
 
   home-manager = {
@@ -55,6 +50,7 @@ in
         manual.manpages.enable = false;
       };
   };
+
   local.dock = {
     enable = true;
     entries = [

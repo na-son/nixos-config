@@ -45,7 +45,6 @@ in
       alias ls='ls --color=auto'
 
       eval "$(direnv hook zsh)"
-
     '';
   };
 

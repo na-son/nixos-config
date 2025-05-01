@@ -1,17 +1,15 @@
 { pkgs, ... }:
 
 let
-  user = "nason";
+  user = "nason"; # Change this to your preferred username - I should figure out how to get this from above
 in
 {
-
   imports = [
     ../../modules/darwin/home-manager.nix
     ../../modules/shared
     ../../modules/shared/cachix
   ];
 
-  # Setup user, packages, programs
   nix = {
     package = pkgs.nixVersions.latest;
     settings.trusted-users = [
@@ -19,7 +17,7 @@ in
       "${user}"
     ];
 
-    gc = {
+    gc = { # keeps the nix system footprint reasonable
       automatic = true;
       interval = {
         Weekday = 0;
@@ -29,22 +27,17 @@ in
       options = "--delete-older-than 30d";
     };
 
-    # Turn this on to make command line easier
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
   };
 
-  # Load configuration that is shared across systems
   environment.systemPackages =
     with pkgs;
     [ ranger ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
 
-  # logout / restart is required for most of these
-  system = {
+  system = { # restart requried
     stateVersion = 4;
-
-    # Turn off NIX_PATH warnings now that we're using flakes
     checks.verifyNixPath = false;
 
     # https://mynixos.com/nix-darwin/options/system.defaults
@@ -59,13 +52,11 @@ in
         NSAutomaticPeriodSubstitutionEnabled = false;
         NSAutomaticQuoteSubstitutionEnabled = false;
 
-        # 120, 90, 60, 30, 12, 6, 2
-        KeyRepeat = 2;
-
-        # 120, 94, 68, 35, 25, 15
-        InitialKeyRepeat = 15;
-
-        "com.apple.mouse.tapBehavior" = 1;
+        KeyRepeat = 2; # 120, 90, 60, 30, 12, 6, 2
+        InitialKeyRepeat = 15; # 120, 94, 68, 35, 25, 15
+        
+        # unavailable preferences can be accessed using quotes
+        "com.apple.mouse.tapBehavior" = 1; 
         "com.apple.sound.beep.volume" = 0.0;
         "com.apple.sound.beep.feedback" = 0;
       };
@@ -76,7 +67,7 @@ in
         };
       };
 
-      dock = {
+      dock = { # the rest of the dock settings are in modules/darwin/home-manager.nix
         autohide = true;
         mru-spaces = false;
         show-recents = false;
