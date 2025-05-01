@@ -27,8 +27,8 @@ with pkgs;
   #pinentry
 
   # Cloud-related tools and SDKs
-  #docker
-  #docker-compose
+  docker
+  docker-compose
   #awscli
   #qemu
   #podman
