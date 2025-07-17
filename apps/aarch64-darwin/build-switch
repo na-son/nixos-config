@@ -16,7 +16,7 @@ echo "${YELLOW}Starting build...${NC}"
 nix --extra-experimental-features 'nix-command flakes' build .#$SYSTEM $@
 
 echo "${YELLOW}Switching to new generation...${NC}"
-./result/sw/bin/darwin-rebuild switch --flake .#$FLAKE $@
+sudo ./result/sw/bin/darwin-rebuild switch --flake .#$FLAKE $@
 
 echo "${YELLOW}Cleaning up...${NC}"
 unlink ./result

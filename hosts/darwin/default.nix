@@ -36,8 +36,9 @@ in
     with pkgs;
     [ ranger ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
 
-  system = { # restart requried
+  system = {
     stateVersion = 4;
+    primaryUser = user;
     checks.verifyNixPath = false;
 
     # https://mynixos.com/nix-darwin/options/system.defaults

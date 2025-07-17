@@ -4,6 +4,9 @@
   lib,
   ...
 }:
+
+# Original source: https://gist.github.com/antifuchs/10138c4d838a63c0a05e725ccd7bccdd
+
 with lib;
 let
   cfg = config.local.dock;
@@ -36,6 +39,11 @@ in
         });
       readOnly = true;
     };
+    local.dock.username = mkOption {
+      description = "Username to apply the dock settings to";
+      default = config.system.primaryUser;
+      type = types.str;
+    };
   };
 
   config = mkIf cfg.enable (
@@ -48,7 +56,7 @@ in
           [
             " "
             "!"
-            ''"''
+            "\""
             "#"
             "$"
             "%"
@@ -71,16 +79,16 @@ in
           ]
           (normalize path)
         );
-      wantURIs = concatMapStrings (entry: ''
-        ${entryURI entry.path}
-      '') cfg.entries;
-      createEntries = concatMapStrings (entry: ''
-        ${dockutil}/bin/dockutil --no-restart --add '${entry.path}' --section ${entry.section} ${entry.options}
-      '') cfg.entries;
+      wantURIs = concatMapStrings (entry: "${entryURI entry.path}\n") cfg.entries;
+      createEntries = concatMapStrings (
+        entry:
+        "${dockutil}/bin/dockutil --no-restart --add '${entry.path}' --section ${entry.section} ${entry.options}\n"
+      ) cfg.entries;
     in
     {
-      system.activationScripts.postUserActivation.text = ''
-        echo >&2 "Setting up the Dock..."
+      system.activationScripts.postActivation.text = ''
+          echo >&2 "Setting up the Dock for ${cfg.username}..."
+          su ${cfg.username} -s /bin/sh <<'USERBLOCK'
         haveURIs="$(${dockutil}/bin/dockutil --list | ${pkgs.coreutils}/bin/cut -f2)"
         if ! diff -wu <(echo -n "$haveURIs") <(echo -n '${wantURIs}') >&2 ; then
           echo >&2 "Resetting Dock."
@@ -90,6 +98,7 @@ in
         else
           echo >&2 "Dock setup complete."
         fi
+        USERBLOCK
       '';
     }
   );
