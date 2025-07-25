@@ -31,21 +31,37 @@ in
         file = "p10k.zsh";
       }
     ];
+    history = {
+      append = true; # parallel history until shell exit
+      ignoreAllDups = true; # remove previous when duplicate commands run
+      ignorePatterns = [
+        "cd"
+        "ls"
+        "pwd"
+      ];
+    };
 
-    initExtraFirst = ''
-      export PATH=$HOME/.tfenv/bin:$PATH
-      export HISTIGNORE="pwd:ls:cd"
+    shellAliases = {
+      cat = "bat";
+      ls = "ls --color=auto";
+    };
 
-      export EDITOR="nvim"
-      export TFENV_CONFIG_DIR=$HOME/.local/share/tfenv
+    sessionVariables = {
+      EDITOR = "nvim";
 
-      alias ls='ls --color=auto'
-    '';
+      # tfenv stuff
+      TFENV_CONFIG_DIR = "$HOME/.local/share/tfenv";
+      PATH = "$HOME/.tfenv/bin:$PATH";
+    };
   };
 
   git = {
     enable = true;
-    ignores = [ "*.swp" ];
+    ignores = [ 
+      ".DS_Store"
+      ".swp"
+      ".vscode"
+    ];
     userName = name;
     userEmail = email;
     lfs = {
@@ -268,6 +284,7 @@ in
     enable = true;
     profiles.default = {
       enableUpdateCheck = false;
+
       # if extensions are messed up, rm ~/.vscode and build-switch
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
@@ -276,6 +293,7 @@ in
         vscodevim.vim
         yzhang.markdown-all-in-one
       ];
+
       # https://code.visualstudio.com/docs/getstarted/settings#_default-settings
       userSettings = {
         # fonts
