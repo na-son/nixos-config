@@ -6,31 +6,8 @@ let
   email = "austin.nason@schrodinger.com";
 in
 {
-
-  direnv = {
-    enable = true;
-    config = {
-      global = {
-        hide_env_diff = true;
-        warn_timeout = 0;
-      };
-    };
-  };
-
   zsh = {
     enable = true;
-    plugins = [
-      {
-        name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      }
-      {
-        name = "powerlevel10k-config";
-        src = lib.cleanSource ./config;
-        file = "p10k.zsh";
-      }
-    ];
     history = {
       append = true; # parallel history until shell exit
       ignoreAllDups = true; # remove previous when duplicate commands run
@@ -55,9 +32,80 @@ in
     };
   };
 
+  starship = {
+    enable = true;
+    enableZshIntegration = true;
+
+    # these are TOML mappings from https://starship.rs/config
+    settings = {
+      add_newline = true;
+      scan_timeout = 10;
+
+      fill.symbol = " ";
+      format = "($nix_shell$container$fill$git_metrics\n)$cmd_duration$hostname$localip$shlvl$shell$env_var$jobs$sudo$username$character";
+      right_format = "$directory$vcsh$git_branch$git_commit$git_state$git_status$docker_context$cmake$python$conda$terraform$rust$memory_usage$custom$status$os$battery$time";
+      continuation_prompt = "[▸▹ ](dimmed white)";
+      
+      aws.disabled = true;
+      gcloud.disabled = true;
+
+      cmd_duration = {
+        format = "[$duration](bold yellow)";
+      };
+
+      git_branch = {
+        style = "italic bright-blue";
+        format = " [$branch(:$remote_branch)]($style)";
+        
+        symbol = "[△](bold italic bright-blue)";
+        only_attached = true;
+        truncation_symbol = "⋯";
+        truncation_length = 11;
+        ignore_branches = [
+          "main"
+        ];
+      };
+
+      git_metrics = {
+        format = "([+$added](italic dimmed green))([-$deleted](italic dimmed red))";
+        
+        ignore_submodules = true;
+        disabled = false;
+      };
+
+      git_status = {
+        style = "bold dimmed blue";
+        format = "([⎪$ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed⎥]($style))";
+        conflicted = "[◪◦](italic bright-magenta)";
+        ahead = "[▴$count](italic green)|";
+        behind = "[▿$count](italic red)|";
+        diverged = "[◇ ▴┤[$ahead_count](regular white)│▿┤[$behind_count](regular white)│](italic bright-magenta)";
+        untracked = "[◌◦](italic bright-yellow)";
+        stashed = "[◃◈](italic white)";
+        modified = "[●◦](italic yellow)";
+        staged = "[▪┤[$count](bold white)│](italic bright-cyan)";
+        renamed = "[◎◦](italic bright-blue)";
+        deleted = "[✕](italic red)";
+      };
+
+      nix_shell = {
+        symbol = "❄";
+        format = "[*⎪$state⎪](bold dimmed blue) [$name](italic dimmed white)";
+        
+        impure_msg = "[⌽](bold dimmed red)";
+        unknown_msg = "[◌](bold dimmed yellow)";
+        pure_msg = "[⌾](bold dimmed green)";
+      };
+
+      terraform = {
+        format = "[🌎⎪$workspace⎪](bold dimmed purple)";
+      };
+    };
+  };
+
   git = {
     enable = true;
-    ignores = [ 
+    ignores = [
       ".DS_Store"
       ".swp"
       ".vscode"
@@ -86,6 +134,16 @@ in
   gh = {
     enable = true;
     gitCredentialHelper.enable = false; # https://github.com/NixOS/nixpkgs/issues/169115
+  };
+
+  direnv = {
+    enable = true;
+    config = {
+      global = {
+        hide_env_diff = true;
+        warn_timeout = 0;
+      };
+    };
   };
 
   vim = {
@@ -198,71 +256,6 @@ in
     '';
   };
 
-  #firefox = {
-  #  enable = true;
-  #  #nativeMessagingHosts.packages = [
-  #  #  pkgs.tridactyl-native
-  #  #];
-  #  profiles = {
-  #    default = {
-  #      id = 0;
-  #      name = "default";
-  #      isDefault = true;
-  #        #extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-  #        #  no-pdf-download
-  #        #  tridactyl
-  #        #  ublock-origin
-  #        #];
-  #      settings = {
-  #        "gfx.webrender.all" = true; # gpu accel
-  #        "media.ffmpeg.vaapi.enabled" = true;
-  #        "widget.dmabuf.force-enabled" = true;
-
-  #        "privacy.webrtc.legacyGlobalIndicator" = false;
-  #        "app.shield.optoutstudies.enabled" = false;
-  #        "app.update.auto" = false;
-  #        "browser.bookmarks.restore_default_bookmarks" = false;
-  #        "browser.contentblocking.category" = "strict";
-  #        "browser.ctrlTab.recentlyUsedOrder" = false;
-  #        "browser.discovery.enabled" = false;
-  #        "browser.laterrun.enabled" = false;
-  #        "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" =
-  #          false;
-  #        "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" =
-  #          false;
-  #        "browser.newtabpage.activity-stream.feeds.snippets" = false;
-  #        "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.havePinned" =
-  #          "";
-  #        "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines" =
-  #          "";
-  #        "browser.newtabpage.activity-stream.section.highlights.includePocket" =
-  #          false;
-  #        "browser.newtabpage.activity-stream.showSponsored" = false;
-  #        "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
-  #        "browser.newtabpage.pinned" = false;
-  #        "browser.protections_panel.infoMessage.seen" = true;
-  #        "browser.quitShortcut.disabled" = true;
-  #        "browser.shell.checkDefaultBrowser" = false;
-  #        "browser.ssb.enabled" = true;
-  #        "browser.toolbars.bookmarks.visibility" = "never";
-  #        "browser.urlbar.placeholderName" = "DuckDuckGo";
-  #        "browser.urlbar.suggest.openpage" = false;
-  #        "datareporting.policy.dataSubmissionEnable" = false;
-  #        "datareporting.policy.dataSubmissionPolicyAcceptedVersion" = 2;
-  #        "dom.security.https_only_mode" = true;
-  #        "dom.security.https_only_mode_ever_enabled" = true;
-  #        "extensions.getAddons.showPane" = false;
-  #        "extensions.htmlaboutaddons.recommendations.enabled" = false;
-  #        "extensions.pocket.enabled" = false;
-  #        "identity.fxaccounts.enabled" = false;
-  #        "privacy.trackingprotection.enabled" = true;
-  #        "privacy.trackingprotection.socialtracking.enabled" = true;
-  #      };
-  #    };
-  #  };
-
-  #};
-
   ssh = {
     enable = true;
     extraConfig = lib.mkMerge [
@@ -305,6 +298,7 @@ in
 
         # git
         "diffEditor.ignoreTrimWhitespace" = false;
+        "git.confirmSync" = false;
 
         # terminal behavior
         "terminal.integrated.copyOnSelection" = true;
