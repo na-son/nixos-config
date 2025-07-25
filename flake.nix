@@ -5,19 +5,19 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
 
+    # Disk partitioning
     disko = {
-      # Disk partitioning
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Terminal
     ghostty = {
-      # Terminal
       url = "github:ghostty-org/ghostty";
     };
 
+    # The rest are all MacOS
     darwin = {
-      # The rest are all MacOS
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
