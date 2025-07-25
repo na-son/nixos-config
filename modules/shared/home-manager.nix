@@ -6,10 +6,19 @@ let
   email = "austin.nason@schrodinger.com";
 in
 {
-  # Shared shell configuration
+
+  direnv = {
+    enable = true;
+    config = {
+      global = {
+        hide_env_diff = true;
+        warn_timeout = 0;
+      };
+    };
+  };
+
   zsh = {
     enable = true;
-    autocd = false;
     plugins = [
       {
         name = "powerlevel10k";
@@ -24,27 +33,13 @@ in
     ];
 
     initExtraFirst = ''
-      if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
-        . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-        . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
-      fi
-
-      export PATH=$HOME/.local/share/bin:$PATH
       export PATH=$HOME/.tfenv/bin:$PATH
       export HISTIGNORE="pwd:ls:cd"
 
       export EDITOR="nvim"
       export TFENV_CONFIG_DIR=$HOME/.local/share/tfenv
 
-      # nix shortcuts
-      shell() {
-          nix-shell '<nixpkgs>' -A "$1"
-      }
-
-      alias diff=difft
       alias ls='ls --color=auto'
-
-      eval "$(direnv hook zsh)"
     '';
   };
 

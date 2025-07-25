@@ -5,16 +5,19 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
 
-    disko = { # Disk partitioning
+    disko = {
+      # Disk partitioning
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ghostty = { # Terminal
+    ghostty = {
+      # Terminal
       url = "github:ghostty-org/ghostty";
     };
 
-    darwin = { # The rest are all MacOS
+    darwin = {
+      # The rest are all MacOS
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -78,7 +81,8 @@
               '';
             };
         };
-      mkApp = scriptName: system: { # this is all the "nix run .#install/.#build-switch tomfoolery.
+      mkApp = scriptName: system: {
+        # this is all the "nix run .#install/.#build-switch tomfoolery.
         type = "app";
         program = "${
           (nixpkgs.legacyPackages.${system}.writeScriptBin scriptName ''
