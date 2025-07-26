@@ -103,6 +103,26 @@ in
     };
   };
 
+  ghostty = {
+    enable = true;
+    package = null;
+    settings = {
+      font-size = 18;
+      font-family = "JetBrainsMono Nerd Font Mono";
+      theme = "Solarized Dark Higher Contrast";
+      cursor-style = "block";
+      shell-integration-features = "no-cursor";
+      clipboard-paste-protection = false;
+      copy-on-select = true;
+      term = "xterm-256color";
+
+      macos-titlebar-proxy-icon = "hidden";
+
+      config-file = "~/.config/ghostty/extra"; # for testing shaders atm
+    };
+  };
+      # custom-shader = "";
+
   git = {
     enable = true;
     ignores = [
