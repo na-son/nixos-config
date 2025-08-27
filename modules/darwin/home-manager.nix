@@ -53,21 +53,21 @@ in
   local.dock = {
     enable = true;
     entries = [
-    { path = "/Applications/Google Chrome.app/"; }
-    { path = "/Applications/Ghostty.app/"; }
-    { path = "/Applications/Visual Studio Code.app/"; }
-    { path = "/Applications/Notion.app/"; }
-    {
-      path = "/Users/${user}/Downloads";
-      options = "--display stack --view list";
-      section = "others";
-    }
-    {
-      path = "/Users/${user}/src";
-      options = "--view list";
-      section = "others";
-    }
-  ];
-};
+      { path = "/Applications/Google Chrome.app/"; }
+      { path = "/Applications/Ghostty.app/"; }
+      { path = "/Applications/Visual Studio Code.app/"; }
+      { path = "/Applications/Notion.app/"; }
+      {
+        path = "/Users/${user}/Downloads";
+        options = "--display stack --view list";
+        section = "others";
+      }
+      {
+        path = "/Users/${user}/src";
+        options = "--view list";
+        section = "others";
+      }
+    ];
+  };
 
 }

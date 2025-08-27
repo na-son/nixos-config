@@ -45,7 +45,7 @@ in
       format = "($nix_shell$container$fill$git_metrics\n)$cmd_duration$hostname$localip$shlvl$shell$env_var$jobs$sudo$username$character";
       right_format = "$directory$vcsh$git_branch$git_commit$git_state$git_status$docker_context$cmake$python$conda$terraform$rust$memory_usage$custom$status$os$battery$time";
       continuation_prompt = "[▸▹ ](dimmed white)";
-      
+
       aws.disabled = true;
       gcloud.disabled = true;
 
@@ -56,7 +56,7 @@ in
       git_branch = {
         style = "italic bright-blue";
         format = " [$branch(:$remote_branch)]($style)";
-        
+
         symbol = "[△](bold italic bright-blue)";
         only_attached = true;
         truncation_symbol = "⋯";
@@ -68,7 +68,7 @@ in
 
       git_metrics = {
         format = "([+$added](italic dimmed green))([-$deleted](italic dimmed red))";
-        
+
         ignore_submodules = true;
         disabled = false;
       };
@@ -91,7 +91,7 @@ in
       nix_shell = {
         symbol = "❄";
         format = "[*⎪$state⎪](bold dimmed blue) [$name](italic dimmed white)";
-        
+
         impure_msg = "[⌽](bold dimmed red)";
         unknown_msg = "[◌](bold dimmed yellow)";
         pure_msg = "[⌾](bold dimmed green)";
@@ -121,7 +121,7 @@ in
       config-file = "~/.config/ghostty/extra"; # for testing shaders atm
     };
   };
-      # custom-shader = "";
+  # custom-shader = "";
 
   git = {
     enable = true;

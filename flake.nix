@@ -107,37 +107,32 @@
     {
       devShells = forAllSystems devShell;
       apps =
-        nixpkgs.lib.genAttrs linuxSystems mkLinuxApps
-        // nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;
+        nixpkgs.lib.genAttrs linuxSystems mkLinuxApps // nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;
 
-      darwinConfigurations =
-        let
-          user = "nason"; # Change to your preferred username
-        in
-        {
-          macos = darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
-            specialArgs = inputs;
-            modules = [
-              home-manager.darwinModules.home-manager
-              nix-homebrew.darwinModules.nix-homebrew
-              {
-                nix-homebrew = {
-                  enable = true;
-                  user = "${user}";
-                  taps = {
-                    "homebrew/homebrew-core" = homebrew-core;
-                    "homebrew/homebrew-cask" = homebrew-cask;
-                    "homebrew/homebrew-bundle" = homebrew-bundle;
-                  };
-                  mutableTaps = false;
-                  autoMigrate = true;
+      darwinConfigurations = {
+        macos = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = inputs;
+          modules = [
+            home-manager.darwinModules.home-manager
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                user = "${user}";
+                taps = {
+                  "homebrew/homebrew-core" = homebrew-core;
+                  "homebrew/homebrew-cask" = homebrew-cask;
+                  "homebrew/homebrew-bundle" = homebrew-bundle;
                 };
-              }
-              ./hosts/darwin
-            ];
-          };
+                mutableTaps = false;
+                autoMigrate = true;
+              };
+            }
+            ./hosts/darwin
+          ];
         };
+      };
 
       nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (
         system:

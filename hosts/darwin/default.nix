@@ -17,7 +17,8 @@ in
       "${user}"
     ];
 
-    gc = { # keeps the nix system footprint reasonable
+    gc = {
+      # keeps the nix system footprint reasonable
       automatic = true;
       interval = {
         Weekday = 0;
@@ -32,9 +33,7 @@ in
     '';
   };
 
-  environment.systemPackages =
-    with pkgs;
-    import ../../modules/shared/packages.nix { inherit pkgs; };
+  environment.systemPackages = with pkgs; import ../../modules/shared/packages.nix { inherit pkgs; };
 
   system = {
     stateVersion = 4;
@@ -55,9 +54,9 @@ in
 
         KeyRepeat = 2; # 120, 90, 60, 30, 12, 6, 2
         InitialKeyRepeat = 15; # 120, 94, 68, 35, 25, 15
-        
+
         # unavailable preferences can be accessed using quotes
-        "com.apple.mouse.tapBehavior" = 1; 
+        "com.apple.mouse.tapBehavior" = 1;
         "com.apple.sound.beep.volume" = 0.0;
         "com.apple.sound.beep.feedback" = 0;
       };
@@ -68,7 +67,8 @@ in
         };
       };
 
-      dock = { # the rest of the dock settings are in modules/darwin/home-manager.nix
+      dock = {
+        # the rest of the dock settings are in modules/darwin/home-manager.nix
         autohide = true;
         mru-spaces = false;
         show-recents = false;
