@@ -166,6 +166,10 @@ in
     };
   };
 
+  neovim = {
+    enable = true;
+  };
+
   vim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
@@ -302,7 +306,7 @@ in
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
         hashicorp.terraform
-        ms-python.python
+        #ms-python.python # build issue
         vscodevim.vim
         yzhang.markdown-all-in-one
       ];

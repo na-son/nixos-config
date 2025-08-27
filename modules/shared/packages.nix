@@ -5,12 +5,10 @@ with pkgs;
   # General packages for development and system management
   aspell
   aspellDicts.en
-  bash-completion
   bat
   btop
   coreutils
   killall
-  neovim
   openssh
   sqlite
   wget
@@ -30,17 +28,16 @@ with pkgs;
   docker
   docker-compose
   #awscli
+  #google-cloud-sdk
   #qemu
   #podman
   #podman-compose
   #podman-tui
   #dive
   #podman-desktop
-  google-cloud-sdk
 
   # Media-related packages
   dejavu_fonts
-  ffmpeg
   fd
   font-awesome
   jetbrains-mono
@@ -53,18 +50,16 @@ with pkgs;
   tree
   tmux
   unzip
-  zsh-powerlevel10k
   tio # serial console
   silver-searcher
-  fastfetch
 
   # devtools
   direnv
   devenv
 
   # Python
-  python311
-  python311Packages.virtualenv # globally install virtualenv
+  python312
+  python312Packages.virtualenv # globally install virtualenv
   #ansible
   #ansible-lint
 
