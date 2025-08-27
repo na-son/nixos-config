@@ -143,6 +143,7 @@ in
       };
       pull.rebase = true;
       rebase.autoStash = true;
+      safe.directory = "/Users/nason/src/nixos-config";
       credential = {
         "https://github.com" = {
           helper = "!gh auth git-credential";

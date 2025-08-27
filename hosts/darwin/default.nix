@@ -34,7 +34,7 @@ in
 
   environment.systemPackages =
     with pkgs;
-    [ ranger ] ++ (import ../../modules/shared/packages.nix { inherit pkgs; });
+    import ../../modules/shared/packages.nix { inherit pkgs; };
 
   system = {
     stateVersion = 4;

@@ -55,7 +55,7 @@ sudo vim hosts/nixos/default.nix
 nix run .#build-switch
 ```
 
-To testi changes you can also run:
+To test changes you can also run:
 
 ```shell
 nixos-rebuild build --flake .#x86_64-linux
@@ -79,3 +79,13 @@ nix --extra-experimental-features 'nix-command flakes' build .#darwinConfigurati
 # if "nothing to push" when you know there is something to push:
 cachix push na-son ./result
 ```
+
+## Caveats
+
+You may need to configure git for the root to trust this directory:
+
+```shell
+sudo su -
+git config --system safe.directory = "/Users/ /nixos-config"
+```
+
