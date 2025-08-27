@@ -2,13 +2,13 @@
   config,
   pkgs,
   home-manager,
+  user,
   ...
 }:
 
 let
-  user = "nason";
-  sharedFiles = import ../shared/files.nix { inherit config pkgs; };
-  additionalFiles = import ./files.nix { inherit user config pkgs; };
+  sharedFiles = import ../shared/files.nix { inherit config pkgs user; };
+  additionalFiles = import ./files.nix { inherit config pkgs user; };
 in
 {
   imports = [ ./dock ];
@@ -44,7 +44,7 @@ in
           ];
           stateVersion = "23.11";
         };
-        programs = { } // import ../shared/home-manager.nix { inherit config pkgs lib; };
+        programs = { } // import ../shared/home-manager.nix { inherit config pkgs lib user; };
 
         manual.manpages.enable = false;
       };

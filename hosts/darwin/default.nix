@@ -1,8 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, user, ... }:
 
-let
-  user = "nason"; # Change this to your preferred username - I should figure out how to get this from above
-in
 {
   imports = [
     ../../modules/darwin/home-manager.nix

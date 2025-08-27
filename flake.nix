@@ -112,7 +112,9 @@
       darwinConfigurations = {
         macos = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = inputs;
+          specialArgs = {
+          user = "nason";
+          } // inputs;
           modules = [
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew
@@ -138,7 +140,11 @@
         system:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = inputs;
+          specialArgs = 
+          {
+            user = "nason";
+          } // inputs;
+
           modules = [
             disko.nixosModules.disko
             home-manager.nixosModules.home-manager
