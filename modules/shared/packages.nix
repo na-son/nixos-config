@@ -58,8 +58,8 @@ with pkgs;
   devenv
 
   # Python
-  python312
-  python312Packages.virtualenv # globally install virtualenv
+  python313
+  python313Packages.virtualenv # globally install virtualenv
   #ansible
   #ansible-lint
 
@@ -70,4 +70,5 @@ with pkgs;
   # Nix
   nil
   nixfmt-rfc-style
+  nix-tree
 ]
