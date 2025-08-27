@@ -11,7 +11,7 @@
     package = pkgs.nixVersions.latest;
     settings.trusted-users = [
       "@admin"
-      "${user}"
+      "${user.name}"
     ];
 
     gc = {
@@ -34,7 +34,7 @@
 
   system = {
     stateVersion = 4;
-    primaryUser = user;
+    primaryUser = user.name;
     checks.verifyNixPath = false;
 
     # https://mynixos.com/nix-darwin/options/system.defaults

@@ -2,7 +2,6 @@ _:
 
 [
   # Development Tools
-  "iterm2"
   "ghostty"
   "zoc"
 

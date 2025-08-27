@@ -52,13 +52,13 @@ in
   };
 
   nix = {
-    nixPath = [ "nixos-config=/home/${user}/.local/share/src/nixos-config:/etc/nixos" ];
+    nixPath = [ "nixos-config=/home/${user.name}/.local/share/src/nixos-config:/etc/nixos" ];
     package = pkgs.nixVersions.latest;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
     settings = {
-      allowed-users = [ "${user}" ];
+      allowed-users = [ "${user.name}" ];
       auto-optimise-store = true;
       substituters = [ "https://nix-community.cachix.org" ];
       trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
@@ -162,7 +162,7 @@ in
   };
 
   users.users = {
-    ${user} = {
+    ${user.name} = {
       isNormalUser = true;
       extraGroups = [
         "wheel" # Enable ‘sudo’ for the user.

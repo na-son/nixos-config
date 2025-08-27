@@ -105,15 +105,15 @@ in
 
       # Program launcher
       super + @space
-            rofi -config -no-lazy-grab -show drun -modi drun -theme /home/${user}/.config/rofi/launcher.rasi
+            rofi -config -no-lazy-grab -show drun -modi drun -theme /home/${user.name}/.config/rofi/launcher.rasi
 
       # Terminal emulator
       super + Return
-            bspc rule -a Alacritty -o state=floating rectangle=1024x768x0x0 center=true && /etc/profiles/per-user/${user}/bin/alacritty
+            bspc rule -a Alacritty -o state=floating rectangle=1024x768x0x0 center=true && /etc/profiles/per-user/${user.name}/bin/alacritty
 
       # Terminal emulator
       super + ctrl + Return
-            /etc/profiles/per-user/${user}/bin/alacritty
+            /etc/profiles/per-user/${user.name}/bin/alacritty
 
       # Jump to workspaces
       super + t
@@ -127,7 +127,7 @@ in
 
       # Keepass XC
       super + shift + x
-            /etc/profiles/per-user/${user}/bin/keepassxc
+            /etc/profiles/per-user/${user.name}/bin/keepassxc
 
       # Emacs
       # -c flag is --create-frame
@@ -180,7 +180,7 @@ in
 
       case "$1" in
       --popup)
-          /etc/profiles/per-user/${user}/bin/yad --calendar --fixed \
+          /etc/profiles/per-user/${user.name}/bin/yad --calendar --fixed \
             --posx=$POSX --posy=80 --no-buttons --borders=0 --title="yad-calendar" \
             --close-on-unfocus
         ;;
@@ -208,7 +208,7 @@ in
     text = ''
       #!/bin/sh
 
-      /etc/profiles/per-user/${user}/bin/google-chrome-stable --new-window "https://search.nixos.org/packages"
+      /etc/profiles/per-user/${user.name}/bin/google-chrome-stable --new-window "https://search.nixos.org/packages"
     '';
   };
 

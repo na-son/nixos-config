@@ -1,9 +1,10 @@
-{ pkgs, lib, user, ... }:
+{
+  pkgs,
+  lib,
+  user,
+  ...
+}:
 
-let
-  name = "Austin Nason";
-  email = "austin.nason@schrodinger.com";
-in
 {
   zsh = {
     enable = true;
@@ -129,8 +130,8 @@ in
       ".swp"
       ".vscode"
     ];
-    userName = name;
-    userEmail = email;
+    userName = user.fullName;
+    userEmail = user.email;
     lfs = {
       enable = true;
     };
@@ -142,7 +143,7 @@ in
       };
       pull.rebase = true;
       rebase.autoStash = true;
-      safe.directory = "/Users/nason/src/nixos-config";
+      safe.directory = "/Users/${user.name}/src/nixos-config";
       credential = {
         "https://github.com" = {
           helper = "!gh auth git-credential";
@@ -289,10 +290,10 @@ in
           IdentitiesOnly yes
       ''
       (lib.mkIf pkgs.stdenv.hostPlatform.isLinux ''
-        IdentityFile /home/${user}/.ssh/id_github
+        IdentityFile /home/${user.name}/.ssh/id_github
       '')
       (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin ''
-        IdentityFile /Users/${user}/.ssh/id_rsa
+        IdentityFile /Users/${user.name}/.ssh/id_rsa
       '')
     ];
   };

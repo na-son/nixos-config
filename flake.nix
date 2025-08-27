@@ -52,7 +52,11 @@
       ghostty,
     }@inputs:
     let
-      user = "nason"; # Change to your preferred username
+      user = { # change to your preferred settings
+        name = "nason";
+        fullName = "Austin Nason";
+        email = "austin.nason@schrodinger.com";
+      };
       linuxSystems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -113,7 +117,7 @@
         macos = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
-          user = "nason";
+          user = user;
           } // inputs;
           modules = [
             home-manager.darwinModules.home-manager
@@ -121,7 +125,7 @@
             {
               nix-homebrew = {
                 enable = true;
-                user = "${user}";
+                user = user.name;
                 taps = {
                   "homebrew/homebrew-core" = homebrew-core;
                   "homebrew/homebrew-cask" = homebrew-cask;
@@ -142,7 +146,7 @@
           inherit system;
           specialArgs = 
           {
-            user = "nason";
+            user = user;
           } // inputs;
 
           modules = [
@@ -152,7 +156,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.${user} = import ./modules/nixos/home-manager.nix;
+                users.${user.name} = import ./modules/nixos/home-manager.nix;
               };
 
               environment.systemPackages = [

@@ -13,9 +13,9 @@ in
 {
   imports = [ ./dock ];
 
-  users.users.${user} = {
-    name = "${user}";
-    home = "/Users/${user}";
+  users.users.${user.name} = {
+    name = "${user.name}";
+    home = "/Users/${user.name}";
     isHidden = false;
     shell = pkgs.zsh;
   };
@@ -28,7 +28,7 @@ in
 
   home-manager = {
     useGlobalPkgs = true;
-    users.${user} =
+    users.${user.name} =
       {
         pkgs,
         config,
@@ -44,7 +44,16 @@ in
           ];
           stateVersion = "23.11";
         };
-        programs = { } // import ../shared/home-manager.nix { inherit config pkgs lib user; };
+        programs =
+          { }
+          // import ../shared/home-manager.nix {
+            inherit
+              config
+              pkgs
+              lib
+              user
+              ;
+          };
 
         manual.manpages.enable = false;
       };
@@ -58,12 +67,12 @@ in
       { path = "/Applications/Visual Studio Code.app/"; }
       { path = "/Applications/Notion.app/"; }
       {
-        path = "/Users/${user}/Downloads";
+        path = "/Users/${user.name}/Downloads";
         options = "--display stack --view list";
         section = "others";
       }
       {
-        path = "/Users/${user}/src";
+        path = "/Users/${user.name}/src";
         options = "--view list";
         section = "others";
       }
