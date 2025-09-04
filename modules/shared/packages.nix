@@ -60,7 +60,7 @@ with pkgs;
   # Python
   python313
   python313Packages.virtualenv # globally install virtualenv
-  #ansible
+  ansible
   #ansible-lint
 
   # Terraform
