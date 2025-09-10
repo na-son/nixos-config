@@ -16,6 +16,12 @@
       url = "github:ghostty-org/ghostty";
     };
 
+    # Neovim Config
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # The rest are all MacOS
     darwin = {
       url = "github:LnL7/nix-darwin/master";
@@ -47,6 +53,7 @@
       homebrew-core,
       homebrew-cask,
       home-manager,
+      nvf,
       nixpkgs,
       disko,
       ghostty,

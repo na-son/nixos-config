@@ -22,7 +22,7 @@ shared-packages
   # Audio tools
   pavucontrol # Pulse audio controls
 
-  neovim
+  #neovim
 
   # MISC DE / WM
   mako
