@@ -59,7 +59,8 @@
       ghostty,
     }@inputs:
     let
-      user = { # change to your preferred settings
+      user = {
+        # change to your preferred settings
         name = "nason";
         fullName = "Austin Nason";
         email = "austin.nason@schrodinger.com";
@@ -124,8 +125,9 @@
         macos = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
-          user = user;
-          } // inputs;
+            user = user;
+          }
+          // inputs;
           modules = [
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew
@@ -151,10 +153,10 @@
         system:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = 
-          {
+          specialArgs = {
             user = user;
-          } // inputs;
+          }
+          // inputs;
 
           modules = [
             disko.nixosModules.disko

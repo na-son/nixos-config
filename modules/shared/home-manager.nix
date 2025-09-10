@@ -36,56 +36,56 @@
     enable = true;
     enableZshIntegration = true;
 
-    # these are TOML mappings from https://starship.rs/config
+    # TOML mappings from https://starship.rs/config
     settings = {
       add_newline = true;
       scan_timeout = 10;
-
-      fill.symbol = " ";
-      format = "($nix_shell$container$fill$git_metrics\n)$cmd_duration$hostname$localip$shlvl$shell$env_var$jobs$sudo$username$character";
-      right_format = "$directory$vcsh$git_branch$git_commit$git_state$git_status$docker_context$cmake$python$conda$terraform$rust$memory_usage$custom$status$os$battery$time";
-      continuation_prompt = "[▸▹ ](dimmed white)";
-
       aws.disabled = true;
       gcloud.disabled = true;
+
+      fill.symbol = " ";
+      format = "($nix_shell$container$fill$git_metrics\n)$cmd_duration$hostname$shlvl$shell$env_var$jobs$sudo$username$character";
+      right_format = "$directory$vcsh$git_branch$git_commit$git_state$git_status$cmake$python$conda$terraform$rust$memory_usage$custom$status$os$battery$time";
+      continuation_prompt = "[▸▹ ](dimmed white)";
 
       cmd_duration = {
         format = "[$duration](bold yellow)";
       };
 
       git_branch = {
-        style = "italic bright-blue";
-        format = " [$branch(:$remote_branch)]($style)";
-
         symbol = "[△](bold italic bright-blue)";
+        format = " [$branch(:$remote_branch)]($style)";
+        style = "italic bright-blue";
+
         only_attached = true;
-        truncation_symbol = "⋯";
         truncation_length = 11;
+        truncation_symbol = "⋯";
         ignore_branches = [
           "main"
         ];
       };
 
       git_metrics = {
+        disabled = false;
         format = "([+$added](italic dimmed green))([-$deleted](italic dimmed red))";
 
         ignore_submodules = true;
-        disabled = false;
       };
 
       git_status = {
-        style = "bold dimmed blue";
         format = "([⎪$ahead_behind$staged$modified$untracked$renamed$deleted$conflicted$stashed⎥]($style))";
-        conflicted = "[◪◦](italic bright-magenta)";
+        style = "bold dimmed blue";
+
         ahead = "[▴$count](italic green)|";
         behind = "[▿$count](italic red)|";
-        diverged = "[◇ ▴┤[$ahead_count](regular white)│▿┤[$behind_count](regular white)│](italic bright-magenta)";
-        untracked = "[◌◦](italic bright-yellow)";
-        stashed = "[◃◈](italic white)";
-        modified = "[●◦](italic yellow)";
-        staged = "[▪┤[$count](bold white)│](italic bright-cyan)";
-        renamed = "[◎◦](italic bright-blue)";
+        conflicted = "[◪◦](italic bright-magenta)";
         deleted = "[✕](italic red)";
+        diverged = "[◇ ▴┤[$ahead_count](regular white)│▿┤[$behind_count](regular white)│](italic bright-magenta)";
+        modified = "[●◦](italic yellow)";
+        renamed = "[◎◦](italic bright-blue)";
+        staged = "[▪┤[$count](bold white)│](italic bright-cyan)";
+        stashed = "[◃◈](italic white)";
+        untracked = "[◌◦](italic bright-yellow)";
       };
 
       nix_shell = {
@@ -107,43 +107,39 @@
     enable = true;
     package = null;
     settings = {
+      copy-on-select = true;
+      clipboard-paste-protection = false;
+      cursor-style = "block";
       font-size = 18;
       font-family = "JetBrainsMono Nerd Font Mono";
-      theme = "Solarized Dark Higher Contrast";
-      cursor-style = "block";
-      shell-integration-features = "no-cursor";
-      clipboard-paste-protection = false;
-      copy-on-select = true;
-      term = "xterm-256color";
-
       macos-titlebar-proxy-icon = "hidden";
-
-      config-file = "~/.config/ghostty/extra"; # for testing shaders atm
+      shell-integration-features = "no-cursor";
+      theme = "Solarized Dark Higher Contrast";
+      term = "xterm-256color";
     };
   };
-  # custom-shader = "";
 
   git = {
     enable = true;
+    userName = user.fullName;
+    userEmail = user.email;
     ignores = [
       ".DS_Store"
       ".swp"
       ".vscode"
     ];
-    userName = user.fullName;
-    userEmail = user.email;
     lfs = {
       enable = true;
     };
     extraConfig = {
       init.defaultBranch = "main";
+      pull.rebase = true;
+      rebase.autoStash = true;
+      safe.directory = "/Users/${user.name}/src/nixos-config";
       core = {
         editor = "nvim";
         autocrlf = "input";
       };
-      pull.rebase = true;
-      rebase.autoStash = true;
-      safe.directory = "/Users/${user.name}/src/nixos-config";
       credential = {
         "https://github.com" = {
           helper = "!gh auth git-credential";
@@ -166,55 +162,49 @@
       };
     };
   };
-  
+
   nvf = {
     enable = true;
     settings = {
       vim = {
+        autocomplete.nvim-cmp.enable = true;
+        autopairs.nvim-autopairs.enable = true;
+        comments.comment-nvim.enable = true;
+        enableLuaLoader = true;
+        git.gitsigns.enable = true;
+        mini.tabline.enable = true;
+        statusline.lualine.enable = true;
+        vimAlias = true;
+        filetree.nvimTree = {
+          enable = true;
+          mappings.toggle = " t";
+          setupOpts.hijack_cursor = true;
+        };
+        languages = {
+          enableTreesitter = true;
+          enableFormat = true;
+          bash.enable = true;
+          markdown.enable = true;
+          nix.enable = true;
+          python.enable = true;
+          terraform.enable = true;
+          yaml.enable = true;
+        };
+        lsp = {
+          enable = true;
+        };
         theme = {
-        enable = true;
-        name = "solarized";
-        style = "dark";
+          enable = true;
+          name = "solarized";
+          style = "dark";
         };
         clipboard = {
           enable = true;
-          registers = "unnamedPlus";
+          registers = "unnamedplus";
         };
-      statusline.lualine.enable = true;
-      mini.tabline.enable = true;
-      filetree.nvimTree = {
-        enable = true;
-        mappings.toggle = " t";
-        setupOpts.hijack_cursor = true;
-        };
-      autopairs.nvim-autopairs.enable = true;
-      comments.comment-nvim.enable = true;
-      autocomplete.nvim-cmp.enable = true;
-      git.gitsigns.enable = true; #'vim.opt.clipboard:append("unnamedplus")' in luaConfigRC,
-      enableLuaLoader = true;
-      vimAlias = true;
-      languages = {
-        enableTreesitter = true;
-        enableFormat = true;
-        bash.enable = true;
-        markdown.enable = true;
-        nix.enable = true;
-        python.enable = true;
-        terraform.enable = true;
-        yaml.enable = true;
-      };
-      lsp = {
-        enable = true;
-        };
-
-
       };
     };
   };
-
-  #neovim = {
-  #  enable = true;
-  #};
 
   #vim = {
   #  enable = true;
@@ -304,13 +294,6 @@
   #    nnoremap <C-k> <C-w>k
   #    nnoremap <C-l> <C-w>l
 
-  #    "" Easier to yank entire line
-  #    nnoremap Y y$
-
-  #    "" Move buffers
-  #    nnoremap <tab> :bnext<cr>
-  #    nnoremap <S-tab> :bprev<cr>
-
   #    let g:startify_lists = [
   #      \ { 'type': 'dir',       'header': ['   Current Directory '. getcwd()] },
   #      \ { 'type': 'sessions',  'header': ['   Sessions']       },
@@ -321,13 +304,25 @@
   #      \ '~/.local/share/src',
   #      \ ]
 
-  #    let g:airline_theme='bubblegum'
-  #    let g:airline_powerline_fonts = 1
   #  '';
   #};
 
   ssh = {
     enable = true;
+    enableDefaultConfig = false;
+    matchBlocks."*" = {
+      forwardAgent = false;
+      addKeysToAgent = "no";
+      compression = false;
+      serverAliveInterval = 0;
+      serverAliveCountMax = 3;
+      hashKnownHosts = false;
+      userKnownHostsFile = "~/.ssh/known_hosts";
+      controlMaster = "no";
+      controlPath = "~/.ssh/master-%r@%n:%p";
+      controlPersist = "no";
+    };
+
     extraConfig = lib.mkMerge [
       ''
         Host github.com

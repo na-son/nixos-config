@@ -1,4 +1,4 @@
-{ pkgs, user, nvf, ... }:
+{ pkgs, user, ... }:
 
 {
   imports = [
@@ -15,7 +15,6 @@
     ];
 
     gc = {
-      # keeps the nix system footprint reasonable
       automatic = true;
       interval = {
         Weekday = 0;
