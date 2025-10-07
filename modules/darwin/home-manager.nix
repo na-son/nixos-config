@@ -2,8 +2,7 @@
   config,
   pkgs,
   user,
-  nvf,
-  #inputs,
+  inputs,
   ...
 }:
 
@@ -36,10 +35,13 @@ in
         pkgs,
         config,
         lib,
+        inputs,
         ...
       }:
       {
-        imports = [ nvf.homeManagerModules.default ];
+        imports = [
+          inputs.nix4nvchad.homeManagerModule
+        ];
         home = {
           packages = pkgs.callPackage ./packages.nix { };
           file = lib.mkMerge [

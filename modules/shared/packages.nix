@@ -15,7 +15,7 @@ with pkgs;
   zip
 
   # networking
-  ipcalc
+  #ipcalc
 
   # Encryption and security tools
   #age

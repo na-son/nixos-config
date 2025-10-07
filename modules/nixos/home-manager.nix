@@ -3,6 +3,7 @@
   pkgs,
   lib,
   user,
+  inputs,
   ...
 }:
 
@@ -14,11 +15,15 @@ let
       pkgs
       lib
       user
+      inputs
       ;
   };
   shared-files = import ../shared/files.nix { inherit config pkgs user; };
 in
 {
+  imports = [
+    inputs.nix4nvchad.homeManagerModule
+  ];
   home = {
     enableNixpkgsReleaseCheck = false;
     username = "${user.name}";

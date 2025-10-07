@@ -12,10 +12,6 @@
     ghostty = {
       url = "github:ghostty-org/ghostty";
     };
-    nvf = {
-      url = "github:NotAShelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,7 +46,6 @@
       homebrew-core,
       homebrew-cask,
       home-manager,
-      nvf,
       nix4nvchad,
       nixpkgs,
       disko,
@@ -124,11 +119,20 @@
           system = "aarch64-darwin";
           specialArgs = {
             user = user;
-          }
-          // inputs;
+          };
 
           modules = [
             home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                extraSpecialArgs = {
+                  user = user;
+                  inherit inputs;
+                };
+                useGlobalPkgs = true;
+                useUserPackages = true;
+              };
+            }
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
@@ -154,8 +158,7 @@
           inherit system;
           specialArgs = {
             user = user;
-          }
-          // inputs;
+          };
 
           modules = [
             disko.nixosModules.disko
@@ -164,6 +167,7 @@
               home-manager = {
                 extraSpecialArgs = {
                   user = user;
+                  inherit inputs;
                 };
                 useGlobalPkgs = true;
                 useUserPackages = true;
