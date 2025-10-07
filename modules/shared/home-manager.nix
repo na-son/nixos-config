@@ -2,6 +2,7 @@
   pkgs,
   lib,
   user,
+  #inputs,
   ...
 }:
 
@@ -162,49 +163,51 @@
       };
     };
   };
-
-  nvf = {
-    enable = true;
-    settings = {
-      vim = {
-        autocomplete.nvim-cmp.enable = true;
-        autopairs.nvim-autopairs.enable = true;
-        comments.comment-nvim.enable = true;
-        enableLuaLoader = true;
-        git.gitsigns.enable = true;
-        mini.tabline.enable = true;
-        statusline.lualine.enable = true;
-        vimAlias = true;
-        filetree.nvimTree = {
-          enable = true;
-          mappings.toggle = " t";
-          setupOpts.hijack_cursor = true;
-        };
-        languages = {
-          enableTreesitter = true;
-          enableFormat = true;
-          bash.enable = true;
-          markdown.enable = true;
-          nix.enable = true;
-          python.enable = true;
-          terraform.enable = true;
-          yaml.enable = true;
-        };
-        lsp = {
-          enable = true;
-        };
-        theme = {
-          enable = true;
-          name = "solarized";
-          style = "dark";
-        };
-        clipboard = {
-          enable = true;
-          registers = "unnamedplus";
-        };
-      };
-    };
-  };
+  #nvchad = {
+  #  enable = true;
+  #};
+  #nvf = {
+  #  enable = true;
+  #  settings = {
+  #    vim = {
+  #      autocomplete.nvim-cmp.enable = true;
+  #      autopairs.nvim-autopairs.enable = true;
+  #      comments.comment-nvim.enable = true;
+  #      enableLuaLoader = true;
+  #      git.gitsigns.enable = true;
+  #      mini.tabline.enable = true;
+  #      statusline.lualine.enable = true;
+  #      vimAlias = true;
+  #      filetree.nvimTree = {
+  #        enable = true;
+  #        mappings.toggle = " t";
+  #        setupOpts.hijack_cursor = true;
+  #      };
+  #      languages = {
+  #        enableTreesitter = true;
+  #        enableFormat = true;
+  #        bash.enable = true;
+  #        markdown.enable = true;
+  #        nix.enable = true;
+  #        python.enable = true;
+  #        terraform.enable = true;
+  #        yaml.enable = true;
+  #      };
+  #      lsp = {
+  #        enable = true;
+  #      };
+  #      theme = {
+  #        enable = true;
+  #        name = "solarized";
+  #        style = "dark";
+  #      };
+  #      clipboard = {
+  #        enable = true;
+  #        registers = "unnamedplus";
+  #      };
+  #    };
+  #  };
+  #};
 
   #vim = {
   #  enable = true;

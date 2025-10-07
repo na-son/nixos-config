@@ -37,11 +37,11 @@ in
     enable = true;
     theme = {
       name = "Adwaita-dark";
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
     };
     iconTheme = {
       name = "Adwaita-dark";
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
     };
   };
 
@@ -123,7 +123,9 @@ in
     # notifications
     mako = {
       enable = true;
-      defaultTimeout = 10000;
+      settings = {
+        default-timeout = 10000;
+      };
     };
 
     # Automount

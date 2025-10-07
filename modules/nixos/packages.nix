@@ -42,7 +42,7 @@ shared-packages
   pciutils
   inotify-tools
   libnotify
-  greetd.tuigreet
+  tuigreet
 
   sqlite
   xdg-utils

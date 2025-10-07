@@ -16,6 +16,10 @@
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix4nvchad = {
+      url = "github:nix-community/nix4nvchad";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     darwin = {
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -47,6 +51,7 @@
       homebrew-cask,
       home-manager,
       nvf,
+      nix4nvchad,
       nixpkgs,
       disko,
       ghostty,
@@ -121,6 +126,7 @@
             user = user;
           }
           // inputs;
+
           modules = [
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew
@@ -156,6 +162,9 @@
             home-manager.nixosModules.home-manager
             {
               home-manager = {
+                extraSpecialArgs = {
+                  user = user;
+                };
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.${user.name} = import ./modules/nixos/home-manager.nix;

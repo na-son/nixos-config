@@ -3,6 +3,7 @@
   pkgs,
   user,
   nvf,
+  #inputs,
   ...
 }:
 
@@ -55,6 +56,7 @@ in
               pkgs
               lib
               user
+              inputs
               ;
           };
 
