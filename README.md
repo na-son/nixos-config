@@ -6,28 +6,21 @@ Built off of https://github.com/dustinlyons/nixos-config
 
 ### Macos
 
-Install xcode bits
+Install xcode + nix
 
 ```shell
 xcode-select --install
-```
-
-Install nix
-
-```shell
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
 
-Build system (optional)
+Bootstrap
 
 ```shell
-nix run .#build
-```
-
-Make configuration active
-
-```shell
-nix run .#build-switch
+mkdir ~/src
+cd ~/src
+git clone git@github.com:na-son/nixos-config.git
+nix build .#darwinConfigurations.macos.system
+./result/sw/bin/nh darwin switch
 ```
 
 ### Linux
@@ -38,7 +31,8 @@ THIS WILL WIPE YOUR DISKS AND APPLY THE PARTITION SCHEME IN
 `./modules/nixos/disk-config.nix`
 
 ```shell
-sudo nix run --extra-experimental-features 'nix-command flakes' github:na-son/nixos-config#install
+sudo nix --extra-experimental-features 'nix-command flakes' run 'github:nix-community/disko/latest#disko-install' -- --write-efi-boot-entries --flake 'github:na-son/nixos-config' --disk sda /
+       │ dev/sda
 ```
 
 After the initial install completes and you land at the greeter, hit `CTRL+ALT+F6` to open a terminal and login as root.
@@ -52,13 +46,13 @@ logout
 cd /etc/nixos
 # make changes to the system config if necessary
 sudo vim hosts/nixos/default.nix
-nix run .#build-switch
+nh os switch
 ```
 
 To test changes you can also run:
 
 ```shell
-nixos-rebuild build --flake .#x86_64-linux
+nh os build
 ```
 
 ## Apps
