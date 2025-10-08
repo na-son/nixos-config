@@ -2,13 +2,13 @@ _:
 
 [
   # Development Tools
-  "ghostty"
+#  "ghostty"
   "zoc"
 
   # Communication Tools
   "zoom"
   "meetingbar"
-  "notion"
+#  "notion"
 
   # Browsers
   "google-chrome"

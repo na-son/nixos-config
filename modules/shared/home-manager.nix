@@ -175,6 +175,24 @@
         },
       }
     '';
+    extraPackages = with pkgs; [
+      nodePackages.bash-language-server
+      nixd
+      #(python3.withPackages(ps: with ps; [
+      #  python-lsp-server
+      #  flake8
+      #]))
+    ];
+
+    chadrcConfig = ''
+      local M = {}
+
+      M.base46 = {
+        theme = "solarized_osaka",
+      }
+
+      M.nvdash = { load_on_startup = true }
+    '';
   };
 
   #nvf = {

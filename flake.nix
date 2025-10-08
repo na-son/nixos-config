@@ -9,13 +9,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
-    nix4nvchad = {
-      url = "github:nix-community/nix4nvchad";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
     darwin = {
       url = "github:LnL7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,6 +28,14 @@
     homebrew-cask = {
       url = "github:homebrew/homebrew-cask";
       flake = false;
+    };
+
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
+    nix4nvchad = {
+      url = "github:nix-community/nix4nvchad";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -82,7 +84,7 @@
                 deadnix
               ];
               shellHook = with pkgs; ''
-                export EDITOR=vim
+                export EDITOR=nvim
               '';
             };
         };

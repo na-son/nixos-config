@@ -39,7 +39,7 @@
   system = {
     stateVersion = 4;
     primaryUser = user.name;
-    checks.verifyNixPath = false;
+    #checks.verifyNixPath = false;
 
     # https://mynixos.com/nix-darwin/options/system.defaults
     defaults = {
