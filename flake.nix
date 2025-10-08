@@ -3,7 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     disko = {
       url = "github:nix-community/disko";
@@ -30,9 +33,6 @@
       flake = false;
     };
 
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
     nix4nvchad = {
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,7 +51,6 @@
       nix4nvchad,
       nixpkgs,
       disko,
-      ghostty,
     }@inputs:
     let
       user = {
@@ -151,10 +150,6 @@
                 useUserPackages = true;
                 users.${user.name} = import ./modules/nixos/home-manager.nix;
               };
-
-              environment.systemPackages = [
-                ghostty.packages.x86_64-linux.default
-              ];
             }
             ./hosts/nixos
           ];

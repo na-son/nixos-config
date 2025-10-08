@@ -6,6 +6,7 @@ let
 in
 shared-packages
 ++ [
+  ghostty
 
   # Security and authentication
   yubikey-agent
@@ -51,5 +52,5 @@ shared-packages
   xdg-desktop-portal-gtk
 
   # work
-  containerlab
+  #containerlab
 ]

@@ -51,16 +51,16 @@ with pkgs;
   tmux
   unzip
   tio # serial console
-  silver-searcher
+  ripgrep
 
   # devtools
   direnv
   devenv
 
   # Python
-  python313
-  python313Packages.virtualenv # globally install virtualenv
-  ansible
+  #python313
+  #python313Packages.virtualenv # globally install virtualenv
+  #ansible
   #ansible-lint
 
   # Terraform

@@ -69,13 +69,36 @@
       };
 
       dock = {
-        # the rest of the dock settings are in modules/darwin/home-manager.nix
         autohide = true;
-        mru-spaces = false;
-        show-recents = false;
         launchanim = true;
+        mru-spaces = false;
         orientation = "bottom";
+        show-recents = false;
         tilesize = 48;
+
+        # dockutil -L is useful here, apps can have spaces in path but files need %20
+        persistent-apps = [
+          {
+            app = "/Applications/Google Chrome.app";
+          }
+          {
+            app = "/Users/${user.name}/Applications/Home Manager Apps/Ghostty.app";
+          }
+          {
+            app = "/Users/${user.name}/Applications/Home Manager Apps/Visual Studio Code.app";
+          }
+          {
+            spacer = {
+              small = true;
+            };
+          }
+          {
+            folder = "/Users/${user.name}/src";
+          }
+          {
+            folder = "/Users/${user.name}/Downloads";
+          }
+        ];
       };
 
       finder = {

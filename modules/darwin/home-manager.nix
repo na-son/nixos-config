@@ -11,10 +11,6 @@ let
   additionalFiles = import ./files.nix { inherit config pkgs user; };
 in
 {
-  imports = [
-    ./dock
-  ];
-
   users.users.${user.name} = {
     name = "${user.name}";
     home = "/Users/${user.name}";
@@ -66,24 +62,25 @@ in
       };
   };
 
-  local.dock = {
-    enable = true;
-    entries = [
-      { path = "/Applications/Google Chrome.app/"; }
-      { path = "/Applications/Ghostty.app/"; }
-      { path = "/Applications/Visual Studio Code.app/"; }
-      { path = "/Applications/Notion.app/"; }
-      {
-        path = "/Users/${user.name}/Downloads";
-        options = "--display stack --view list";
-        section = "others";
-      }
-      {
-        path = "/Users/${user.name}/src";
-        options = "--view list";
-        section = "others";
-      }
-    ];
-  };
+  #local.dock = {
+  #  enable = true;
+  #  entries = [
+  #    { path = "/Applications/Google Chrome.app/"; }
+  #    { path = "/Users/${user.name}/Applications/Home\ Manager\ Apps/Ghostty.app"; }
+  #    { path = "/Applications/Visual Studio Code.app/"; }
+  #    { path = "/Applications/Notion.app/"; }
+  #    {
+  #      #path = "/Users/${user.name}/Downloads";
+  #      path = "/Users/${user.name}/Applications";
+  #      options = "--display stack --view list";
+  #      section = "others";
+  #    }
+  #    {
+  #      path = "/Users/${user.name}/src";
+  #      options = "--view list";
+  #      section = "others";
+  #    }
+  #  ];
+  #};
 
 }
