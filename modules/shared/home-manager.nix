@@ -24,12 +24,12 @@
 
     sessionVariables = {
       EDITOR = "nvim";
-
       # tfenv stuff
       TFENV_CONFIG_DIR = "$HOME/.local/share/tfenv";
       PATH = "$HOME/.tfenv/bin:$PATH";
     };
   };
+
   starship = import ./config/starship.nix;
 
   ghostty = {
@@ -40,7 +40,8 @@
       clipboard-paste-protection = false;
       cursor-style = "block";
       font-size = 18;
-      font-family = "JetBrainsMono Nerd Font Mono";
+      font-family = "MonaspiceNe Nerd Font Mono";
+      font-feature = "calt, liga, ss01, ss02, ss03, ss04, ss05, ss06, ss07, ss08, ss09";
       macos-titlebar-proxy-icon = "hidden";
       shell-integration-features = "no-cursor";
       theme = "Solarized Dark Higher Contrast";
@@ -126,25 +127,6 @@
     #'';
   };
 
-  #nvf = {
-  #  enable = true;
-  #  settings = {
-  #    vim = {
-  #      autocomplete.nvim-cmp.enable = true;
-  #      autopairs.nvim-autopairs.enable = true;
-  #      comments.comment-nvim.enable = true;
-  #      enableLuaLoader = true;
-  #      git.gitsigns.enable = true;
-  #      mini.tabline.enable = true;
-  #      statusline.lualine.enable = true;
-  #      vimAlias = true;
-  #      filetree.nvimTree = {
-  #        enable = true;
-  #        mappings.toggle = " t";
-  #        setupOpts.hijack_cursor = true;
-  #      };
-  #      languages = {
-  #        enableTreesitter = true;
   #        enableFormat = true;
   #        bash.enable = true;
   #        markdown.enable = true;
@@ -152,22 +134,6 @@
   #        python.enable = true;
   #        terraform.enable = true;
   #        yaml.enable = true;
-  #      };
-  #      lsp = {
-  #        enable = true;
-  #      };
-  #      theme = {
-  #        enable = true;
-  #        name = "solarized";
-  #        style = "dark";
-  #      };
-  #      clipboard = {
-  #        enable = true;
-  #        registers = "unnamedplus";
-  #      };
-  #    };
-  #  };
-  #};
 
   ssh = {
     enable = true;
@@ -200,37 +166,5 @@
     ];
   };
 
-  vscode = {
-    enable = true;
-    profiles.default = {
-      enableUpdateCheck = false;
-
-      # if extensions are messed up, rm ~/.vscode and build-switch
-      extensions = with pkgs.vscode-extensions; [
-        bbenoist.nix
-        hashicorp.terraform
-        #ms-python.python # build issue
-        vscodevim.vim
-        yzhang.markdown-all-in-one
-      ];
-
-      # https://code.visualstudio.com/docs/getstarted/settings#_default-settings
-      userSettings = {
-        # fonts
-        "editor.fontFamily" = "JetBrains Mono";
-        "terminal.integrated.fontFamily" = "JetBrainsMono Nerd Font Mono";
-
-        # colorscheme
-        "workbench.colorTheme" = "Solarized Dark";
-
-        # git
-        "diffEditor.ignoreTrimWhitespace" = false;
-        "git.confirmSync" = false;
-
-        # terminal behavior
-        "terminal.integrated.copyOnSelection" = true;
-        "terminal.integrated.defaultProfile.osx" = "zsh";
-      };
-    };
-  };
+  vscode = import ./config/vscode.nix { inherit pkgs; };
 }

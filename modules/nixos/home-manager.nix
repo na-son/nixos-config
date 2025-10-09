@@ -8,7 +8,6 @@
 }:
 
 let
-  #xdg_configHome = "/home/${user}/.config";
   shared-programs = import ../shared/home-manager.nix {
     inherit
       config
@@ -24,6 +23,7 @@ in
   imports = [
     inputs.nix4nvchad.homeManagerModule
   ];
+
   home = {
     enableNixpkgsReleaseCheck = false;
     username = "${user.name}";

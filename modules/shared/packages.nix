@@ -8,7 +8,6 @@ with pkgs;
   bat
   btop
   coreutils
-  killall
   openssh
   sqlite
   wget
@@ -25,8 +24,8 @@ with pkgs;
   #pinentry
 
   # Cloud-related tools and SDKs
-  docker
-  docker-compose
+  #docker
+  #docker-compose
   #awscli
   #google-cloud-sdk
   #qemu
@@ -37,18 +36,17 @@ with pkgs;
   #podman-desktop
 
   # Media-related packages
-  dejavu_fonts
-  fd
-  font-awesome
+  #fd
   jetbrains-mono
   nerd-fonts.jetbrains-mono
+  nerd-fonts.monaspace
 
   # Text and terminal utilities
-  htop
+  #htop
   #iftop
   jq
   tree
-  tmux
+  #tmux
   unzip
   tio # serial console
   ripgrep
@@ -62,10 +60,6 @@ with pkgs;
   #python313Packages.virtualenv # globally install virtualenv
   #ansible
   #ansible-lint
-
-  # Terraform
-  #terraform-ls
-  #terraform-docs
 
   # Nix
   nil

@@ -118,4 +118,11 @@
       remapCapsLockToControl = true;
     };
   };
+
+  users.users.${user.name} = {
+    name = "${user.name}";
+    home = "/Users/${user.name}";
+    isHidden = false;
+    shell = pkgs.zsh;
+  };
 }

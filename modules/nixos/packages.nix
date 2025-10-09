@@ -23,8 +23,6 @@ shared-packages
   # Audio tools
   pavucontrol # Pulse audio controls
 
-  #neovim
-
   # MISC DE / WM
   mako
   foot

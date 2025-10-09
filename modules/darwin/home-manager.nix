@@ -11,13 +11,6 @@ let
   additionalFiles = import ./files.nix { inherit config pkgs user; };
 in
 {
-  users.users.${user.name} = {
-    name = "${user.name}";
-    home = "/Users/${user.name}";
-    isHidden = false;
-    shell = pkgs.zsh;
-  };
-
   homebrew = {
     enable = true;
     casks = pkgs.callPackage ./casks.nix { };
@@ -61,26 +54,5 @@ in
         manual.manpages.enable = false;
       };
   };
-
-  #local.dock = {
-  #  enable = true;
-  #  entries = [
-  #    { path = "/Applications/Google Chrome.app/"; }
-  #    { path = "/Users/${user.name}/Applications/Home\ Manager\ Apps/Ghostty.app"; }
-  #    { path = "/Applications/Visual Studio Code.app/"; }
-  #    { path = "/Applications/Notion.app/"; }
-  #    {
-  #      #path = "/Users/${user.name}/Downloads";
-  #      path = "/Users/${user.name}/Applications";
-  #      options = "--display stack --view list";
-  #      section = "others";
-  #    }
-  #    {
-  #      path = "/Users/${user.name}/src";
-  #      options = "--view list";
-  #      section = "others";
-  #    }
-  #  ];
-  #};
 
 }
