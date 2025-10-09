@@ -6,7 +6,6 @@ let
 in
 shared-packages
 ++ [
-  dockutil
   gnugrep
   ghostty-bin
 ]

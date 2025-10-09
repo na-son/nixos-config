@@ -36,19 +36,13 @@ with pkgs;
   #podman-desktop
 
   # Media-related packages
-  #fd
-  jetbrains-mono
-  nerd-fonts.jetbrains-mono
   nerd-fonts.monaspace
 
   # Text and terminal utilities
   #htop
-  #iftop
   jq
   tree
-  #tmux
   unzip
-  tio # serial console
   ripgrep
 
   # devtools

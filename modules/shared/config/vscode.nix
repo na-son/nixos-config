@@ -16,8 +16,8 @@
     # https://code.visualstudio.com/docs/getstarted/settings#_default-settings
     userSettings = {
       # fonts
-      "editor.fontFamily" = "JetBrains Mono";
-      "terminal.integrated.fontFamily" = "JetBrainsMono Nerd Font Mono";
+      "editor.fontFamily" = "MonaspiceNe Nerd Font Mono";
+      "terminal.integrated.fontFamily" = "MonaspcieNe Nerd Font Mono";
 
       # colorscheme
       "workbench.colorTheme" = "Solarized Dark";
