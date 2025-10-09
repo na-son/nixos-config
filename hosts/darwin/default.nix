@@ -35,7 +35,9 @@
   };
 
   environment.systemPackages = with pkgs; import ../../modules/shared/packages.nix { inherit pkgs; };
-
+  
+  security.pam.services.sudo_local.touchIdAuth = true;
+  
   system = {
     stateVersion = 4;
     primaryUser = user.name;
@@ -70,6 +72,7 @@
 
       dock = {
         autohide = true;
+        expose-animation-duration = 0.0;
         launchanim = true;
         mru-spaces = false;
         orientation = "bottom";
