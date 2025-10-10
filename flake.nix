@@ -37,6 +37,10 @@
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -49,6 +53,7 @@
       homebrew-cask,
       home-manager,
       nix4nvchad,
+      nvf,
       nixpkgs,
       disko,
     }@inputs:

@@ -2,6 +2,7 @@
   pkgs,
   lib,
   user,
+  inputs,
   ...
 }:
 {
@@ -30,11 +31,10 @@
     };
   };
 
-  starship = import ./config/starship.nix;
-
   ghostty = {
     enable = true;
     package = pkgs.ghostty-bin;
+
     settings = {
       copy-on-select = true;
       clipboard-paste-protection = false;
@@ -53,14 +53,8 @@
     enable = true;
     userName = user.fullName;
     userEmail = user.email;
-    ignores = [
-      ".DS_Store"
-      ".swp"
-      ".vscode"
-    ];
-    lfs = {
-      enable = true;
-    };
+    lfs.enable = true;
+
     extraConfig = {
       init.defaultBranch = "main";
       pull.rebase = true;
@@ -76,6 +70,12 @@
         };
       };
     };
+
+    ignores = [
+      ".DS_Store"
+      ".swp"
+      ".vscode"
+    ];
   };
 
   gh = {
@@ -85,55 +85,11 @@
 
   direnv = {
     enable = true;
-    config = {
-      global = {
-        hide_env_diff = true;
-        warn_timeout = 0;
-      };
+    config.global = {
+      hide_env_diff = true;
+      warn_timeout = 0;
     };
   };
-
-  nvchad = {
-    enable = true;
-    #extraPlugins = ''
-    #  return {
-    #    "equalsraf/neovim-gui-shim",lazy=false},
-    #    {"lervag/vimtex",lazy=false},
-    #    {"nvim-lua/plenary.nvim"},
-    #    {
-    #      'xeluxee/competitest.nvim',
-    #      dependencies = 'MunifTanjim/nui.nvim',
-    #      config = function() require('competitest').setup() end,
-    #    },
-    #}
-    #'';
-    #extraPackages = with pkgs; [
-    #  #nodePackages.bash-language-server
-    #  nixd
-    #  #(python3.withPackages(ps: with ps; [
-    #  #  python-lsp-server
-    #  #  flake8
-    #  #]))
-    #];
-
-    #chadrcConfig = ''
-    #  local M = {}
-
-    #  M.base46 = {
-    #    theme = "solarized_osaka",
-    #  }
-
-    #  M.nvdash = { load_on_startup = true }
-    #'';
-  };
-
-  #        enableFormat = true;
-  #        bash.enable = true;
-  #        markdown.enable = true;
-  #        nix.enable = true;
-  #        python.enable = true;
-  #        terraform.enable = true;
-  #        yaml.enable = true;
 
   ssh = {
     enable = true;
@@ -166,5 +122,7 @@
     ];
   };
 
+  nvf = import ./config/nvf.nix { inherit inputs; };
+  starship = import ./config/starship.nix;
   vscode = import ./config/vscode.nix { inherit pkgs; };
 }

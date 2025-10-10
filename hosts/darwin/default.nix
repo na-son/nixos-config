@@ -4,12 +4,11 @@
   inputs,
   ...
 }:
-
 {
   imports = [
     ../../modules/darwin/home-manager.nix
     ../../modules/shared
-    ../../modules/shared/cachix
+    ../../modules/shared/config/cachix.nix
   ];
 
   nix = {
@@ -35,9 +34,9 @@
   };
 
   environment.systemPackages = with pkgs; import ../../modules/shared/packages.nix { inherit pkgs; };
-  
+
   security.pam.services.sudo_local.touchIdAuth = true;
-  
+
   system = {
     stateVersion = 4;
     primaryUser = user.name;

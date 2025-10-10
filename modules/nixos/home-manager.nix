@@ -6,7 +6,6 @@
   inputs,
   ...
 }:
-
 let
   shared-programs = import ../shared/home-manager.nix {
     inherit
@@ -21,7 +20,7 @@ let
 in
 {
   imports = [
-    inputs.nix4nvchad.homeManagerModule
+    inputs.nvf.homeManagerModules.default
   ];
 
   home = {
@@ -87,7 +86,6 @@ in
       ];
 
       keybindings = lib.mkOptionDefault {
-
         # Laptop buttons
         "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +5%";
         "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -5%";

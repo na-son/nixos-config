@@ -2,10 +2,8 @@
   config,
   pkgs,
   user,
-  inputs,
   ...
 }:
-
 let
   sharedFiles = import ../shared/files.nix { inherit config pkgs user; };
   additionalFiles = import ./files.nix { inherit config pkgs user; };
@@ -14,7 +12,6 @@ in
   homebrew = {
     enable = true;
     casks = pkgs.callPackage ./casks.nix { };
-    masApps = { }; # $ mas search <app name>
   };
 
   home-manager = {
@@ -29,7 +26,7 @@ in
       }:
       {
         imports = [
-          inputs.nix4nvchad.homeManagerModule
+          inputs.nvf.homeManagerModules.default
         ];
         home = {
           packages = pkgs.callPackage ./packages.nix { };
@@ -54,5 +51,4 @@ in
         manual.manpages.enable = false;
       };
   };
-
 }
