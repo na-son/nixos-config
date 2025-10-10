@@ -33,109 +33,96 @@
       flake = false;
     };
 
-    nix4nvchad = {
-      url = "github:nix-community/nix4nvchad";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nvf = {
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs =
-    {
-      self,
-      darwin,
-      nix-homebrew,
-      homebrew-bundle,
-      homebrew-core,
-      homebrew-cask,
-      home-manager,
-      nix4nvchad,
-      nvf,
-      nixpkgs,
-      disko,
-    }@inputs:
-    let
-      user = {
-        # change to your preferred settings
-        name = "nason";
-        fullName = "Austin Nason";
-        email = "austin.nason@schrodinger.com";
-      };
-      linuxSystems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
-      darwinSystems = [ "aarch64-darwin" ];
-      forAllSystems = f: nixpkgs.lib.genAttrs (linuxSystems ++ darwinSystems) f;
+  outputs = {
+    self,
+    darwin,
+    nix-homebrew,
+    homebrew-bundle,
+    homebrew-core,
+    homebrew-cask,
+    home-manager,
+    nvf,
+    nixpkgs,
+    disko,
+  } @ inputs: let
+    user = {
+      # change to your preferred settings
+      name = "nason";
+      fullName = "Austin Nason";
+      email = "austin.nason@schrodinger.com";
+    };
+    linuxSystems = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    darwinSystems = ["aarch64-darwin"];
+    forAllSystems = f: nixpkgs.lib.genAttrs (linuxSystems ++ darwinSystems) f;
 
-      formatter = nixpkgs.nixfmt-rfc-style;
-      devShell =
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
-          default =
-            with pkgs;
-            mkShell {
-              nativeBuildInputs = with pkgs; [
-                bashInteractive
-                git
-                statix
-                deadnix
-              ];
-              shellHook = with pkgs; ''
-                export EDITOR=nvim
-              '';
-            };
-        };
-    in
-    {
-      devShells = forAllSystems devShell;
-
-      darwinConfigurations = {
-        macos = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          specialArgs = {
-            user = user;
-          };
-
-          modules = [
-            home-manager.darwinModules.home-manager
-            {
-              home-manager = {
-                extraSpecialArgs = {
-                  user = user;
-                  inherit inputs;
-                };
-                useGlobalPkgs = true;
-                useUserPackages = true;
-              };
-            }
-            nix-homebrew.darwinModules.nix-homebrew
-            {
-              nix-homebrew = {
-                enable = true;
-                user = user.name;
-                taps = {
-                  "homebrew/homebrew-core" = homebrew-core;
-                  "homebrew/homebrew-cask" = homebrew-cask;
-                  "homebrew/homebrew-bundle" = homebrew-bundle;
-                };
-                mutableTaps = false;
-                autoMigrate = true;
-              };
-            }
-            ./hosts/darwin
+    formatter = nixpkgs.nixfmt-rfc-style;
+    devShell = system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      default = with pkgs;
+        mkShell {
+          nativeBuildInputs = with pkgs; [
+            bashInteractive
+            git
+            statix
+            deadnix
           ];
+          shellHook = with pkgs; ''
+            export EDITOR=nvim
+          '';
         };
-      };
+    };
+  in {
+    devShells = forAllSystems devShell;
 
-      nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (
-        system:
+    darwinConfigurations = {
+      macos = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs.user = user;
+
+        modules = [
+          ./hosts/darwin
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.${user.name} = import ./modules/darwin/home-manager.nix;
+              extraSpecialArgs = {
+                user = user;
+                inherit inputs;
+              };
+            };
+          }
+          nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              enable = true;
+              autoMigrate = true;
+              mutableTaps = false;
+              user = user.name;
+              taps = {
+                "homebrew/homebrew-core" = homebrew-core;
+                "homebrew/homebrew-cask" = homebrew-cask;
+                "homebrew/homebrew-bundle" = homebrew-bundle;
+              };
+            };
+          }
+        ];
+      };
+    };
+
+    nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (
+      system:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
@@ -144,21 +131,21 @@
 
           modules = [
             disko.nixosModules.disko
+            ./hosts/nixos
             home-manager.nixosModules.home-manager
             {
               home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${user.name} = import ./modules/nixos/home-manager.nix;
                 extraSpecialArgs = {
                   user = user;
                   inherit inputs;
                 };
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${user.name} = import ./modules/nixos/home-manager.nix;
               };
             }
-            ./hosts/nixos
           ];
         }
-      );
-    };
+    );
+  };
 }

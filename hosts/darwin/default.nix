@@ -2,14 +2,19 @@
   pkgs,
   user,
   inputs,
+  config,
+  lib,
   ...
-}:
-{
+}: {
   imports = [
-    ../../modules/darwin/home-manager.nix
     ../../modules/shared
     ../../modules/shared/config/cachix.nix
   ];
+
+  homebrew = {
+    enable = true;
+    casks = pkgs.callPackage ../../modules/darwin/casks.nix {};
+  };
 
   nix = {
     package = pkgs.nixVersions.latest;
@@ -33,14 +38,14 @@
     '';
   };
 
-  environment.systemPackages = with pkgs; import ../../modules/shared/packages.nix { inherit pkgs; };
+  environment.systemPackages = with pkgs; import ../../modules/shared/packages.nix {inherit pkgs;};
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
   system = {
     stateVersion = 4;
     primaryUser = user.name;
-    #checks.verifyNixPath = false;
+    checks.verifyNixPath = false;
 
     # https://mynixos.com/nix-darwin/options/system.defaults
     defaults = {

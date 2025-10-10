@@ -9,7 +9,7 @@ This configuration gets imported by both modules.
 ├── config             # Programs with complex configuration
 ├── default.nix        # Global config + Overlays
 ├── files.nix          # Immutable files
-├── home-manager.nix   # The goods; most all shared config lives here
+├── home-manager.nix   # home.packages {} config - 99% of the stuff
 ├── packages.nix       # List of packages to share
 
 ```

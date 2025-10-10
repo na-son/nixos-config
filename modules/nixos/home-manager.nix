@@ -5,8 +5,7 @@
   user,
   inputs,
   ...
-}:
-let
+}: let
   shared-programs = import ../shared/home-manager.nix {
     inherit
       config
@@ -16,9 +15,8 @@ let
       inputs
       ;
   };
-  shared-files = import ../shared/files.nix { inherit config pkgs user; };
-in
-{
+  shared-files = import ../shared/files.nix {inherit config pkgs user;};
+in {
   imports = [
     inputs.nvf.homeManagerModules.default
   ];
@@ -27,8 +25,8 @@ in
     enableNixpkgsReleaseCheck = false;
     username = "${user.name}";
     homeDirectory = "/home/${user.name}";
-    packages = pkgs.callPackage ./packages.nix { };
-    file = shared-files // import ./files.nix { inherit user; };
+    packages = pkgs.callPackage ./packages.nix {};
+    file = shared-files // import ./files.nix {inherit user;};
     stateVersion = "21.05";
 
     keyboard = {
@@ -72,8 +70,8 @@ in
         };
       };
       startup = [
-        { command = "exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,secrets,ssh"; }
-        { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; }
+        {command = "exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,secrets,ssh";}
+        {command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";}
         {
           # see https://nixos.wiki/wiki/Firefox
           always = true;
@@ -108,7 +106,7 @@ in
       bars = [
         {
           fonts = {
-            names = [ "JetBrains Mono" ];
+            names = ["JetBrains Mono"];
             size = 10.0;
           };
           mode = "dock";
@@ -135,55 +133,57 @@ in
     # udiskie.enable = true;
   };
 
-  programs = shared-programs // {
-    # terminal
-    foot = {
-      enable = true;
-      server.enable = true;
+  programs =
+    shared-programs
+    // {
+      # terminal
+      foot = {
+        enable = true;
+        server.enable = true;
 
-      settings = {
-        main = {
-          term = "xterm-256color";
-          font = "JetBrains Mono:size=8";
-          dpi-aware = "yes";
-          pad = "10x10 center";
-        };
+        settings = {
+          main = {
+            term = "xterm-256color";
+            font = "JetBrains Mono:size=8";
+            dpi-aware = "yes";
+            pad = "10x10 center";
+          };
 
-        bell = {
-          urgent = "yes";
-          notify = "yes";
-          visual = "yes";
-        };
+          bell = {
+            urgent = "yes";
+            notify = "yes";
+            visual = "yes";
+          };
 
-        mouse = {
-          hide-when-typing = "yes";
-        };
+          mouse = {
+            hide-when-typing = "yes";
+          };
 
-        colors = {
-          background = "002b36";
-          foreground = "839496";
+          colors = {
+            background = "002b36";
+            foreground = "839496";
 
-          regular0 = "073642";
-          regular1 = "dc322f";
-          regular2 = "859900";
-          regular3 = "b58900";
-          regular4 = "268bd2";
-          regular5 = "d33682";
-          regular6 = "2aa198";
-          regular7 = "eee8d5";
-          bright0 = "002b36";
-          bright1 = "cb4b16";
-          bright2 = "586e75";
-          bright3 = "657b83";
-          bright4 = "839496";
-          bright5 = "6c71c4";
-          bright6 = "93a1a1";
-          bright7 = "fdf6e3";
+            regular0 = "073642";
+            regular1 = "dc322f";
+            regular2 = "859900";
+            regular3 = "b58900";
+            regular4 = "268bd2";
+            regular5 = "d33682";
+            regular6 = "2aa198";
+            regular7 = "eee8d5";
+            bright0 = "002b36";
+            bright1 = "cb4b16";
+            bright2 = "586e75";
+            bright3 = "657b83";
+            bright4 = "839496";
+            bright5 = "6c71c4";
+            bright6 = "93a1a1";
+            bright7 = "fdf6e3";
 
-          selection-foreground = "93a1a1";
-          selection-background = "073642";
+            selection-foreground = "93a1a1";
+            selection-background = "073642";
+          };
         };
       };
     };
-  };
 }

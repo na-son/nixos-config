@@ -4,13 +4,12 @@
   user,
   inputs,
   ...
-}:
-{
+}: {
   zsh = {
     enable = true;
     history = {
-      append = true; # parallel history until shell exit
-      ignoreAllDups = true; # remove previous when duplicate commands run
+      append = true;
+      ignoreAllDups = true;
       ignorePatterns = [
         "cd"
         "ls"
@@ -122,7 +121,7 @@
     ];
   };
 
-  nvf = import ./config/nvf.nix { inherit inputs; };
+  nvf = import ./config/nvf.nix {inherit inputs;};
   starship = import ./config/starship.nix;
-  vscode = import ./config/vscode.nix { inherit pkgs; };
+  vscode = import ./config/vscode.nix {inherit pkgs;};
 }
