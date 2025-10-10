@@ -5,8 +5,6 @@
   inputs,
   ...
 }: {
-  zsh = import ./config/zsh.zix;
-
   ghostty = {
     enable = true;
     package = pkgs.ghostty-bin;
@@ -101,4 +99,5 @@
   nvf = import ./config/nvf.nix {inherit inputs;};
   starship = import ./config/starship.nix;
   vscode = import ./config/vscode.nix {inherit pkgs;};
+  zsh = import ./config/zsh.nix;
 }
