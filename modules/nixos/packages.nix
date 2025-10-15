@@ -1,54 +1,50 @@
-{ pkgs }:
-
-with pkgs;
-let
-  shared-packages = import ../shared/packages.nix { inherit pkgs; };
+{pkgs}:
+with pkgs; let
+  shared-packages = import ../shared/packages.nix {inherit pkgs;};
 in
-shared-packages
-++ [
-  ghostty
+  shared-packages
+  ++ [
+    # Security and authentication
+    yubikey-agent
 
-  # Security and authentication
-  yubikey-agent
+    # App and package management
+    gnumake
+    cmake
+    home-manager
 
-  # App and package management
-  gnumake
-  cmake
-  home-manager
+    # Media and design tools
+    fontconfig
+    font-manager
 
-  # Media and design tools
-  fontconfig
-  font-manager
+    # Audio tools
+    pavucontrol # Pulse audio controls
 
-  # Audio tools
-  pavucontrol # Pulse audio controls
+    # MISC DE / WM
+    mako
+    foot
 
-  # MISC DE / WM
-  mako
-  foot
+    wl-clipboard
+    cliphist
 
-  wl-clipboard
-  cliphist
+    rofi
+    rofi-calc
 
-  rofi
-  rofi-calc
+    # Testing and development tools
 
-  # Testing and development tools
+    # Core unix tools
+    unixtools.ifconfig
+    unixtools.netstat
+    pciutils
+    inotify-tools
+    libnotify
+    tuigreet
 
-  # Core unix tools
-  unixtools.ifconfig
-  unixtools.netstat
-  pciutils
-  inotify-tools
-  libnotify
-  tuigreet
+    sqlite
+    xdg-utils
+    xdg-user-dirs
+    xdg-desktop-portal-wlr
+    xdg-desktop-portal-gtk
 
-  sqlite
-  xdg-utils
-  xdg-user-dirs
-  xdg-desktop-portal-wlr
-  xdg-desktop-portal-gtk
-
-  # work
-  #containerlab
-]
+    # work
+    #containerlab
+  ]

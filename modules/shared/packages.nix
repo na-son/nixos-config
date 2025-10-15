@@ -1,7 +1,5 @@
-{ pkgs }:
-
-with pkgs;
-[
+{pkgs}:
+with pkgs; [
   # General packages for development and system management
   aspell
   aspellDicts.en
@@ -10,32 +8,11 @@ with pkgs;
   coreutils
   openssh
   sqlite
+  inetutils
   wget
   zip
 
-  # networking
-  #ipcalc
-
-  # Encryption and security tools
-  #age
-  #age-plugin-yubikey
-  #gnupg
-  #libfido2
-  #pinentry
-
-  # Cloud-related tools and SDKs
-  #docker
-  #docker-compose
-  #awscli
-  #google-cloud-sdk
-  #qemu
-  #podman
-  #podman-compose
-  #podman-tui
-  #dive
-  #podman-desktop
-
-  # Media-related packages
+  # Font
   nerd-fonts.monaspace
 
   # Text and terminal utilities
@@ -44,6 +21,8 @@ with pkgs;
   tree
   unzip
   ripgrep
+  gnugrep
+  ghostty-bin
 
   # devtools
   direnv
@@ -57,7 +36,7 @@ with pkgs;
 
   # Nix
   nil
-  nixfmt-rfc-style
   nix-tree # $nix-tree .#darwinConfigurations.macos.system
+  alejandra
   nh
 ]

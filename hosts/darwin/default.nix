@@ -1,44 +1,25 @@
-{
-  pkgs,
-  user,
-  inputs,
-  config,
-  lib,
-  ...
-}: {
+{user, ...}: {
   imports = [
-    ../../modules/shared
-    ../../modules/shared/config/cachix.nix
+    ../../modules/shared/default.nix
   ];
 
   homebrew = {
     enable = true;
-    casks = pkgs.callPackage ../../modules/darwin/casks.nix {};
-  };
-
-  nix = {
-    package = pkgs.nixVersions.latest;
-    settings.trusted-users = [
-      "@admin"
-      "${user.name}"
+    casks = [
+      "zoc"
+      "zoom"
+      "notion"
+      "google-chrome"
+      "meetingbar"
+      "hiddenbar"
     ];
-
-    gc = {
-      automatic = true;
-      interval = {
-        Weekday = 0;
-        Hour = 2;
-        Minute = 0;
-      };
-      options = "--delete-older-than 30d";
-    };
-
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
   };
 
-  environment.systemPackages = with pkgs; import ../../modules/shared/packages.nix {inherit pkgs;};
+  nix.gc.interval = {
+    Weekday = 0;
+    Hour = 2;
+    Minute = 0;
+  };
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
@@ -49,11 +30,18 @@
 
     # https://mynixos.com/nix-darwin/options/system.defaults
     defaults = {
+      CustomUserPreferences = {
+        "com.apple.Spotlight" = {
+          "com.apple.Spotlight MenuItemHidden" = 1;
+        };
+      };
+
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";
         AppleShowAllExtensions = true;
         ApplePressAndHoldEnabled = false;
         AppleICUForce24HourTime = true;
+
         NSAutomaticCapitalizationEnabled = false;
         NSAutomaticDashSubstitutionEnabled = false;
         NSAutomaticPeriodSubstitutionEnabled = false;
@@ -66,12 +54,6 @@
         "com.apple.mouse.tapBehavior" = 1;
         "com.apple.sound.beep.volume" = 0.0;
         "com.apple.sound.beep.feedback" = 0;
-      };
-
-      CustomUserPreferences = {
-        "com.apple.Spotlight" = {
-          "com.apple.Spotlight MenuItemHidden" = 1;
-        };
       };
 
       dock = {
@@ -127,9 +109,6 @@
   };
 
   users.users.${user.name} = {
-    name = "${user.name}";
-    home = "/Users/${user.name}";
     isHidden = false;
-    shell = pkgs.zsh;
   };
 }

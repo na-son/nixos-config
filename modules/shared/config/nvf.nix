@@ -1,5 +1,4 @@
-{ inputs }:
-{
+{inputs}: {
   enable = true;
   settings = {
     vim = {

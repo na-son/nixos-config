@@ -1,11 +1,9 @@
-{ pkgs }:
-
-with pkgs;
-let
-  shared-packages = import ../shared/packages.nix { inherit pkgs; };
+{pkgs}:
+with pkgs; let
+  shared-packages = import ../shared/packages.nix {inherit pkgs;};
 in
-shared-packages
-++ [
-  gnugrep
-  ghostty-bin
-]
+  shared-packages
+  ++ [
+    gnugrep
+    ghostty-bin
+  ]

@@ -64,7 +64,6 @@
     darwinSystems = ["aarch64-darwin"];
     forAllSystems = f: nixpkgs.lib.genAttrs (linuxSystems ++ darwinSystems) f;
 
-    formatter = nixpkgs.nixfmt-rfc-style;
     devShell = system: let
       pkgs = nixpkgs.legacyPackages.${system};
     in {
@@ -75,10 +74,8 @@
             git
             statix
             deadnix
+            alejandra
           ];
-          shellHook = with pkgs; ''
-            export EDITOR=nvim
-          '';
         };
     };
   in {
@@ -96,10 +93,9 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.${user.name} = import ./modules/darwin/home-manager.nix;
+              users.${user.name} = import ./modules/shared/home.nix;
               extraSpecialArgs = {
-                user = user;
-                inherit inputs;
+                inherit inputs user;
               };
             };
           }
