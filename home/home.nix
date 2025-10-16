@@ -7,19 +7,20 @@
 }: {
   imports = [
     inputs.nvf.homeManagerModules.default
-    ./config/cachix.nix
-    ./config/direnv.nix
-    ./config/ghostty.nix
-    ./config/git.nix
-    ./config/nvf.nix
-    ./config/ssh.nix
-    ./config/starship.nix
-    ./config/vscode.nix
-    ./config/zsh.nix
+    ./modules/cachix.nix
+    ./modules/direnv.nix
+    ./modules/ghostty.nix
+    ./modules/git.nix
+    ./modules/nvf.nix
+    ./modules/ssh.nix
+    ./modules/starship.nix
+    ./modules/sway.nix
+    ./modules/vscode.nix
+    ./modules/zsh.nix
+    ./packages.nix
   ];
 
   home = {
-    packages = pkgs.callPackage ./packages.nix {};
     username = "${user.name}";
 
     homeDirectory = lib.mkDefault (
@@ -38,6 +39,5 @@
 
   manual.manpages.enable = false;
 
-  #programs = {
-  #};
+  #programs = { };
 }

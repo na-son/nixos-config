@@ -1,6 +1,6 @@
 {user, ...}: {
   imports = [
-    ../../modules/shared/default.nix
+    ../default.nix
   ];
 
   homebrew = {

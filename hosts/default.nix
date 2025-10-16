@@ -4,7 +4,16 @@
   user,
   ...
 }: {
-  environment.systemPackages = import ./packages.nix {inherit pkgs;};
+  environment.systemPackages = with pkgs; [
+    coreutils
+    home-manager
+    inetutils
+    jq
+    nh
+    openssh
+    unzip
+    zip
+  ];
 
   nix = {
     package = pkgs.nixVersions.latest;

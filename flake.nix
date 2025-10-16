@@ -93,7 +93,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.${user.name} = import ./modules/shared/home.nix;
+              users.${user.name} = import ./home/home.nix;
               extraSpecialArgs = {
                 inherit inputs user;
               };
@@ -122,18 +122,17 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit user;
+            inherit inputs user;
           };
 
           modules = [
-            disko.nixosModules.disko
             ./hosts/nixos
             home-manager.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.${user.name} = import ./modules/nixos/home-manager.nix;
+                users.${user.name} = import ./home/home.nix;
                 extraSpecialArgs = {
                   inherit inputs user;
                 };

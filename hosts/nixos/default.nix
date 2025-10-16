@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   user,
   ...
@@ -8,8 +9,9 @@
   ];
 in {
   imports = [
-    ../../modules/nixos/disk-config.nix
-    ../../modules/shared/default.nix
+    inputs.disko.nixosModules.disko
+    ./disk-config.nix
+    ../default.nix
   ];
 
   boot = {
@@ -36,11 +38,10 @@ in {
   };
 
   hardware = {
+    brillo.enable = true;
     enableAllFirmware = true;
-    brillo.enable = true; # brightness
     graphics = {
       enable = true;
-      # intel AV stuff
       extraPackages = with pkgs; [
         intel-media-driver
         vaapiIntel
@@ -54,8 +55,8 @@ in {
 
   networking = {
     hostName = "luna";
-    usePredictableInterfaceNames = true;
     networkmanager.enable = true;
+    usePredictableInterfaceNames = true;
     useDHCP = false;
   };
 
@@ -90,16 +91,6 @@ in {
     thermald.enable = true;
     upower.enable = true;
 
-    tlp = {
-      enable = true;
-      settings = {
-        RUNTIME_PM_ON_AC = "auto";
-        CPU_ENERGY_PERF_POLICY_ON_AC = "auto";
-        DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi wwan";
-        DEVICES_TO_ENABLE_ON_LAN_DISCONNECT = "wifi wwan";
-      };
-    };
-
     greetd = {
       enable = true;
       settings.default_session = {
@@ -112,6 +103,16 @@ in {
       enable = true;
       alsa.enable = true;
       pulse.enable = true;
+    };
+
+    tlp = {
+      enable = true;
+      settings = {
+        RUNTIME_PM_ON_AC = "auto";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "auto";
+        DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi wwan";
+        DEVICES_TO_ENABLE_ON_LAN_DISCONNECT = "wifi wwan";
+      };
     };
   };
 
