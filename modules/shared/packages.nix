@@ -38,4 +38,5 @@ with pkgs; [
   nix-tree # $nix-tree .#darwinConfigurations.macos.system
   alejandra
   nh
+  home-manager
 ]

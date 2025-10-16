@@ -1,37 +1,11 @@
 {
-  config,
   pkgs,
   lib,
-  user,
-  inputs,
   ...
-}: let
-  shared-programs = import ../shared/home-manager.nix {
-    inherit
-      config
-      pkgs
-      lib
-      user
-      inputs
-      ;
-  };
-in {
+}: {
   imports = [
-    inputs.nvf.homeManagerModules.default
+    ../shared/home.nix
   ];
-  # TODO: merge with ./shared/home.nix
-  home = {
-    enableNixpkgsReleaseCheck = false;
-    username = "${user.name}";
-    homeDirectory = "/home/${user.name}";
-    packages = pkgs.callPackage ./packages.nix {};
-    stateVersion = "21.05";
-
-    keyboard = {
-      layout = "us";
-      variant = "dvorak";
-    };
-  };
 
   gtk = {
     enable = true;
@@ -131,57 +105,54 @@ in {
     # udiskie.enable = true;
   };
 
-  programs =
-    shared-programs
-    // {
-      # terminal
-      foot = {
-        enable = true;
-        server.enable = true;
+  programs = {
+    foot = {
+      enable = true;
+      server.enable = true;
 
-        settings = {
-          main = {
-            term = "xterm-256color";
-            font = "JetBrains Mono:size=8";
-            dpi-aware = "yes";
-            pad = "10x10 center";
-          };
+      settings = {
+        main = {
+          term = "xterm-256color";
+          font = "JetBrains Mono:size=8";
+          dpi-aware = "yes";
+          pad = "10x10 center";
+        };
 
-          bell = {
-            urgent = "yes";
-            notify = "yes";
-            visual = "yes";
-          };
+        bell = {
+          urgent = "yes";
+          notify = "yes";
+          visual = "yes";
+        };
 
-          mouse = {
-            hide-when-typing = "yes";
-          };
+        mouse = {
+          hide-when-typing = "yes";
+        };
 
-          colors = {
-            background = "002b36";
-            foreground = "839496";
+        colors = {
+          background = "002b36";
+          foreground = "839496";
 
-            regular0 = "073642";
-            regular1 = "dc322f";
-            regular2 = "859900";
-            regular3 = "b58900";
-            regular4 = "268bd2";
-            regular5 = "d33682";
-            regular6 = "2aa198";
-            regular7 = "eee8d5";
-            bright0 = "002b36";
-            bright1 = "cb4b16";
-            bright2 = "586e75";
-            bright3 = "657b83";
-            bright4 = "839496";
-            bright5 = "6c71c4";
-            bright6 = "93a1a1";
-            bright7 = "fdf6e3";
+          regular0 = "073642";
+          regular1 = "dc322f";
+          regular2 = "859900";
+          regular3 = "b58900";
+          regular4 = "268bd2";
+          regular5 = "d33682";
+          regular6 = "2aa198";
+          regular7 = "eee8d5";
+          bright0 = "002b36";
+          bright1 = "cb4b16";
+          bright2 = "586e75";
+          bright3 = "657b83";
+          bright4 = "839496";
+          bright5 = "6c71c4";
+          bright6 = "93a1a1";
+          bright7 = "fdf6e3";
 
-            selection-foreground = "93a1a1";
-            selection-background = "073642";
-          };
+          selection-foreground = "93a1a1";
+          selection-background = "073642";
         };
       };
     };
+  };
 }

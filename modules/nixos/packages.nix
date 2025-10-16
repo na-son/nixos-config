@@ -7,11 +7,6 @@ in
     # Security and authentication
     yubikey-agent
 
-    # App and package management
-    gnumake
-    cmake
-    home-manager
-
     # Media and design tools
     fontconfig
     font-manager
@@ -39,7 +34,6 @@ in
     libnotify
     tuigreet
 
-    sqlite
     xdg-utils
     xdg-user-dirs
     xdg-desktop-portal-wlr

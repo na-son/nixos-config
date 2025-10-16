@@ -1,6 +1,8 @@
 {
-  pkgs,
   inputs,
+  lib,
+  pkgs,
+  user,
   ...
 }: {
   imports = [
@@ -18,6 +20,19 @@
 
   home = {
     packages = pkgs.callPackage ./packages.nix {};
+    username = "${user.name}";
+
+    homeDirectory = lib.mkDefault (
+      if pkgs.stdenv.isLinux
+      then "/home/${user.name}"
+      else "/Users/${user.name}"
+    );
+
+    keyboard = {
+      layout = "us";
+      variant = "dvorak";
+    };
+
     stateVersion = "23.11";
   };
 
