@@ -15,18 +15,16 @@
       inputs
       ;
   };
-  #shared-files = import ../shared/files.nix {inherit config pkgs user;};
 in {
   imports = [
     inputs.nvf.homeManagerModules.default
   ];
-
+  # TODO: merge with ./shared/home.nix
   home = {
     enableNixpkgsReleaseCheck = false;
     username = "${user.name}";
     homeDirectory = "/home/${user.name}";
     packages = pkgs.callPackage ./packages.nix {};
-    #file = shared-files // import ./files.nix {inherit user;};
     stateVersion = "21.05";
 
     keyboard = {

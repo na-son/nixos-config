@@ -2,7 +2,6 @@
   pkgs,
   lib,
   user,
-  inputs,
   ...
 }: {
   ghostty = {
@@ -96,7 +95,7 @@
     ];
   };
 
-  nvf = import ./config/nvf.nix {inherit inputs;};
+  # nvf = import ./config/nvf.nix {inherit inputs;};
   starship = import ./config/starship.nix;
   vscode = import ./config/vscode.nix {inherit pkgs;};
   zsh = import ./config/zsh.nix;

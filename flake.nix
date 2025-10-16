@@ -122,7 +122,7 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            user = user;
+            inherit user;
           };
 
           modules = [
@@ -135,8 +135,7 @@
                 useUserPackages = true;
                 users.${user.name} = import ./modules/nixos/home-manager.nix;
                 extraSpecialArgs = {
-                  user = user;
-                  inherit inputs;
+                  inherit inputs user;
                 };
               };
             }

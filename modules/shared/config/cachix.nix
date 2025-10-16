@@ -1,4 +1,4 @@
-{...}: {
+_: {
   nix.settings = {
     substituters = [
       "https://na-son.cachix.org"

@@ -9,7 +9,6 @@ with pkgs; [
   openssh
   sqlite
   inetutils
-  wget
   zip
 
   # Font

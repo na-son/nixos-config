@@ -244,6 +244,6 @@ in {
   # @todo: Don't use hardcoded src paths
   "${xdg_configHome}/rofi/bin/powermenu.sh" = {
     executable = true;
-    text = builtins.readFile ./dot/rofi/bin/powermenu.sh
+    text = builtins.readFile ./dot/rofi/bin/powermenu.sh;
   };
 }
