@@ -88,8 +88,8 @@ _: {
 
         theme = {
           enable = true;
-          name = "solarized";
-          style = "dark";
+          name = "catppuccin";
+          style = "mocha";
         };
 
         ui = {

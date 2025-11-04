@@ -1,11 +1,15 @@
 {user, ...}: {
   programs.git = {
     enable = true;
-    userName = user.fullName;
-    userEmail = user.email;
     lfs.enable = true;
 
-    extraConfig = {
+    ignores = [
+      ".DS_Store"
+      ".swp"
+      ".vscode"
+    ];
+
+    settings = {
       init.defaultBranch = "main";
       pull.rebase = true;
       rebase.autoStash = true;
@@ -19,13 +23,11 @@
           helper = "!gh auth git-credential";
         };
       };
+      user = {
+        email = user.email; # inherit user; ?
+        name = user.fullName;
+      };
     };
-
-    ignores = [
-      ".DS_Store"
-      ".swp"
-      ".vscode"
-    ];
   };
 
   programs.gh = {

@@ -3,6 +3,14 @@
     ../default.nix
   ];
 
+  # it's just way less stuff to manage
+  documentation = {
+    enable = false;
+    doc.enable = false;
+    info.enable = false;
+    man.enable = false;
+  };
+
   homebrew = {
     enable = true;
     casks = [
@@ -21,12 +29,17 @@
     Minute = 0;
   };
 
+  programs.man.enable = false;
+  programs.info.enable = false;
+
   security.pam.services.sudo_local.touchIdAuth = true;
 
   system = {
     stateVersion = 4;
-    primaryUser = user.name;
+
     checks.verifyNixPath = false;
+    primaryUser = user.name;
+    tools.darwin-option.enable = false;
 
     # https://mynixos.com/nix-darwin/options/system.defaults
     defaults = {

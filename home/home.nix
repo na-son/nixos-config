@@ -15,7 +15,7 @@
     ./modules/ssh.nix
     ./modules/starship.nix
     ./modules/sway.nix
-    ./modules/vscode.nix
+    #./modules/vscode.nix
     ./modules/zsh.nix
     ./packages.nix
   ];
