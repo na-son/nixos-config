@@ -9,7 +9,6 @@
     nerd-fonts.monaspace
 
     # Text and terminal utilities
-    #htop
     jq
     tree
     ripgrep
@@ -21,10 +20,14 @@
 
     # Nix
     nil
+    nixd
     nix-tree # $nix-tree .#darwinConfigurations.macos.system
     alejandra
     nh
     home-manager
+
+    # testing
+    gemini-cli-bin
   ];
 
   linuxOnlyPackages = with pkgs; [

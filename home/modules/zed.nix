@@ -10,7 +10,7 @@
 
     extraPackages = [
       pkgs.opentofu
-      pkgs.nixd
+      #pkgs.gemini-cli-bin
     ];
 
     userSettings = {
