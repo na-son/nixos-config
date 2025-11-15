@@ -9,6 +9,7 @@
     ];
 
     extraPackages = [
+      pkgs.opentofu
       pkgs.nixd
     ];
 

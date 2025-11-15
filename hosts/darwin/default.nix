@@ -16,7 +16,6 @@
     casks = [
       "zoc"
       "zoom"
-      "notion"
       "google-chrome"
       "meetingbar"
       "hiddenbar"
@@ -87,7 +86,7 @@
             app = "/Users/${user.name}/Applications/Home Manager Apps/Ghostty.app";
           }
           {
-            app = "/Users/${user.name}/Applications/Home Manager Apps/Visual Studio Code.app";
+            app = "/Users/${user.name}/Applications/Home Manager Apps/Zed.app";
           }
           {
             spacer = {
