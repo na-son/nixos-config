@@ -16,8 +16,8 @@
     ./modules/starship.nix
     ./modules/sway.nix
     #./modules/vscode.nix
+    ./modules/zed.nix
     ./modules/zsh.nix
-    ./packages.nix
   ];
 
   home = {
