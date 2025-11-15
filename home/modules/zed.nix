@@ -1,15 +1,18 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.zed-editor = {
     enable = true;
     installRemoteServer = true;
+
     extensions = [
       "catppuccin"
       "github-actions"
       "nix"
+      "opentofu"
     ];
 
     extraPackages = [
-      pkgs.opentofu
+      pkgs.tofu-ls
       #pkgs.gemini-cli-bin
     ];
 
@@ -23,8 +26,18 @@
       use_system_path_prompts = false;
       vim_mode = true;
 
+      agent = {
+        default_model = {
+          provider = "copilot_chat";
+          model = "gpt-5-mini";
+        };
+        #inline_alternatives = [
+        #];
+      };
+
       features = {
-        copilot = false;
+        copilot = true;
+        edit_prodiction_provider = "copilot";
       };
 
       gutter = {
