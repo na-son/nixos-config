@@ -60,6 +60,8 @@ secrets/secrets.yaml   sops-encrypted (age)
 
 **Always** query `mcp-nixos` before suggesting a package, option, or attribute path. Your training data lags nixpkgs by months. Do this even when you're confident.
 
+The presence of the `mcp-nixos` server in your tool list is also your signal that you're running on a Nix-managed system (this repo's flake provisions it) — assume `nix`, `nh`, `alejandra`, etc. are available, and prefer Nix-native solutions over ad-hoc installs.
+
 Common calls (copy the JSON shape):
 
 - Package exists? — `nix {"action":"info","query":"foo","channel":"unstable"}`
@@ -76,6 +78,16 @@ Inside `nix develop` (or via direnv, automatic):
 - `alejandra .` — format (required before commit)
 - `statix check` — lint
 - `deadnix` — find dead code
+
+## Pretty-printed JSON in generated configs
+
+`builtins.toJSON` emits compact one-liners. For human-readable output (especially sops templates), use `pkgs.formats.json`:
+
+```nix
+content = builtins.readFile ((pkgs.formats.json {}).generate "name.json" { ... });
+```
+
+`generate` runs the value through `jq`, so the resulting file is indented. Sops placeholders survive intact as JSON string values. See `home/modules/gemini.nix` for a working example.
 
 ## Secrets (sops-nix + age)
 

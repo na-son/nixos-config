@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   sops = {
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     defaultSopsFile = ../../secrets/secrets.yaml;
@@ -15,7 +19,7 @@
 
     templates."gemini-settings.json" = {
       path = "${config.home.homeDirectory}/.gemini/settings.json";
-      content = builtins.toJSON {
+      content = builtins.readFile ((pkgs.formats.json {}).generate "gemini-settings.json" {
         security.auth.selectedType = "oauth-personal";
         general = {
           previewFeatures = true;
@@ -74,7 +78,7 @@
         };
         context.loadMemoryFromIncludeDirectories = true;
         tools.sandboxNetworkAccess = true;
-      };
+      });
     };
   };
 }
