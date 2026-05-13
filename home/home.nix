@@ -10,6 +10,7 @@
     inputs.nvf.homeManagerModules.default
     #    ./modules/cachix.nix
     ./modules/direnv.nix
+    ./modules/gemini.nix
     ./modules/ghostty.nix
     ./modules/git.nix
     ./modules/nvf.nix

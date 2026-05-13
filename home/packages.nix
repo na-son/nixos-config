@@ -30,6 +30,8 @@
     alejandra
     nh
     home-manager
+    mcp-nixos
+    sops
   ];
 
   linuxOnlyPackages = with pkgs; [

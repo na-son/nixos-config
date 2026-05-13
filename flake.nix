@@ -123,29 +123,37 @@
       };
     };
 
-    nixosConfigurations = nixpkgs.lib.genAttrs linuxSystems (
-      system:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs user;
-          };
+    homeConfigurations.${user.name} = home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs {
+        system = builtins.currentSystem;
+        config.allowUnfree = true;
+      };
+      extraSpecialArgs = {
+        inherit inputs user;
+      };
+      modules = [./home/home.nix];
+    };
 
-          modules = [
-            ./hosts/nixos
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${user.name} = import ./home/home.nix;
-                extraSpecialArgs = {
-                  inherit inputs user;
-                };
-              };
-            }
-          ];
+    nixosConfigurations.luna = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {
+        inherit inputs user;
+      };
+
+      modules = [
+        ./hosts/nixos
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.${user.name} = import ./home/home.nix;
+            extraSpecialArgs = {
+              inherit inputs user;
+            };
+          };
         }
-    );
+      ];
+    };
   };
 }
