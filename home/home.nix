@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    inputs.sops-nix.homeManagerModules.sops
     inputs.nvf.homeManagerModules.default
     #    ./modules/cachix.nix
     ./modules/direnv.nix

@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.zed-editor = {
     enable = true;
     installRemoteServer = true;
@@ -13,7 +12,6 @@
 
     extraPackages = [
       pkgs.tofu-ls
-      #pkgs.gemini-cli-bin
     ];
 
     userSettings = {

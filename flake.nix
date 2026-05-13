@@ -37,6 +37,11 @@
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -50,6 +55,7 @@
     nvf,
     nixpkgs,
     disko,
+    sops-nix,
   } @ inputs: let
     user = {
       # change to your preferred settings

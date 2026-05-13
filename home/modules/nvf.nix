@@ -101,7 +101,6 @@ _: {
           smartcolumn.enable = true;
           breadcrumbs = {
             enable = true;
-            #navbuddy.enable = true;
           };
         };
 
