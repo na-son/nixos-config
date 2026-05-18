@@ -8,12 +8,13 @@
   imports = [
     inputs.sops-nix.homeManagerModules.sops
     inputs.nvf.homeManagerModules.default
-    #    ./modules/cachix.nix
+    inputs.sdgr-hm.homeManagerModules.opencode
     ./modules/direnv.nix
     ./modules/gemini.nix
     ./modules/ghostty.nix
     ./modules/git.nix
     ./modules/nvf.nix
+    ./modules/opencode.nix
     ./modules/ssh.nix
     ./modules/starship.nix
     ./modules/sway.nix

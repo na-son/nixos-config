@@ -13,7 +13,10 @@
     openssh
     unzip
     zip
+    netbird
   ];
+
+  services.netbird.enable = true;
 
   nix = {
     package = pkgs.nixVersions.latest;

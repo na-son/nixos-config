@@ -115,6 +115,27 @@
         "type": "github"
       }
     },
+    "home-manager_2": {
+      "inputs": {
+        "nixpkgs": [
+          "sdgr-hm",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779027260,
+        "narHash": "sha256-ZbgWWFQmSyM3HQ31nAZk2hJ7OSeNr9uRFHL8jCifY9M=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "bcb774cfc3268120cd61808629f9aa7dad3750a2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "homebrew-bundle": {
       "flake": false,
       "locked": {
@@ -270,7 +291,30 @@
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
+        "sdgr-hm": "sdgr-hm",
         "sops-nix": "sops-nix"
+      }
+    },
+    "sdgr-hm": {
+      "inputs": {
+        "home-manager": "home-manager_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779135657,
+        "narHash": "sha256-s/QrQ3x0t8WF8snx2RKQJo0olxq5bqYQcj5vkPd1l8w=",
+        "ref": "options",
+        "rev": "846734860152d77bb40dcea19de8bf1c87a200df",
+        "revCount": 9,
+        "type": "git",
+        "url": "ssh://git@github.com/schrodinger/sdgr-hm.git"
+      },
+      "original": {
+        "ref": "options",
+        "type": "git",
+        "url": "ssh://git@github.com/schrodinger/sdgr-hm.git"
       }
     },
     "sops-nix": {

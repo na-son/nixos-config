@@ -25,7 +25,7 @@
           previewFeatures = true;
           plan = {
             modelRouting = true;
-            directory = "~/.plans";
+            directory = ".plans";
           };
           enableNotifications = true;
           vimMode = true;
@@ -77,7 +77,10 @@
           compressionThreshold = 0.7;
         };
         context.loadMemoryFromIncludeDirectories = true;
-        tools.sandboxNetworkAccess = true;
+        tools = {
+          sandbox = true;
+          sandboxNetworkAccess = true;
+        };
       });
     };
   };

@@ -46,6 +46,7 @@ home/
   home.nix             home-manager entry (imports modules + sops)
   packages.nix         user CLI/GUI packages
   modules/*.nix        per-program HM modules (git, zsh, sway, nvf, ...)
+  modules/files/       static source files inlined into HM modules (TS, scripts, ...)
 secrets/secrets.yaml   sops-encrypted (age)
 ```
 
@@ -54,6 +55,7 @@ secrets/secrets.yaml   sops-encrypted (age)
 - **System package or service** → `hosts/default.nix` (shared) or `hosts/{darwin,nixos}/default.nix` (platform-specific).
 - **User CLI tool** → append to `home/packages.nix`.
 - **Configured user program** (with dotfiles/options) → new file in `home/modules/`, then add to the `imports` list in `home/home.nix`.
+- **Static file inlined into HM config** (TS plugin, shell script, JSON without sops placeholders) → drop it in `home/modules/files/<name>` and reference with `file."...".source = ./files/<name>;`. Avoids Nix string escaping and gives editor tooling a real file to work with.
 - **Platform-conditional home config** → use `lib.mkIf pkgs.stdenv.isDarwin` / `isLinux`. See `home/home.nix` for the pattern.
 
 ## Looking things up — use the `mcp-nixos` MCP server

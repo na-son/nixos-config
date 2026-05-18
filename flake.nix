@@ -42,6 +42,11 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sdgr-hm = {
+      url = "git+ssh://git@github.com/schrodinger/sdgr-hm.git?ref=options";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -56,6 +61,7 @@
     nixpkgs,
     disko,
     sops-nix,
+    sdgr-hm,
   } @ inputs: let
     user = {
       # change to your preferred settings
