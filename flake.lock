@@ -303,11 +303,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779155393,
-        "narHash": "sha256-ZPlE9v9ebAlpTGU5HosYqzRcrx6VInRUZykgpvj3BJs=",
+        "lastModified": 1779161882,
+        "narHash": "sha256-kS4B2MTKsErVPaozRUVMG1a3iqw/iR5H4kBBuONDkdI=",
         "ref": "options",
-        "rev": "37aaf433fa32ce22caf90ad1b5e9ce21b7a9d274",
-        "revCount": 17,
+        "rev": "56bed84b9f46a469a9b88a3ea2ca61f2081edd21",
+        "revCount": 19,
         "type": "git",
         "url": "ssh://git@github.com/schrodinger/sdgr-hm.git"
       },

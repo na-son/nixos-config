@@ -1,9 +1,7 @@
 {...}: {
   programs.sdgr-hm.gemini = {
     enable = true;
-    mcp.atlassian = {
-      enable = true;
-    };
+    enabledMcpServers = ["atlassian"];
     extraSettings = {
       general.vimMode = true;
       context.fileFiltering.respectGitIgnore = false;
