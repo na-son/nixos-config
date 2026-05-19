@@ -102,11 +102,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779140521,
-        "narHash": "sha256-j1sEzwit7BhYP56sVsNNVA/Ds+Pjc4gLqVRCBWAU2Es=",
+        "lastModified": 1779143091,
+        "narHash": "sha256-qxiUVquHM09KOV1aD4We9q0ooPWO4qOc0v9J9NDWSAo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "b0e2077789e884d66c47274b88aca4899d28b05f",
+        "rev": "736c2084ea750a049ecdbdd7ff5817d2eeeef444",
         "type": "github"
       },
       "original": {
@@ -155,11 +155,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1779136321,
-        "narHash": "sha256-MEpvAvEuONhxaszoH7qiVwWcH1I3nDf4aGHUxJ4//PA=",
+        "lastModified": 1779154914,
+        "narHash": "sha256-te8PfZfIA3YPRBEQnFSorEMoCMURUxKswiNRoEKYXeU=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "013709a53d60dc639a11b946eec40eb4f4195c3a",
+        "rev": "c0d94ca6d7d0518680b3542a39b63207185feb1a",
         "type": "github"
       },
       "original": {
@@ -171,11 +171,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1779139893,
-        "narHash": "sha256-HuQKRiO4pU+lwK5T9Tr2Y+Y3CCf55aObc+Nedfs2dR0=",
+        "lastModified": 1779146959,
+        "narHash": "sha256-GU3LodzIDoMp6niMplaMFAnaxrfphjzh7jmIPl9TOCk=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "7bc0da64353443afbef3b6bac5a71821271ff650",
+        "rev": "364234b375a0b793f3e12e813dee7fa67ec7e3f7",
         "type": "github"
       },
       "original": {
@@ -303,11 +303,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779150816,
-        "narHash": "sha256-/1mPChJQF4CoYm+MPFdkreNGq6L/xqUcXslaTuGoBMQ=",
+        "lastModified": 1779155393,
+        "narHash": "sha256-ZPlE9v9ebAlpTGU5HosYqzRcrx6VInRUZykgpvj3BJs=",
         "ref": "options",
-        "rev": "c108c977f65bf22671c1af2d7d66a5152c8ef54b",
-        "revCount": 15,
+        "rev": "37aaf433fa32ce22caf90ad1b5e9ce21b7a9d274",
+        "revCount": 17,
         "type": "git",
         "url": "ssh://git@github.com/schrodinger/sdgr-hm.git"
       },
