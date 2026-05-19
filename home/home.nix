@@ -8,6 +8,7 @@
   imports = [
     inputs.sops-nix.homeManagerModules.sops
     inputs.nvf.homeManagerModules.default
+    inputs.sdgr-hm.homeManagerModules.gemini
     inputs.sdgr-hm.homeManagerModules.opencode
     ./modules/direnv.nix
     ./modules/gemini.nix
