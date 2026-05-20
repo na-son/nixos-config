@@ -44,7 +44,7 @@
     };
 
     sdgr-hm = {
-      url = "git+ssh://git@github.com/schrodinger/sdgr-hm.git?ref=options";
+      url = "git+ssh://git@github.com/schrodinger/sdgr-hm.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
