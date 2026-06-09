@@ -44,7 +44,7 @@
     };
 
     sdgr-hm = {
-      url = "git+ssh://git@github.com/schrodinger/sdgr-hm.git";
+      url = "git+ssh://git@github.com/schrodinger/sdgr-hm.git?ref=opencode-models";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

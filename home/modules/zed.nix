@@ -15,56 +15,124 @@
     ];
 
     userSettings = {
-      auto_signature_help = true; # not sure about this one yet
-      buffer_line_height = "standard";
+      ui_font_family = "MonaspiceNe Nerd Font";
+      ui_font_size = 14;
+      buffer_font_family = "MonaspiceNe Nerd Font Mono";
       buffer_font_size = 16;
-      tab_size = 2;
-      ui_font_size = 16;
-      use_system_prompts = false;
-      use_system_path_prompts = false;
-      vim_mode = true;
-
+      buffer_line_height = "standard";
+      buffer_font_features = {
+        calt = true;
+        liga = true;
+        ss01 = true;
+        ss02 = true;
+        ss03 = true;
+        ss04 = true;
+        ss05 = true;
+        ss06 = true;
+        ss07 = true;
+        ss08 = true;
+        ss09 = true;
+      };
+      terminal = {
+        copy_on_select = true;
+        font_family = "MonaspiceNe Nerd Font Mono";
+        font_features = {
+          calt = true;
+          liga = true;
+          ss01 = true;
+          ss02 = true;
+          ss03 = true;
+          ss04 = true;
+          ss05 = true;
+          ss06 = true;
+          ss07 = true;
+          ss08 = true;
+          ss09 = true;
+        };
+      };
       agent = {
+        dock = "right";
         default_model = {
           provider = "copilot_chat";
           model = "gpt-5-mini";
         };
-        #inline_alternatives = [
-        #];
+        model_parameters = [];
       };
-
-      features = {
-        copilot = true;
-        edit_prodiction_provider = "copilot";
+      which_key = {
+        enabled = true;
       };
-
-      gutter = {
-        min_line_number_digits = 0;
-        line_numbers = true;
+      collaboration_panel = {
+        dock = "left";
       };
-
+      git_panel = {
+        dock = "left";
+      };
+      agent_servers = {
+        claude-acp = {
+          type = "registry";
+        };
+        gemini = {
+          type = "registry";
+        };
+      };
+      tabs = {
+        show_diagnostics = "all";
+      };
+      outline_panel = {
+        dock = "left";
+        button = true;
+      };
+      project_panel = {
+        dock = "left";
+        hide_root = true;
+        hide_hidden = false;
+        entry_spacing = "standard";
+        default_width = 180.0;
+      };
+      search = {
+        case_sensitive = false;
+      };
+      git = {
+        blame = {
+          show_avatar = false;
+        };
+      };
       indent_guides = {
+        background_coloring = "disabled";
         coloring = "indent_aware";
         active_line_width = 2;
         line_width = 1;
       };
-
-      project_panel = {
-        hide_root = true;
-        hide_hidden = true;
-        entry_spacing = "standard";
-        default_width = 180.0;
+      tab_size = 2;
+      minimap = {
+        show = "auto";
+        thumb = "always";
+        thumb_border = "left_open";
       };
-
+      gutter = {
+        min_line_number_digits = 0;
+        line_numbers = true;
+      };
+      auto_signature_help = true;
+      icon_theme = "Zed (Default)";
+      use_system_prompts = false;
+      use_system_path_prompts = false;
+      on_last_window_closed = "platform_default";
+      telemetry = {
+        diagnostics = false;
+        metrics = false;
+      };
+      vim_mode = true;
       theme = {
         mode = "system";
         light = "Catppuccin Frappé";
         dark = "Catppuccin Mocha";
       };
-
-      telemetry = {
-        diagnostics = false;
-        metrics = false;
+      auto_install_extensions = {
+        catppuccin = true;
+        github-actions = true;
+        nix = true;
+        opentofu = true;
       };
     };
   };

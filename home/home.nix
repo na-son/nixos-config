@@ -9,7 +9,6 @@
     inputs.sops-nix.homeManagerModules.sops
     inputs.nvf.homeManagerModules.default
     inputs.sdgr-hm.homeManagerModules.default
-    ./modules/antigravity.nix
     ./modules/claude.nix
     ./modules/direnv.nix
     ./modules/gemini.nix

@@ -13,7 +13,6 @@
     openssh
     unzip
     zip
-    netbird
   ];
 
   services.netbird.enable = true;
