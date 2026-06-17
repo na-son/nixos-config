@@ -1,5 +1,3 @@
 {...}: {
-  programs.sdgr-hm.opencode = {
-    enable = true;
-  };
+  programs.opencode.enable = true;
 }

@@ -13,6 +13,7 @@
     tree
     ripgrep
     ghostty-bin
+    tmux
 
     # devtools
     acli
@@ -63,6 +64,12 @@
 
   darwinOnlyPackages = with pkgs; [
     gnugrep
+
+    # Docker via colima (Linux gets `docker` from podman's dockerCompat).
+    # Run `colima start` to bring up the daemon, then use `docker` as normal.
+    colima
+    docker-client
+    docker-compose
   ];
 in {
   home.packages =

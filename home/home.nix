@@ -10,6 +10,7 @@
     inputs.nvf.homeManagerModules.default
     inputs.sdgr-hm.homeManagerModules.default
     ./modules/claude.nix
+    ./modules/codex.nix
     ./modules/direnv.nix
     ./modules/gemini.nix
     ./modules/ghostty.nix

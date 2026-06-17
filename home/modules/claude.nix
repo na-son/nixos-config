@@ -9,7 +9,8 @@
       };
 
       defaultMode = "plan";
-      effortLevel = "medium";
+      model = "claude-opus-4-8";
+      effortLevel = "auto";
       mcpToolSearch = true;
       skipWebFetchPreflight = true;
       tui = "fullscreen";
