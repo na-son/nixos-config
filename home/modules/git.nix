@@ -6,7 +6,7 @@
     ignores = [
       ".DS_Store"
       ".swp"
-      ".vscode"
+      ".tmp"
     ];
 
     signing.format = "openpgp";
