@@ -20,10 +20,16 @@
     ./modules/ssh.nix
     ./modules/starship.nix
     ./modules/sway.nix
+    ./modules/yazi
     ./modules/zed.nix
+    ./modules/zellij
     ./modules/zsh.nix
     ./packages.nix
   ];
+
+  # Zellij multiplexer + Yazi sidebar, vendored from ~/src/zpak. The zellij
+  # module auto-enables the yazi integration.
+  features.apps.zellij.enable = true;
 
   home = {
     username = "${user.name}";

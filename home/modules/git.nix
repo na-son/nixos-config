@@ -26,7 +26,7 @@
         };
       };
       user = {
-        email = user.email; # inherit user; ?
+        email = user.email;
         name = user.fullName;
       };
     };
@@ -34,6 +34,6 @@
 
   programs.gh = {
     enable = true;
-    gitCredentialHelper.enable = false; # https://github.com/NixOS/nixpkgs/issues/169115
+    gitCredentialHelper.enable = false;
   };
 }

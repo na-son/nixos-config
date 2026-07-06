@@ -39,10 +39,10 @@ _: {
           enableFormat = true;
           enableTreesitter = true;
 
-          # bash.enable = true;
-          # markdown.enable = true;
+          bash.enable = true;
+          markdown.enable = true;
           nix.enable = true;
-          # python.enable = true;
+          python.enable = true;
           # terraform.enable = true;
           # yaml.enable = true;
         };

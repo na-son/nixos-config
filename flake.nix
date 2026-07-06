@@ -47,6 +47,13 @@
       url = "git+ssh://git@github.com/schrodinger/sdgr-hm.git?ref=opencode-models";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Zellij config + prebuilt wasm plugins (paned, zbar, recall, agents) and the
+    # KDL serializer. Local path for now; switch to a github ref later.
+    zpak = {
+      url = "path:/Users/nason/src/zpak";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -62,6 +69,7 @@
     disko,
     sops-nix,
     sdgr-hm,
+    zpak,
   } @ inputs: let
     user = {
       # change to your preferred settings
@@ -75,6 +83,25 @@
     ];
     darwinSystems = ["aarch64-darwin"];
     forAllSystems = f: nixpkgs.lib.genAttrs (linuxSystems ++ darwinSystems) f;
+
+    # Bridge zpak's prebuilt (wasm) plugin packages into pkgs by name so the
+    # vendored zellij/yazi modules can reference `pkgs.paned` etc. Consuming the
+    # realized flake outputs (rather than zpak's overlay) keeps fenix/crane out
+    # of this config's nixpkgs.
+    zpakOverlay = _final: prev: {
+      inherit
+        (zpak.packages.${prev.stdenv.hostPlatform.system})
+        paned
+        zbar
+        recall
+        agents
+        widget
+        tokenusage
+        ;
+    };
+
+    # Nix -> KDL serializer used by the vendored zellij modules.
+    kdl = zpak.lib.kdl;
 
     devShell = system: let
       pkgs = nixpkgs.legacyPackages.${system};
@@ -100,6 +127,7 @@
 
         modules = [
           ./hosts/darwin
+          {nixpkgs.overlays = [zpakOverlay];}
           home-manager.darwinModules.home-manager
           {
             home-manager = {
@@ -107,7 +135,7 @@
               useUserPackages = true;
               users.${user.name} = import ./home/home.nix;
               extraSpecialArgs = {
-                inherit inputs user;
+                inherit inputs user kdl;
               };
             };
           }
@@ -133,9 +161,10 @@
       pkgs = import nixpkgs {
         system = builtins.currentSystem;
         config.allowUnfree = true;
+        overlays = [zpakOverlay];
       };
       extraSpecialArgs = {
-        inherit inputs user;
+        inherit inputs user kdl;
       };
       modules = [./home/home.nix];
     };
@@ -148,6 +177,7 @@
 
       modules = [
         ./hosts/nixos
+        {nixpkgs.overlays = [zpakOverlay];}
         home-manager.nixosModules.home-manager
         {
           home-manager = {
@@ -155,7 +185,7 @@
             useUserPackages = true;
             users.${user.name} = import ./home/home.nix;
             extraSpecialArgs = {
-              inherit inputs user;
+              inherit inputs user kdl;
             };
           };
         }
