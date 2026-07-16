@@ -44,8 +44,12 @@
     };
 
     sdgr-hm = {
-      url = "git+ssh://git@github.com/schrodinger/sdgr-hm.git?ref=opencode-models";
+      url = "git+ssh://git@github.com/schrodinger/sdgr-hm.git?ref=llm-agents";
       inputs.nixpkgs.follows = "nixpkgs";
+      # sdgr-hm's neovim module bundles nvf; follow this flake's nvf input so
+      # the home-manager module is imported once instead of twice (which would
+      # redeclare `programs.neovim-flake`).
+      inputs.nvf.follows = "nvf";
     };
 
     # Zellij config + prebuilt wasm plugins (paned, zbar, recall, agents) and the

@@ -1,5 +1,3 @@
 {...}: {
-  programs.codex = {
-    enable = true;
-  };
+  sdgr-hm.programs.codex.enable = true;
 }

@@ -17,8 +17,6 @@
 
     # devtools
     acli
-    claude-code
-    gemini-cli
     google-cloud-sdk
     nodejs
     tenv

@@ -7,7 +7,6 @@
 }: {
   imports = [
     inputs.sops-nix.homeManagerModules.sops
-    inputs.nvf.homeManagerModules.default
     inputs.sdgr-hm.homeManagerModules.default
     ./modules/claude.nix
     ./modules/codex.nix
@@ -30,6 +29,17 @@
   # Zellij multiplexer + Yazi sidebar, vendored from ~/src/zpak. The zellij
   # module auto-enables the yazi integration.
   features.apps.zellij.enable = true;
+
+  # Shared MCP server registry. Each sdgr-hm agent module (claude, codex,
+  # gemini, opencode) pulls this via its `enableMcpIntegration` flag. sdgr-hm
+  # defaults in atlassian/github/google(nixos); keep only nixos + atlassian.
+  sdgr-hm.programs.mcp.enable = true;
+  programs.mcp.servers = {
+    github.enabled = false;
+    calendar.enabled = false;
+    docs.enabled = false;
+    chat.enabled = false;
+  };
 
   home = {
     username = "${user.name}";

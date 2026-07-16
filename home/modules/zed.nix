@@ -1,13 +1,11 @@
 {pkgs, ...}: {
   programs.zed-editor = {
-    enable = true;
-    installRemoteServer = true;
+    enable = false;
+    installRemoteServer = false;
 
     extensions = [
       "catppuccin"
-      "github-actions"
       "nix"
-      "opentofu"
     ];
 
     extraPackages = [
