@@ -7,11 +7,12 @@ modules, user dotfiles, zpak overlays, KDL helpers, or SOPS user secrets here.
 Keep Homebrew and nix-darwin configuration in `hosts/darwin`, and NixOS/Disko
 configuration in `hosts/nixos`. Shared system packages and services belong in
 `hosts/default.nix`. The nixpkgs `home-manager` CLI package intentionally
-remains available for activating the separate `~/src/flake` repository.
+remains available for activating the separate `na-son/flake` repository,
+which is expected to be checked out at `../flake`.
 
 Apply the system first with `nh darwin switch ~/src/nixos-config` or
-`nh os switch ~/src/nixos-config`, then apply `~/src/flake#nason-darwin` or
-`~/src/flake#nason-linux` with `home-manager switch --flake`.
+`nh os switch ~/src/nixos-config`, then apply `../flake#nason-darwin` or
+`../flake#nason-linux` with `home-manager switch --flake`.
 
 Format with `alejandra .`. Evaluate both system outputs before switching; do
 not fold the existing `vaapiIntel` rename problem into Home Manager migration

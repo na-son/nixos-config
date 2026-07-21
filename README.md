@@ -2,18 +2,19 @@
 
 This flake manages the `macos` nix-darwin system and the `luna` NixOS system.
 User configuration is applied separately from the sibling standalone Home
-Manager repository at `~/src/flake`.
+Manager repository [`na-son/flake`](https://github.com/na-son/flake), which is
+expected to be checked out at `../flake`.
 
 ## Switch
 
 ```sh
 # macOS system, then user
 nh darwin switch ~/src/nixos-config
-home-manager switch --flake ~/src/flake#nason-darwin
+home-manager switch --flake ../flake#nason-darwin
 
 # NixOS system, then user
 nh os switch ~/src/nixos-config
-home-manager switch --flake ~/src/flake#nason-linux
+home-manager switch --flake ../flake#nason-linux
 ```
 
 The system flake retains nix-darwin, NixOS, Homebrew, Disko, `nh`, and the
