@@ -15,8 +15,6 @@
     zip
   ];
 
-  services.netbird.enable = true;
-
   nix = {
     package = pkgs.nixVersions.latest;
     settings.trusted-users = [

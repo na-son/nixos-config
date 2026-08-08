@@ -14,7 +14,9 @@
   homebrew = {
     enable = true;
     casks = [
-      "zoc"
+      "chatgpt"
+      "claude"
+      "displaylink"
       "zoom"
       "google-chrome"
       "meetingbar"
@@ -34,6 +36,12 @@
   programs.info.enable = false;
 
   security.pam.services.sudo_local.touchIdAuth = true;
+
+  services.openssh.extraConfig = ''
+    PubkeyAuthentication yes
+    PasswordAuthentication no
+    KbdInteractiveAuthentication no
+  '';
 
   system = {
     stateVersion = 4;
