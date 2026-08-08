@@ -19,6 +19,7 @@
       "google-chrome"
       "meetingbar"
       "hiddenbar"
+      "vicinae"
     ];
   };
   nix.enable = false;
